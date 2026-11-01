@@ -67,3 +67,29 @@ export function needsMfa(state: MemberState): boolean {
     state.aal !== "aal2"
   );
 }
+
+// Settings permissions (Step 4). These mirror the RLS policies; the UI uses them only to
+// show or hide controls, the database enforces them.
+const SETTINGS_ACCESS = {
+  /** Company profile and employer numbers (tenants_update). */
+  editCompany: ["owner"],
+  /** Branches, geofence and operating hours (branches_insert / _update). */
+  manageBranches: ["owner", "hr_admin"],
+  /** Invite people and change roles (memberships_insert / _update). */
+  manageUsers: ["owner"],
+  /** See the Users list (memberships_select_tenant). */
+  viewUsers: ["owner", "hr_admin", "auditor"],
+  /** Change checklist status, due dates and evidence (setup_checklist_items_update). */
+  editChecklist: ["owner", "hr_admin"],
+  /** See the Employer Setup Checklist (setup_checklist_items_select). */
+  viewChecklist: ["owner", "hr_admin", "payroll_approver", "auditor"],
+} as const satisfies Record<string, readonly AppRole[]>;
+
+export type SettingsAction = keyof typeof SETTINGS_ACCESS;
+
+export function can(role: AppRole | null, action: SettingsAction): boolean {
+  return (
+    role !== null &&
+    (SETTINGS_ACCESS[action] as readonly AppRole[]).includes(role)
+  );
+}

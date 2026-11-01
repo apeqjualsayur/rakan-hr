@@ -1,12 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Settings } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SignOutButton } from "@/components/layout/SignOutButton";
 import { PersonAvatar } from "@/components/ui/PersonRow";
+import { Link } from "@/i18n/navigation";
 
-// TopNav avatar: shows who is signed in, with Sign out.
-export function AccountMenu({ user }: { user: { id: string; name: string } }) {
+// TopNav avatar: shows who is signed in, with Settings (when given) and Sign out.
+export function AccountMenu({
+  user,
+  settingsHref,
+}: {
+  user: { id: string; name: string };
+  settingsHref?: string;
+}) {
   const t = useTranslations("AdminNav");
   const tAuth = useTranslations("Auth");
   const [open, setOpen] = useState(false);
@@ -43,6 +51,16 @@ export function AccountMenu({ user }: { user: { id: string; name: string } }) {
           <p className="text-meta break-all text-ink-muted">
             {tAuth("signedInAs", { email: user.name })}
           </p>
+          {settingsHref ? (
+            <Link
+              href={settingsHref}
+              onClick={() => setOpen(false)}
+              className="flex min-h-11 items-center gap-2 rounded-control px-3 text-label text-ink-soft transition-colors hover:bg-canvas"
+            >
+              <Settings aria-hidden size={20} strokeWidth={1.75} />
+              {t("settings")}
+            </Link>
+          ) : null}
           <SignOutButton />
         </div>
       ) : null}

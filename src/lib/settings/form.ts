@@ -1,0 +1,78 @@
+// Shared shapes for the Settings forms (Step 4). Parsers are pure so they are unit-tested;
+// error values are message keys under Settings.errors in messages/*.json.
+
+export type ErrorKey =
+  | "required"
+  | "tooLong"
+  | "invalidDate"
+  | "invalidState"
+  | "paydayBeforeHire"
+  | "invalidCoordinates"
+  | "coordinatesPair"
+  | "invalidRadius"
+  | "invalidHours"
+  | "invalidEmail"
+  | "invalidRole"
+  | "alreadyMember"
+  | "memberElsewhere"
+  | "lastOwner"
+  | "forbidden"
+  | "notFound"
+  | "saveFailed";
+
+export type FieldErrors = Partial<Record<string, ErrorKey>>;
+
+export type FormState =
+  | { status: "idle" }
+  | { status: "saved"; at: number }
+  | { status: "error"; errors?: FieldErrors; message?: ErrorKey };
+
+export const idle: FormState = { status: "idle" };
+
+export type Parsed<T> =
+  { ok: true; values: T } | { ok: false; errors: FieldErrors };
+
+/** Trimmed text, or null when blank. Records `tooLong` past `max` characters. */
+export function readText(
+  formData: FormData,
+  name: string,
+  max: number,
+  errors: FieldErrors,
+): string | null {
+  const value = String(formData.get(name) ?? "").trim();
+  if (value.length > max) errors[name] = "tooLong";
+  return value === "" ? null : value;
+}
+
+/** "YYYY-MM-DD" from a date input, or null when blank. Records `invalidDate`. */
+export function readDate(
+  formData: FormData,
+  name: string,
+  errors: FieldErrors,
+): string | null {
+  const value = String(formData.get(name) ?? "").trim();
+  if (value === "") return null;
+  if (!isIsoDate(value)) {
+    errors[name] = "invalidDate";
+    return null;
+  }
+  return value;
+}
+
+export function isIsoDate(value: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().startsWith(value);
+}
+
+export function done<T>(values: T, errors: FieldErrors): Parsed<T> {
+  return Object.keys(errors).length > 0
+    ? { ok: false, errors }
+    : { ok: true, values };
+}
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+export function isUuid(value: unknown): value is string {
+  return typeof value === "string" && UUID.test(value);
+}

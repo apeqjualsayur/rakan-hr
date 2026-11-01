@@ -24,7 +24,15 @@ test("signed-out visitors land on the login page, which switches to BM", async (
 test("admin and staff areas redirect signed-out visitors to login", async ({
   page,
 }) => {
-  for (const path of ["/en/admin", "/en/staff", "/ms/mfa"]) {
+  for (const path of [
+    "/en/admin",
+    "/en/staff",
+    "/ms/mfa",
+    "/en/admin/settings/company",
+    "/en/admin/settings/branches/new",
+    "/ms/admin/settings/users",
+    "/en/admin/settings/setup-checklist",
+  ]) {
     await page.goto(path);
     await expect(page).toHaveURL(/\/(en|ms)\/login$/);
   }

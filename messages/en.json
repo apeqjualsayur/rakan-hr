@@ -66,6 +66,10 @@
       },
       "fallback": {
         "title": "New notification"
+      },
+      "invite": {
+        "title": "You're invited to Rakan",
+        "body": "Sign in with this email address and we'll send you a 6-digit code."
       }
     },
     "entity": {
@@ -85,7 +89,8 @@
     "search": "Search people, forms…",
     "notifications": "Notifications",
     "notificationsUnread": "Notifications (unread)",
-    "account": "Your account"
+    "account": "Your account",
+    "settings": "Settings"
   },
   "StaffNav": {
     "label": "Main",
@@ -163,6 +168,18 @@
       "credential": {
         "expiring_soon": "Expiring"
       }
+    },
+    "checklist": {
+      "not_started": "Not started",
+      "in_progress": "In progress",
+      "done": "Done",
+      "not_applicable": "Not applicable",
+      "overdue": "Overdue"
+    },
+    "membership": {
+      "invited": "Invited",
+      "active": "Active",
+      "deactivated": "Deactivated"
     }
   },
   "Stepper": {
@@ -325,5 +342,262 @@
       },
       "empty": "No credentials match this filter."
     }
+  },
+  "Settings": {
+    "title": "Settings",
+    "intro": "Company details, branches, who can use Rakan, and the one-off registrations to finish before your first hire.",
+    "saved": "Saved.",
+    "save": "Save changes",
+    "cancel": "Cancel",
+    "readOnly": "You can view these settings. Only {who} can change them.",
+    "readOnlyWho": {
+      "owner": "the Owner",
+      "ownerHr": "the Owner or HR Admin"
+    },
+    "nav": {
+      "label": "Settings sections",
+      "company": "Company",
+      "branches": "Branches",
+      "users": "Users",
+      "checklist": "Setup checklist"
+    },
+    "errors": {
+      "required": "This is required.",
+      "tooLong": "This is too long.",
+      "invalidDate": "Enter a valid date.",
+      "invalidState": "Choose a state from the list.",
+      "paydayBeforeHire": "The first payday can't be before the first hire date.",
+      "invalidCoordinates": "Those coordinates aren't valid.",
+      "coordinatesPair": "Enter both latitude and longitude, or neither.",
+      "invalidRadius": "Use a whole number from 20 to 1,000 metres.",
+      "invalidHours": "Check the opening hours: each closing time must be after the opening time.",
+      "invalidEmail": "Enter a valid email address.",
+      "invalidRole": "Choose a role.",
+      "alreadyMember": "This email is already on your Users list.",
+      "memberElsewhere": "This person already uses Rakan with another company, so they can't be invited.",
+      "lastOwner": "The company must keep at least one active Owner. Make someone else an Owner first.",
+      "forbidden": "You don't have permission to do this.",
+      "notFound": "This item no longer exists. Refresh the page.",
+      "saveFailed": "Couldn't save. Please try again.",
+      "checkFields": "Check the fields marked in red."
+    },
+    "company": {
+      "title": "Company profile",
+      "intro": "Prefilled from your company configuration. Blank fields are still to be confirmed.",
+      "profile": "Company details",
+      "legal_name": "Legal name",
+      "legal_nameHint": "As registered with SSM.",
+      "trading_name": "Trading name",
+      "trading_nameHint": "The name staff and clients see.",
+      "ssm_no": "SSM registration no.",
+      "ssm_noHint": "The 12-digit number, e.g. 202601012345.",
+      "address": "Registered address",
+      "state_code": "State",
+      "state_codeHint": "Decides which public holidays apply.",
+      "statePlaceholder": "Choose a state",
+      "is_msme": "MSME status",
+      "msmeYes": "MSME (annual sales under RM 50 million)",
+      "msmeNo": "Not an MSME",
+      "is_msmeHint": "Affects which minimum wage rule applies.",
+      "dates": "Key dates",
+      "datesIntro": "Setup checklist deadlines count from these dates.",
+      "first_hire_date": "First hire date",
+      "first_hire_dateHint": "The day your first employee starts (planned).",
+      "first_payday_date": "First payday",
+      "first_payday_dateHint": "The first day salaries are paid (planned).",
+      "employer": "Employer numbers",
+      "employerIntro": "Leave blank until registered. The setup checklist tracks each registration.",
+      "epf_employer_no": "KWSP (EPF) employer no.",
+      "socso_employer_code": "PERKESO (SOCSO) employer code",
+      "lhdn_e_no": "LHDN employer E-number",
+      "hrdcorp_no": "HRD Corp employer no.",
+      "hrdcorp_noHint": "Optional under 10 Malaysian staff."
+    },
+    "branches": {
+      "title": "Branches",
+      "intro": "Each branch's geofence is used for clock-in, and its hours for the roster.",
+      "add": "Add branch",
+      "edit": "Edit",
+      "view": "View",
+      "newTitle": "New branch",
+      "editTitle": "Edit branch",
+      "back": "All branches",
+      "empty": "No branches yet.",
+      "unnamed": "Unnamed branch",
+      "noAddress": "No address yet",
+      "geofenceSet": "Geofence set · {radius} m radius",
+      "geofenceMissing": "Geofence not set",
+      "hoursMissing": "Opening hours not set",
+      "created": "Branch added. Set its geofence and hours below.",
+      "name": "Branch name",
+      "address": "Address",
+      "state_code": "State",
+      "state_codeHint": "For this branch's public holidays.",
+      "statePlaceholder": "Choose a state",
+      "geofence": "Geofence",
+      "geofenceIntro": "Click the map to drop the pin on your building, or drag the pin. Staff who clock in inside the circle count as at the centre.",
+      "geofenceIntroReadOnly": "Staff who clock in inside the circle count as at the centre.",
+      "mapLabel": "Map of the branch location. Click to place the pin.",
+      "paste": "Paste coordinates",
+      "pasteHint": "In Google Maps, right-click the building, then click the coordinates to copy them.",
+      "pastePlaceholder": "3.139003, 101.686855",
+      "pasteApply": "Use",
+      "pasteInvalid": "Paste the latitude and longitude, like 3.139003, 101.686855.",
+      "geo_lat": "Latitude",
+      "geo_lng": "Longitude",
+      "geo_radius_m": "Radius (metres)",
+      "radiusHint": "20 to 1,000 m. 100 m covers most buildings.",
+      "useLocation": "Use my current location",
+      "locating": "Finding your location…",
+      "locationFailed": "Couldn't get your location. Allow location access, or place the pin on the map.",
+      "clearPin": "Remove pin",
+      "hours": "Operating hours",
+      "hoursIntro": "Used by the roster and attendance.",
+      "open": "Open",
+      "closed": "Closed",
+      "opens": "Opens",
+      "closes": "Closes",
+      "saveBranch": "Save branch",
+      "days": {
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday",
+        "sun": "Sunday"
+      },
+      "daysShort": {
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat",
+        "sun": "Sun"
+      }
+    },
+    "users": {
+      "title": "Users",
+      "intro": "They sign in with a code sent to this email. Only the Owner can invite people or change roles.",
+      "inviteTitle": "Invite someone",
+      "email": "Email",
+      "emailPlaceholder": "name@example.com",
+      "role": "Role",
+      "branches": "Branches they manage",
+      "branchesHint": "Managers see and approve requests from staff in these branches.",
+      "unnamedBranch": "Unnamed branch",
+      "sendInvite": "Send invite",
+      "invited": "Invited. {email} can now sign in and will get an email with a link.",
+      "listTitle": "People with access",
+      "you": "you",
+      "noEmail": "No email on record",
+      "inviteFailed": "Invite email didn't send. Try Resend invite.",
+      "inviteSent": "Invite email sent {date}",
+      "invitedOn": "Invited {date}",
+      "changeRole": "Change role",
+      "saveRole": "Save role",
+      "deactivate": "Deactivate",
+      "reactivate": "Reactivate",
+      "resend": "Resend invite",
+      "remove": "Remove invite",
+      "deactivateConfirm": "Deactivate {email}? They will no longer be able to sign in. You can reactivate them later.",
+      "removeConfirm": "Remove the invite for {email}?",
+      "done": "Done."
+    },
+    "checklist": {
+      "title": "Employer Setup Checklist",
+      "intro": "One-off registrations to finish before your first hire and first payday. Upload proof for each one: uploading marks it done.",
+      "progress": "Employer setup",
+      "progressValue": "{done} of {total} done",
+      "cardTitle": "Employer setup",
+      "open": "Open checklist",
+      "nextUp": "Next: {title}",
+      "allDone": "All set. Every item that applies is done.",
+      "due": "Due {date}",
+      "overdueCount": "{count, plural, one {# item is overdue} other {# items are overdue}}",
+      "status": "Status",
+      "dueDate": "Due date",
+      "noDue": "No due date",
+      "completed": "Done {date}",
+      "ruleHireOn": "By the first hire date",
+      "ruleHireAfter": "{days, plural, one {# day after the first hire} other {# days after the first hire}}",
+      "rulePaydayOn": "By the first payday",
+      "rulePaydayBefore": "{days, plural, one {# day before the first payday} other {# days before the first payday}}",
+      "needsFirstHire": "Set the first hire date to see this deadline.",
+      "needsFirstPayday": "Set the first payday to see this deadline.",
+      "companyPage": "Go to Company",
+      "verifyDeadline": "Confirm this deadline with your accountant.",
+      "noEvidence": "No evidence uploaded",
+      "view": "View evidence",
+      "upload": "Upload evidence",
+      "replace": "Replace file",
+      "removeEvidence": "Remove file",
+      "removeConfirm": "Remove this evidence file? The item keeps its status.",
+      "evidenceHint": "PDF, JPG or PNG, up to 10 MB.",
+      "problems": {
+        "fileType": "Upload a PDF, JPG or PNG file.",
+        "fileTooBig": "That file is over 10 MB.",
+        "uploadFailed": "Couldn't upload the file. Please try again.",
+        "openFailed": "Couldn't open the file. Please try again."
+      },
+      "items": {
+        "EPF_REGISTRATION": {
+          "title": "KWSP (EPF) employer registration",
+          "why": "Needed before you can pay EPF contributions for your staff."
+        },
+        "SOCSO_REGISTRATION": {
+          "title": "PERKESO (SOCSO and EIS) employer registration",
+          "why": "Covers staff for work injuries, invalidity and job loss (EIS)."
+        },
+        "LHDN_E_NUMBER": {
+          "title": "LHDN employer E-number",
+          "why": "Needed to send monthly tax deductions (PCB) to LHDN from the first payroll."
+        },
+        "PAYROLL_BANK_ACCOUNT": {
+          "title": "Company bank account for payroll",
+          "why": "A corporate account with bulk payments, so salaries can be paid from a payment file. Leaves a week to test the first file."
+        },
+        "PDPA_PRIVACY_NOTICE": {
+          "title": "PDPA privacy notice published",
+          "why": "Staff and candidates must be told, in BM and English, how their personal data is used."
+        },
+        "DPO_APPOINTED": {
+          "title": "Data Protection Officer (DPO) appointed",
+          "why": "Name the person responsible for protecting personal data. Set your own due date."
+        },
+        "HRDCORP_REGISTRATION": {
+          "title": "HRD Corp employer registration",
+          "why": "Optional under 10 Malaysian staff, required from 10. Leave as not applicable until then."
+        }
+      }
+    }
+  },
+  "Roles": {
+    "owner": {
+      "name": "Owner",
+      "description": "Everything, including approving payroll release."
+    },
+    "hr_admin": {
+      "name": "HR Admin",
+      "description": "Manages staff, leave, claims and credential checks, and prepares payroll."
+    },
+    "payroll_approver": {
+      "name": "Payroll Approver",
+      "description": "Reviews and approves payroll runs."
+    },
+    "manager": {
+      "name": "Manager / Clinical Lead",
+      "description": "Approves their team's leave, overtime and claims, and sees the team's credential status."
+    },
+    "staff": {
+      "name": "Staff",
+      "description": "Self-service: own profile, leave, claims, clock-in, payslips and credentials."
+    },
+    "auditor": {
+      "name": "Auditor (read-only)",
+      "description": "Reads records and reports but can't change anything. For your accountant or an inspection."
+    },
+    "mfaNote": "Needs two-step sign-in."
   }
 }

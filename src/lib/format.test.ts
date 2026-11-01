@@ -1,11 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
+  dateFromIso,
   dateTileParts,
+  formatClock,
   formatDate,
   formatMoney,
   formatTime,
   greetingPeriod,
   initials,
+  malaysiaToday,
   maskNumber,
 } from "./format";
 
@@ -76,5 +79,24 @@ describe("maskNumber / initials / greetingPeriod", () => {
     expect(greetingPeriod(new Date("2026-10-30T01:00:00Z"))).toBe("morning");
     expect(greetingPeriod(new Date("2026-10-30T06:00:00Z"))).toBe("afternoon");
     expect(greetingPeriod(new Date("2026-10-30T11:00:00Z"))).toBe("evening");
+  });
+});
+
+describe("Malaysian dates and clock times", () => {
+  it("gives today's date in Malaysia, not UTC", () => {
+    // 11:30 pm UTC on 1 Dec is already 2 Dec in Kuala Lumpur.
+    expect(malaysiaToday(new Date("2026-12-01T23:30:00Z"))).toBe("2026-12-02");
+    expect(malaysiaToday(new Date("2026-12-01T10:00:00Z"))).toBe("2026-12-01");
+  });
+
+  it("formats Postgres dates on the right day", () => {
+    expect(formatDate(dateFromIso("2026-12-08"), "en", "full")).toBe(
+      "8 Dec 2026",
+    );
+  });
+
+  it("formats stored opening times", () => {
+    expect(formatClock("08:30", "en")).toBe("8:30 am");
+    expect(formatClock("17:30", "en")).toBe("5:30 pm");
   });
 });

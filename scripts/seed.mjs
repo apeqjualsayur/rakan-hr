@@ -1,7 +1,9 @@
-// Seeds the linked DEV project from _specs/hr-system/company-config.yaml (build step 3):
+// Seeds the linked DEV project from _specs/hr-system/company-config.yaml (build steps 3–4):
 // the tenant, its branch, and an Owner membership for every email in people.owner_emails.
-// Safe to re-run: rows are upserted. Owners removed from the yaml are deactivated
-// (is_active = false, audited), never deleted.
+// Creating the tenant also creates its Employer Setup Checklist (database trigger).
+// Safe to re-run. The yaml only prefills: on a re-run it fills fields that are still
+// empty and never overwrites what was saved in Settings. Owners removed from the yaml are
+// deactivated (is_active = false, audited), never deleted.
 //
 // Needs SUPABASE_DB_URL in .env.local. Refuses to run unless it points at the linked project
 // and that project is the dev project in .env.local.
@@ -46,12 +48,17 @@ try {
 }
 
 const columns = (row) => Object.keys(row);
-function upsert(table, id, row) {
+// Insert, or fill only the columns that are still empty (null, or {} for jsonb).
+function prefill(table, id, row) {
   const cols = columns(row);
+  const keep = (c) =>
+    c === "operating_hours"
+      ? `${c} = case when ${table}.${c} = '{}'::jsonb then excluded.${c} else ${table}.${c} end`
+      : `${c} = coalesce(${table}.${c}, excluded.${c})`;
   return {
     text: `insert into public.${table} (id, ${cols.join(", ")})
            values ($1, ${cols.map((_, i) => `$${i + 2}`).join(", ")})
-           on conflict (id) do update set ${cols.map((c) => `${c} = excluded.${c}`).join(", ")}`,
+           on conflict (id) do update set ${cols.map(keep).join(", ")}`,
     values: [id, ...cols.map((c) => row[c])],
   };
 }
@@ -67,9 +74,9 @@ const client = new pg.Client({
 try {
   await client.connect();
   await client.query("begin");
-  await client.query(upsert("tenants", TENANT_ID, tenant));
+  await client.query(prefill("tenants", TENANT_ID, tenant));
   await client.query(
-    upsert("branches", BRANCH_ID, { tenant_id: TENANT_ID, ...branch }),
+    prefill("branches", BRANCH_ID, { tenant_id: TENANT_ID, ...branch }),
   );
 
   for (const email of owners) {
@@ -98,11 +105,15 @@ try {
     throw new Error("Refusing to leave the company with no active Owner.");
   await client.query("commit");
 
-  const unknown = Object.entries(tenant)
-    .filter(([, v]) => v === null)
-    .map(([k]) => k);
+  const saved = await client.query(
+    `select to_jsonb(t) as row from public.tenants t where id = $1`,
+    [TENANT_ID],
+  );
+  const unknown = Object.keys(tenant).filter(
+    (k) => saved.rows[0].row[k] === null,
+  );
   console.log(
-    `✔ Tenant and branch saved (still TBC: ${unknown.join(", ") || "none"})`,
+    `✔ Tenant and branch saved; empty fields filled from the yaml (still blank: ${unknown.join(", ") || "none"})`,
   );
   for (const row of active.rows) {
     console.log(

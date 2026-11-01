@@ -37,6 +37,20 @@ const copy = {
       title: `Your ${entity} request was ${approved ? "approved" : "rejected"}`,
       body: comment ? `Comment: ${comment}` : "",
     }),
+    // Step 4 Settings > Users. Sent by the Edge Function from a membership, not a notification.
+    roles: {
+      owner: "Owner",
+      hr_admin: "HR Admin",
+      payroll_approver: "Payroll Approver",
+      manager: "Manager",
+      staff: "Staff",
+      auditor: "Auditor (read-only)",
+    } as Record<string, string>,
+    yourCompany: "Your company",
+    invite: (company: string, role: string) => ({
+      title: "You're invited to Rakan",
+      body: `${company} has invited you to Rakan as ${role}. Sign in with this email address and we'll send you a 6-digit code.`,
+    }),
     fallback: { title: "New notification", body: "" },
   },
   ms: {
@@ -56,6 +70,19 @@ const copy = {
       title: `Permohonan ${entity} anda ${approved ? "diluluskan" : "ditolak"}`,
       body: comment ? `Ulasan: ${comment}` : "",
     }),
+    roles: {
+      owner: "Pemilik",
+      hr_admin: "Pentadbir HR",
+      payroll_approver: "Pelulus Gaji",
+      manager: "Pengurus",
+      staff: "Kakitangan",
+      auditor: "Juruaudit (baca sahaja)",
+    } as Record<string, string>,
+    yourCompany: "Syarikat anda",
+    invite: (company: string, role: string) => ({
+      title: "Anda dijemput ke Rakan",
+      body: `${company} telah menjemput anda ke Rakan sebagai ${role}. Log masuk dengan alamat e-mel ini dan kami akan menghantar kod 6 digit kepada anda.`,
+    }),
     fallback: { title: "Pemberitahuan baharu", body: "" },
   },
 };
@@ -73,6 +100,11 @@ function text(template: string, data: Data, locale: Locale) {
         entity,
         data.decision === "approved",
         data.comment ? String(data.comment) : undefined,
+      );
+    case "invite":
+      return c.invite(
+        data.company ? String(data.company) : c.yourCompany,
+        c.roles[String(data.role)] ?? String(data.role ?? ""),
       );
     default:
       return c.fallback;

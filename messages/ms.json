@@ -66,6 +66,10 @@
       },
       "fallback": {
         "title": "Pemberitahuan baharu"
+      },
+      "invite": {
+        "title": "Anda dijemput ke Rakan",
+        "body": "Log masuk dengan alamat e-mel ini dan kami akan menghantar kod 6 digit kepada anda."
       }
     },
     "entity": {
@@ -85,7 +89,8 @@
     "search": "Cari kakitangan, borang…",
     "notifications": "Pemberitahuan",
     "notificationsUnread": "Pemberitahuan (belum dibaca)",
-    "account": "Akaun anda"
+    "account": "Akaun anda",
+    "settings": "Tetapan"
   },
   "StaffNav": {
     "label": "Utama",
@@ -163,6 +168,18 @@
       "credential": {
         "expiring_soon": "Hampir tamat"
       }
+    },
+    "checklist": {
+      "not_started": "Belum bermula",
+      "in_progress": "Sedang dibuat",
+      "done": "Selesai",
+      "not_applicable": "Tidak berkaitan",
+      "overdue": "Lewat"
+    },
+    "membership": {
+      "invited": "Dijemput",
+      "active": "Aktif",
+      "deactivated": "Dinyahaktifkan"
     }
   },
   "Stepper": {
@@ -325,5 +342,262 @@
       },
       "empty": "Tiada kredensial yang sepadan dengan penapis ini."
     }
+  },
+  "Settings": {
+    "title": "Tetapan",
+    "intro": "Butiran syarikat, cawangan, siapa boleh menggunakan Rakan, dan pendaftaran sekali sahaja yang perlu disiapkan sebelum pengambilan pekerja pertama.",
+    "saved": "Disimpan.",
+    "save": "Simpan perubahan",
+    "cancel": "Batal",
+    "readOnly": "Anda boleh melihat tetapan ini. Hanya {who} boleh mengubahnya.",
+    "readOnlyWho": {
+      "owner": "Pemilik",
+      "ownerHr": "Pemilik atau Pentadbir HR"
+    },
+    "nav": {
+      "label": "Bahagian tetapan",
+      "company": "Syarikat",
+      "branches": "Cawangan",
+      "users": "Pengguna",
+      "checklist": "Senarai semak persediaan"
+    },
+    "errors": {
+      "required": "Ruangan ini wajib diisi.",
+      "tooLong": "Terlalu panjang.",
+      "invalidDate": "Masukkan tarikh yang sah.",
+      "invalidState": "Pilih negeri daripada senarai.",
+      "paydayBeforeHire": "Hari gaji pertama tidak boleh lebih awal daripada tarikh pengambilan pekerja pertama.",
+      "invalidCoordinates": "Koordinat itu tidak sah.",
+      "coordinatesPair": "Masukkan kedua-dua latitud dan longitud, atau biarkan kedua-duanya kosong.",
+      "invalidRadius": "Gunakan nombor bulat dari 20 hingga 1,000 meter.",
+      "invalidHours": "Semak waktu operasi: setiap waktu tutup mesti selepas waktu buka.",
+      "invalidEmail": "Masukkan alamat e-mel yang sah.",
+      "invalidRole": "Pilih peranan.",
+      "alreadyMember": "E-mel ini sudah ada dalam senarai Pengguna anda.",
+      "memberElsewhere": "Orang ini sudah menggunakan Rakan dengan syarikat lain, jadi mereka tidak boleh dijemput.",
+      "lastOwner": "Syarikat mesti mempunyai sekurang-kurangnya seorang Pemilik yang aktif. Jadikan orang lain Pemilik dahulu.",
+      "forbidden": "Anda tiada kebenaran untuk melakukan ini.",
+      "notFound": "Item ini sudah tiada. Muat semula halaman.",
+      "saveFailed": "Tidak dapat menyimpan. Sila cuba lagi.",
+      "checkFields": "Semak ruangan yang ditanda merah."
+    },
+    "company": {
+      "title": "Profil syarikat",
+      "intro": "Diisi awal daripada konfigurasi syarikat anda. Ruangan kosong masih belum disahkan.",
+      "profile": "Butiran syarikat",
+      "legal_name": "Nama berdaftar",
+      "legal_nameHint": "Seperti yang didaftarkan dengan SSM.",
+      "trading_name": "Nama perniagaan",
+      "trading_nameHint": "Nama yang dilihat oleh kakitangan dan pelanggan.",
+      "ssm_no": "No. pendaftaran SSM",
+      "ssm_noHint": "Nombor 12 digit, cth. 202601012345.",
+      "address": "Alamat berdaftar",
+      "state_code": "Negeri",
+      "state_codeHint": "Menentukan cuti umum yang terpakai.",
+      "statePlaceholder": "Pilih negeri",
+      "is_msme": "Status PMKS",
+      "msmeYes": "PMKS (jualan tahunan di bawah RM 50 juta)",
+      "msmeNo": "Bukan PMKS",
+      "is_msmeHint": "Mempengaruhi peraturan gaji minimum yang terpakai.",
+      "dates": "Tarikh penting",
+      "datesIntro": "Tarikh akhir senarai semak persediaan dikira dari tarikh-tarikh ini.",
+      "first_hire_date": "Tarikh pengambilan pekerja pertama",
+      "first_hire_dateHint": "Hari pekerja pertama anda mula bekerja (dirancang).",
+      "first_payday_date": "Hari gaji pertama",
+      "first_payday_dateHint": "Hari pertama gaji dibayar (dirancang).",
+      "employer": "Nombor majikan",
+      "employerIntro": "Biarkan kosong sehingga berdaftar. Senarai semak persediaan menjejak setiap pendaftaran.",
+      "epf_employer_no": "No. majikan KWSP",
+      "socso_employer_code": "Kod majikan PERKESO",
+      "lhdn_e_no": "Nombor E majikan LHDN",
+      "hrdcorp_no": "No. majikan HRD Corp",
+      "hrdcorp_noHint": "Pilihan jika kurang daripada 10 kakitangan warganegara Malaysia."
+    },
+    "branches": {
+      "title": "Cawangan",
+      "intro": "Geofence setiap cawangan digunakan untuk daftar masuk, dan waktunya untuk jadual tugas.",
+      "add": "Tambah cawangan",
+      "edit": "Edit",
+      "view": "Lihat",
+      "newTitle": "Cawangan baharu",
+      "editTitle": "Edit cawangan",
+      "back": "Semua cawangan",
+      "empty": "Belum ada cawangan.",
+      "unnamed": "Cawangan tanpa nama",
+      "noAddress": "Belum ada alamat",
+      "geofenceSet": "Geofence ditetapkan · jejari {radius} m",
+      "geofenceMissing": "Geofence belum ditetapkan",
+      "hoursMissing": "Waktu operasi belum ditetapkan",
+      "created": "Cawangan ditambah. Tetapkan geofence dan waktunya di bawah.",
+      "name": "Nama cawangan",
+      "address": "Alamat",
+      "state_code": "Negeri",
+      "state_codeHint": "Untuk cuti umum cawangan ini.",
+      "statePlaceholder": "Pilih negeri",
+      "geofence": "Geofence",
+      "geofenceIntro": "Klik peta untuk meletakkan pin pada bangunan anda, atau seret pin. Kakitangan yang daftar masuk di dalam bulatan dikira berada di pusat.",
+      "geofenceIntroReadOnly": "Kakitangan yang daftar masuk di dalam bulatan dikira berada di pusat.",
+      "mapLabel": "Peta lokasi cawangan. Klik untuk meletakkan pin.",
+      "paste": "Tampal koordinat",
+      "pasteHint": "Dalam Google Maps, klik kanan pada bangunan, kemudian klik koordinat untuk menyalinnya.",
+      "pastePlaceholder": "3.139003, 101.686855",
+      "pasteApply": "Guna",
+      "pasteInvalid": "Tampal latitud dan longitud, seperti 3.139003, 101.686855.",
+      "geo_lat": "Latitud",
+      "geo_lng": "Longitud",
+      "geo_radius_m": "Jejari (meter)",
+      "radiusHint": "20 hingga 1,000 m. 100 m meliputi kebanyakan bangunan.",
+      "useLocation": "Guna lokasi semasa saya",
+      "locating": "Mencari lokasi anda…",
+      "locationFailed": "Tidak dapat mengesan lokasi anda. Benarkan akses lokasi, atau letakkan pin pada peta.",
+      "clearPin": "Buang pin",
+      "hours": "Waktu operasi",
+      "hoursIntro": "Digunakan oleh jadual tugas dan kehadiran.",
+      "open": "Buka",
+      "closed": "Tutup",
+      "opens": "Buka",
+      "closes": "Tutup",
+      "saveBranch": "Simpan cawangan",
+      "days": {
+        "mon": "Isnin",
+        "tue": "Selasa",
+        "wed": "Rabu",
+        "thu": "Khamis",
+        "fri": "Jumaat",
+        "sat": "Sabtu",
+        "sun": "Ahad"
+      },
+      "daysShort": {
+        "mon": "Isn",
+        "tue": "Sel",
+        "wed": "Rab",
+        "thu": "Kha",
+        "fri": "Jum",
+        "sat": "Sab",
+        "sun": "Ahd"
+      }
+    },
+    "users": {
+      "title": "Pengguna",
+      "intro": "Mereka log masuk dengan kod yang dihantar ke e-mel ini. Hanya Pemilik boleh menjemput orang atau menukar peranan.",
+      "inviteTitle": "Jemput seseorang",
+      "email": "E-mel",
+      "emailPlaceholder": "nama@contoh.com",
+      "role": "Peranan",
+      "branches": "Cawangan yang diuruskan",
+      "branchesHint": "Pengurus melihat dan meluluskan permohonan daripada kakitangan di cawangan ini.",
+      "unnamedBranch": "Cawangan tanpa nama",
+      "sendInvite": "Hantar jemputan",
+      "invited": "Dijemput. {email} kini boleh log masuk dan akan menerima e-mel dengan pautan.",
+      "listTitle": "Orang yang mempunyai akses",
+      "you": "anda",
+      "noEmail": "Tiada e-mel dalam rekod",
+      "inviteFailed": "E-mel jemputan tidak dihantar. Cuba Hantar semula jemputan.",
+      "inviteSent": "E-mel jemputan dihantar {date}",
+      "invitedOn": "Dijemput {date}",
+      "changeRole": "Tukar peranan",
+      "saveRole": "Simpan peranan",
+      "deactivate": "Nyahaktifkan",
+      "reactivate": "Aktifkan semula",
+      "resend": "Hantar semula jemputan",
+      "remove": "Buang jemputan",
+      "deactivateConfirm": "Nyahaktifkan {email}? Mereka tidak lagi boleh log masuk. Anda boleh mengaktifkan mereka semula kemudian.",
+      "removeConfirm": "Buang jemputan untuk {email}?",
+      "done": "Selesai."
+    },
+    "checklist": {
+      "title": "Senarai Semak Persediaan Majikan",
+      "intro": "Pendaftaran sekali sahaja yang perlu disiapkan sebelum pengambilan pekerja pertama dan hari gaji pertama. Muat naik bukti bagi setiap satu: muat naik akan menandakannya selesai.",
+      "progress": "Persediaan majikan",
+      "progressValue": "{done} daripada {total} selesai",
+      "cardTitle": "Persediaan majikan",
+      "open": "Buka senarai semak",
+      "nextUp": "Seterusnya: {title}",
+      "allDone": "Semua siap. Setiap item yang berkaitan telah selesai.",
+      "due": "Tarikh akhir {date}",
+      "overdueCount": "{count} item melepasi tarikh akhir",
+      "status": "Status",
+      "dueDate": "Tarikh akhir",
+      "noDue": "Tiada tarikh akhir",
+      "completed": "Selesai {date}",
+      "ruleHireOn": "Pada tarikh pengambilan pekerja pertama",
+      "ruleHireAfter": "{days} hari selepas pengambilan pekerja pertama",
+      "rulePaydayOn": "Pada hari gaji pertama",
+      "rulePaydayBefore": "{days} hari sebelum hari gaji pertama",
+      "needsFirstHire": "Tetapkan tarikh pengambilan pekerja pertama untuk melihat tarikh akhir ini.",
+      "needsFirstPayday": "Tetapkan hari gaji pertama untuk melihat tarikh akhir ini.",
+      "companyPage": "Pergi ke Syarikat",
+      "verifyDeadline": "Sahkan tarikh akhir ini dengan akauntan anda.",
+      "noEvidence": "Tiada bukti dimuat naik",
+      "view": "Lihat bukti",
+      "upload": "Muat naik bukti",
+      "replace": "Ganti fail",
+      "removeEvidence": "Buang fail",
+      "removeConfirm": "Buang fail bukti ini? Status item tidak berubah.",
+      "evidenceHint": "PDF, JPG atau PNG, sehingga 10 MB.",
+      "problems": {
+        "fileType": "Muat naik fail PDF, JPG atau PNG.",
+        "fileTooBig": "Fail itu melebihi 10 MB.",
+        "uploadFailed": "Tidak dapat memuat naik fail. Sila cuba lagi.",
+        "openFailed": "Tidak dapat membuka fail. Sila cuba lagi."
+      },
+      "items": {
+        "EPF_REGISTRATION": {
+          "title": "Pendaftaran majikan KWSP",
+          "why": "Diperlukan sebelum anda boleh membayar caruman KWSP untuk kakitangan."
+        },
+        "SOCSO_REGISTRATION": {
+          "title": "Pendaftaran majikan PERKESO (SOCSO dan SIP)",
+          "why": "Melindungi kakitangan daripada kecederaan kerja, keilatan dan kehilangan pekerjaan (SIP)."
+        },
+        "LHDN_E_NUMBER": {
+          "title": "Nombor E majikan LHDN",
+          "why": "Diperlukan untuk menghantar potongan cukai bulanan (PCB) kepada LHDN mulai gaji pertama."
+        },
+        "PAYROLL_BANK_ACCOUNT": {
+          "title": "Akaun bank syarikat untuk gaji",
+          "why": "Akaun korporat dengan pembayaran pukal, supaya gaji boleh dibayar daripada fail pembayaran. Memberi seminggu untuk menguji fail pertama."
+        },
+        "PDPA_PRIVACY_NOTICE": {
+          "title": "Notis privasi PDPA diterbitkan",
+          "why": "Kakitangan dan calon mesti dimaklumkan, dalam BM dan Bahasa Inggeris, bagaimana data peribadi mereka digunakan."
+        },
+        "DPO_APPOINTED": {
+          "title": "Pegawai Perlindungan Data (DPO) dilantik",
+          "why": "Namakan orang yang bertanggungjawab melindungi data peribadi. Tetapkan tarikh akhir anda sendiri."
+        },
+        "HRDCORP_REGISTRATION": {
+          "title": "Pendaftaran majikan HRD Corp",
+          "why": "Pilihan jika kurang daripada 10 kakitangan warganegara Malaysia, wajib mulai 10. Biarkan sebagai tidak berkaitan sehingga itu."
+        }
+      }
+    }
+  },
+  "Roles": {
+    "owner": {
+      "name": "Pemilik",
+      "description": "Semua perkara, termasuk meluluskan pembayaran gaji."
+    },
+    "hr_admin": {
+      "name": "Pentadbir HR",
+      "description": "Mengurus kakitangan, cuti, tuntutan dan semakan kelayakan, serta menyediakan gaji."
+    },
+    "payroll_approver": {
+      "name": "Pelulus Gaji",
+      "description": "Menyemak dan meluluskan proses gaji."
+    },
+    "manager": {
+      "name": "Pengurus / Ketua Klinikal",
+      "description": "Meluluskan cuti, kerja lebih masa dan tuntutan pasukan, dan melihat status kelayakan pasukan."
+    },
+    "staff": {
+      "name": "Kakitangan",
+      "description": "Layan diri: profil, cuti, tuntutan, daftar masuk, slip gaji dan kelayakan sendiri."
+    },
+    "auditor": {
+      "name": "Juruaudit (baca sahaja)",
+      "description": "Membaca rekod dan laporan tetapi tidak boleh mengubah apa-apa. Untuk akauntan anda atau pemeriksaan."
+    },
+    "mfaNote": "Memerlukan log masuk dua langkah."
   }
 }

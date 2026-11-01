@@ -54,7 +54,7 @@ Run from the repo root. The Supabase CLI is a project dev dependency, so `npm ru
 | Production build | `npm run build` |
 | List migrations: local files vs applied on the linked project | `npm run db:migrations` |
 | Push new migrations to the linked project (show `db:migrations` first) | `npm run db:push` |
-| Seed / re-sync the tenant, branch and Owners from `company-config.yaml` (add or remove emails in `people.owner_emails`, then re-run; removed owners are deactivated) | `npm run db:seed` |
+| Seed the tenant, branch, Owners and Employer Setup Checklist from `company-config.yaml`. Re-runs only fill fields that are still empty, never overwriting what was saved in Settings; add or remove emails in `people.owner_emails`, then re-run (removed owners are deactivated) | `npm run db:seed` |
 | Wipe the dev DB, re-apply all migrations, then `db:seed` (refuses unless linked to the `.env.local` dev project) | `npm run db:reset` |
 | Connect notification emails: Vault secrets + Edge Function secrets from `.env.local` (`RESEND_API_KEY`, `EMAIL_FROM`, `APP_URL`) | `npm run notify:setup` |
 | Deploy Edge Functions without Docker (server-side bundling) | `npm run functions:deploy` (one function: `npm run functions:deploy -- <name>`; the email function: `npm run functions:deploy -- send-notification-email --no-verify-jwt`) |

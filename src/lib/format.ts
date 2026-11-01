@@ -101,3 +101,18 @@ export function greetingPeriod(
   if (hour < 18) return "afternoon";
   return "evening";
 }
+
+/** Today's date in Malaysia as "YYYY-MM-DD" (compares directly with Postgres `date` values). */
+export function malaysiaToday(now = new Date()) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: TIME_ZONE }).format(now);
+}
+
+/** A Postgres `date` ("2026-12-08") as the start of that day in Malaysia, for formatDate. */
+export function dateFromIso(iso: string) {
+  return new Date(`${iso}T00:00:00+08:00`);
+}
+
+/** A wall-clock time from the database ("08:30") in the display format: 8:30 am. */
+export function formatClock(hhmm: string, locale: string) {
+  return formatTime(new Date(`2000-01-01T${hhmm}:00+08:00`), locale);
+}

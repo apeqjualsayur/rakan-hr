@@ -25,7 +25,12 @@ async function AdminGate({ children }: { children: ReactNode }) {
   return (
     <AdminShell
       bell={<NotificationBell />}
-      account={<AccountMenu user={{ id: member.userId ?? name, name }} />}
+      account={
+        <AccountMenu
+          user={{ id: member.userId ?? name, name }}
+          settingsHref="/admin/settings"
+        />
+      }
     >
       {children}
     </AdminShell>

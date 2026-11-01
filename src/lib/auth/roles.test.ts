@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   ADMIN_ROLES,
   APP_ROLES,
+  can,
   guardRedirect,
   homeFor,
   needsMfa,
@@ -73,5 +74,28 @@ describe("guardRedirect", () => {
       const result = guardRedirect(member({ role, aal: "aal2" }), [role]);
       expect(result).toBeNull();
     }
+  });
+});
+
+describe("can (settings)", () => {
+  it("lets only the owner edit the company and manage users", () => {
+    for (const role of APP_ROLES) {
+      expect(can(role, "editCompany")).toBe(role === "owner");
+      expect(can(role, "manageUsers")).toBe(role === "owner");
+    }
+  });
+
+  it("keeps the auditor read-only", () => {
+    expect(can("auditor", "viewUsers")).toBe(true);
+    expect(can("auditor", "viewChecklist")).toBe(true);
+    expect(can("auditor", "editChecklist")).toBe(false);
+    expect(can("auditor", "manageBranches")).toBe(false);
+  });
+
+  it("lets HR admin run branches and the checklist", () => {
+    expect(can("hr_admin", "manageBranches")).toBe(true);
+    expect(can("hr_admin", "editChecklist")).toBe(true);
+    expect(can("staff", "viewChecklist")).toBe(false);
+    expect(can(null, "viewChecklist")).toBe(false);
   });
 });

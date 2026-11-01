@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  isoDate,
   known,
   ownerEmails,
   parseOperatingHours,
@@ -73,6 +74,29 @@ describe("toTenant / toBranch", () => {
       geo_radius_m: 100,
       state_code: "MY-10",
     });
+  });
+});
+
+describe("isoDate", () => {
+  it("keeps real YYYY-MM-DD dates and turns TBC into null", () => {
+    expect(isoDate("2026-12-01")).toBe("2026-12-01");
+    expect(isoDate(new Date("2026-12-01T00:00:00Z"))).toBe("2026-12-01");
+    expect(isoDate("TBC")).toBeNull();
+    expect(isoDate(undefined)).toBeNull();
+  });
+  it("rejects dates it cannot read rather than guessing", () => {
+    expect(() => isoDate("1/12/2026")).toThrow(/YYYY-MM-DD/);
+    expect(() => isoDate("2026-02-30")).toThrow(/YYYY-MM-DD/);
+  });
+  it("feeds the first hire and payday dates into the tenant", () => {
+    const tenant = toTenant({
+      company: {
+        first_hire_target_date: "2026-12-01",
+        first_payday_target_date: "TBC",
+      },
+    });
+    expect(tenant.first_hire_date).toBe("2026-12-01");
+    expect(tenant.first_payday_date).toBeNull();
   });
 });
 

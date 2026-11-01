@@ -63,6 +63,8 @@ Global (no tenant): statutory_rate_versions, epf_rate_bands, socso_rate_bands,
 | hrdcorp_no | text | nullable |
 | credential_enforcement | enum `enforcement_mode` | soft / hard (CRD-14) |
 | default_locale | text | `en` / `ms` |
+| first_hire_date | date | ORG-04 deadlines count from it; set by Step 8 on the first conversion |
+| first_payday_date | date | ORG-04 deadlines count from it |
 
 **banks** (global reference) — `code` (e.g. `MBB`, `CIMB`, `PBB`, `RHB`, `BIMB`, `HLB`, `AMB`), `name`, `swift_bic`, `ibg_code`, `is_active`. Used by both company and employee bank accounts.
 
@@ -72,9 +74,9 @@ Global (no tenant): statutory_rate_versions, epf_rate_bands, socso_rate_bands,
 
 **branches** — `tenant_id`, name, address, `geo_lat`, `geo_lng`, `geo_radius_m`, `operating_hours jsonb`, `state_code`.
 
-**memberships** 🔒 — `user_id → auth.users`, `tenant_id`, `role enum app_role`, `employee_id` (nullable link to own employee record), `branch_ids uuid[]` (manager scope), `is_active`.
+**memberships** 🔒 — `user_id → auth.users`, `tenant_id`, `role enum app_role`, `employee_id` (nullable link to own employee record), `branch_ids uuid[]` (manager scope), `is_active`, `invited_email`, `invite_sent_at`, `invite_error`. Signed-in members are deactivated, never deleted; the last active Owner cannot be removed.
 
-**setup_checklist_items** (ORG-04) — `tenant_id`, `code` (e.g. `EPF_REGISTRATION`), title, `due_rule` (e.g. "7 days after first hire"), `due_date`, `status enum checklist_status`, `evidence_file_path`, `completed_at`, `completed_by`.
+**setup_checklist_items** (ORG-04) — `tenant_id`, `code` (e.g. `EPF_REGISTRATION`), title, `sort_order`, `due_rule` (e.g. `first_hire+7`, `first_payday-7`; null = typed due date), `due_date` (computed from the rule), `status enum checklist_status`, `evidence_file_path` (bucket `company`; adding one marks the item done), `completed_at`, `completed_by`. Seven items are created with each tenant.
 
 ### 3.2 People
 
@@ -339,6 +341,7 @@ Every policy also includes `tenant_id = auth_tenant_id()`.
 | `policies` | `{tenant_id}/{policy_code}/v{version}.pdf` | audience: read; HR: write |
 | `signed` | `{tenant_id}/{entity_type}/{entity_id}/{signature_id}.pdf` | signer + HR; never overwritten |
 | `avatars` | `{tenant_id}/{employee_id}.jpg` | tenant members: read; owner of photo + HR: write |
+| `company` | `{tenant_id}/setup-checklist/{item_id}/{file}` | Owner / HR: write; admin roles + auditor: read |
 
 Max file size 10 MB; allowed MIME enforced in an upload Edge Function, not only in the UI.
 

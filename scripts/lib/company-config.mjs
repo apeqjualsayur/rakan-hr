@@ -78,6 +78,18 @@ function number(value) {
   return n;
 }
 
+/** "YYYY-MM-DD" (or a YAML date) → "YYYY-MM-DD"; TBC → null. */
+export function isoDate(value) {
+  if (value instanceof Date) return value.toISOString().slice(0, 10);
+  const text = known(value);
+  if (text === null) return null;
+  const match = text.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  const date = match ? new Date(`${text}T00:00:00Z`) : null;
+  if (!date || date.toISOString().slice(0, 10) !== text)
+    throw new Error(`Not a YYYY-MM-DD date in company-config.yaml: "${text}"`);
+  return text;
+}
+
 export function toTenant(config) {
   const company = config.company ?? {};
   const employer = config.employer_numbers ?? {};
@@ -92,6 +104,8 @@ export function toTenant(config) {
     socso_employer_code: known(employer.socso_employer_code),
     lhdn_e_no: known(employer.lhdn_e_no),
     hrdcorp_no: known(employer.hrdcorp_no),
+    first_hire_date: isoDate(company.first_hire_target_date),
+    first_payday_date: isoDate(company.first_payday_target_date),
     credential_enforcement:
       config.credential_enforcement === "hard" ? "hard" : "soft",
   };

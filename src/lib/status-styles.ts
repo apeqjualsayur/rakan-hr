@@ -78,6 +78,20 @@ export const statusTones = {
     overdue: "danger",
     signed: "primary",
   },
+  // Employer Setup Checklist (ORG-04): checklist_status plus the derived "overdue".
+  checklist: {
+    not_started: "neutral",
+    in_progress: "info",
+    done: "primary",
+    not_applicable: "neutral",
+    overdue: "danger",
+  },
+  // Settings > Users.
+  membership: {
+    invited: "info",
+    active: "primary",
+    deactivated: "neutral",
+  },
 } as const satisfies Record<string, Record<string, Tone>>;
 
 export type StatusDomain = keyof typeof statusTones;

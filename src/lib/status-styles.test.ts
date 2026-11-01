@@ -14,7 +14,17 @@ const domains = Object.keys(statusTones) as StatusDomain[];
 describe("status-styles", () => {
   it("covers every status family the spec names", () => {
     expect(domains.sort()).toEqual(
-      ["claim", "cpd", "credential", "leave", "ot", "payroll", "policy"].sort(),
+      [
+        "checklist",
+        "claim",
+        "cpd",
+        "credential",
+        "leave",
+        "membership",
+        "ot",
+        "payroll",
+        "policy",
+      ].sort(),
     );
   });
 
