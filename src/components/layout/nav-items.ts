@@ -1,12 +1,8 @@
 import {
-  CalendarDays,
-  ChartColumn,
   Clock,
   House,
   ShieldCheck,
   User,
-  UserPlus,
-  Users,
   Wallet,
   type LucideIcon,
 } from "lucide-react";
@@ -15,31 +11,32 @@ import {
 // those items render as disabled placeholders.
 export type NavItem<Key extends string> = {
   key: Key;
-  icon: LucideIcon;
   href?: string;
 };
 
-export const adminNavItems: NavItem<
+export type AdminNavKey =
   | "home"
   | "people"
   | "hiring"
   | "timeOff"
   | "payroll"
   | "compliance"
-  | "reports"
->[] = [
-  { key: "home", icon: House, href: "/admin" },
-  { key: "people", icon: Users },
-  { key: "hiring", icon: UserPlus },
-  { key: "timeOff", icon: CalendarDays },
-  { key: "payroll", icon: Wallet },
-  { key: "compliance", icon: ShieldCheck },
-  { key: "reports", icon: ChartColumn },
+  | "reports";
+
+export type StaffNavKey = "home" | "time" | "credentials" | "pay" | "me";
+
+// The desktop top nav is text-only (reference screen); the bottom nav has icons.
+export const adminNavItems: NavItem<AdminNavKey>[] = [
+  { key: "home", href: "/admin" },
+  { key: "people" },
+  { key: "hiring" },
+  { key: "timeOff" },
+  { key: "payroll" },
+  { key: "compliance" },
+  { key: "reports" },
 ];
 
-export const staffNavItems: NavItem<
-  "home" | "time" | "credentials" | "pay" | "me"
->[] = [
+export const staffNavItems: (NavItem<StaffNavKey> & { icon: LucideIcon })[] = [
   { key: "home", icon: House, href: "/staff" },
   { key: "time", icon: Clock },
   { key: "credentials", icon: ShieldCheck },

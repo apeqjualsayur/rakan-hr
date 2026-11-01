@@ -57,5 +57,6 @@ Do not use `supabase test db`: in CLI 2.122 it runs pg_prove in a Docker contain
 
 Stack notes:
 - Next.js 16: middleware is `src/proxy.ts`; `cacheComponents` is on. Read `AGENTS.md` and `node_modules/next/dist/docs/` before using unfamiliar Next APIs.
-- Tailwind v4: design tokens live in `src/app/globals.css` (`@theme`), not in a `tailwind.config.ts`.
+- Tailwind v4: design tokens live in `src/app/globals.css` (`@theme`), not in a `tailwind.config.ts`. Type scale classes: `text-display`, `text-display-sm`, `text-h2`, `text-h3`, `text-body`, `text-meta`, `text-label`, `text-stat`. Use `cn` from `@/lib/utils` (it knows these custom names).
+- UI: reuse the components in `src/components/ui/` (ui-system.md §4; shadcn primitives are the lowercase files). Status colours and labels come only from `src/lib/status-styles.ts`; dates, money and masking from `src/lib/format.ts`. Browse everything at http://localhost:3002/en/design (dev only; 404 in production).
 - i18n: URLs are prefixed `/en/…` and `/ms/…` (`src/i18n/routing.ts`); strings live in `messages/en.json` and `messages/ms.json`, and `npm test` fails if their keys differ.

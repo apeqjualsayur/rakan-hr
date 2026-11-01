@@ -1,7 +1,10 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 /* Design tokens from _specs/hr-system/ui-system.md §2 / §7.
-   Tailwind v4 reads tokens from this CSS file (there is no tailwind.config.ts). */
+   Tailwind v4 reads tokens from this CSS file (there is no tailwind.config.ts).
+   Class names: bg-canvas, text-ink-muted, rounded-card, text-h2, … */
 @theme {
   --color-canvas: #f6f3ea;
   --color-surface: #ffffff;
@@ -16,8 +19,11 @@
   --color-primary-strong: #14503d;
   --color-primary-tint: #ddeee5;
   --color-primary-on-hero: #478671;
-
+  /* Hover shades (not in the spec table): primary / accent darkened slightly. */
+  --color-primary-hover: #185c46;
   --color-accent: #c4461f;
+  --color-accent-hover: #ad3d1a;
+  --color-accent-strong: #973515;
 
   --color-info: #2d4f9c;
   --color-info-tint: #e1e9fb;
@@ -37,16 +43,73 @@
   --radius-card: 24px;
   --radius-hero: 32px;
 
+  --shadow-fab: 0 8px 24px rgb(30 42 36 / 0.18);
+
   --font-sans:
     var(--font-inter), Inter, system-ui, -apple-system, "Segoe UI", Roboto,
     sans-serif;
+
+  /* Type scale (§2.2). */
+  --text-display: 2.5rem;
+  --text-display--line-height: 3rem;
+  --text-display--font-weight: 700;
+  --text-display--letter-spacing: -0.02em;
+  --text-display-sm: 1.875rem;
+  --text-display-sm--line-height: 2.375rem;
+  --text-display-sm--font-weight: 700;
+  --text-display-sm--letter-spacing: -0.02em;
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 2rem;
+  --text-h2--font-weight: 600;
+  --text-h2--letter-spacing: -0.01em;
+  --text-h3: 1.0625rem;
+  --text-h3--line-height: 1.5rem;
+  --text-h3--font-weight: 600;
+  --text-body: 1rem;
+  --text-body--line-height: 1.5rem;
+  --text-body--font-weight: 400;
+  --text-meta: 0.875rem;
+  --text-meta--line-height: 1.25rem;
+  --text-meta--font-weight: 400;
+  --text-label: 0.875rem;
+  --text-label--line-height: 1.25rem;
+  --text-label--font-weight: 600;
+  --text-stat: 2.25rem;
+  --text-stat--line-height: 2.5rem;
+  --text-stat--font-weight: 700;
+  --text-stat--letter-spacing: -0.02em;
 }
 
-body {
-  background: var(--color-canvas);
-  color: var(--color-ink);
+/* shadcn/ui primitives read these names; they point at the Rakan tokens above.
+   `accent` is deliberately not mapped: in Rakan it is the rust CTA colour. */
+@theme inline {
+  --color-background: var(--color-canvas);
+  --color-foreground: var(--color-ink);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-ink);
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-ink);
+  --color-primary-foreground: #ffffff;
+  --color-muted: var(--color-track);
+  --color-muted-foreground: var(--color-ink-muted);
+  --color-destructive: var(--color-danger);
+  --color-input: var(--color-border);
+  --color-ring: var(--color-primary);
 }
 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-canvas text-ink;
+  }
+}
+
+/* §4.1 focus ring: 2 px primary, offset 2 px. */
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;

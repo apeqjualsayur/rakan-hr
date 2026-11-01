@@ -15,7 +15,8 @@
     "subtitle": "Sumber manusia dan gaji untuk pusat penjagaan kesihatan dan terapi. Aplikasi sedang disediakan.",
     "previewHeading": "Pratonton susun atur",
     "adminPreview": "Susun atur pentadbir (desktop)",
-    "staffPreview": "Susun atur kakitangan (mudah alih)"
+    "staffPreview": "Susun atur kakitangan (mudah alih)",
+    "designPreview": "Sistem reka bentuk dan skrin rujukan"
   },
   "AdminNav": {
     "label": "Utama",
@@ -28,6 +29,7 @@
     "reports": "Laporan",
     "search": "Cari kakitangan, borang…",
     "notifications": "Pemberitahuan",
+    "notificationsUnread": "Pemberitahuan (belum dibaca)",
     "account": "Akaun anda"
   },
   "StaffNav": {
@@ -43,5 +45,230 @@
     "staffTitle": "Utama",
     "body": "Ini susun atur sementara. Skrin akan ditambah dalam langkah pembinaan seterusnya.",
     "notBuilt": "Akan datang dalam langkah pembinaan seterusnya"
+  },
+  "Greeting": {
+    "morning": "Selamat pagi, {name}",
+    "afternoon": "Selamat tengah hari, {name}",
+    "evening": "Selamat petang, {name}",
+    "hi": "Hai, {name}"
+  },
+  "Category": {
+    "credential": "Kredensial",
+    "leave": "Cuti",
+    "claim": "Tuntutan",
+    "overtime": "Lebih masa",
+    "bank_change": "Tukar bank"
+  },
+  "Status": {
+    "credential": {
+      "upcoming": "Akan datang",
+      "valid": "Sah",
+      "expiring_soon": "Hampir tamat",
+      "expired": "Tamat tempoh",
+      "missing": "Tiada",
+      "pending": "Menunggu",
+      "rejected": "Ditolak"
+    },
+    "cpd": {
+      "pending": "Menunggu",
+      "verified": "Disahkan",
+      "rejected": "Ditolak"
+    },
+    "leave": {
+      "pending": "Menunggu",
+      "approved": "Diluluskan",
+      "rejected": "Ditolak",
+      "cancelled": "Dibatalkan"
+    },
+    "claim": {
+      "pending": "Menunggu",
+      "approved": "Diluluskan",
+      "rejected": "Ditolak",
+      "paid": "Dibayar"
+    },
+    "ot": {
+      "pending": "Menunggu",
+      "approved": "Diluluskan",
+      "rejected": "Ditolak"
+    },
+    "payroll": {
+      "draft": "Draf",
+      "calculated": "Dikira",
+      "reviewed": "Disemak",
+      "approved": "Diluluskan",
+      "locked": "Dikunci",
+      "paid": "Dibayar"
+    },
+    "policy": {
+      "awaiting_signature": "Menunggu tandatangan",
+      "overdue": "Lewat",
+      "signed": "Ditandatangani"
+    },
+    "short": {
+      "credential": {
+        "expiring_soon": "Hampir tamat"
+      }
+    }
+  },
+  "Stepper": {
+    "done": "selesai",
+    "current": "langkah semasa",
+    "upcoming": "belum bermula",
+    "stepOf": "langkah {step} daripada {total}"
+  },
+  "Shift": {
+    "todaysShift": "Syif hari ini",
+    "insideCentre": "Di pusat",
+    "outsideCentre": "Di luar pusat",
+    "clockIn": "Daftar masuk",
+    "clockInWithReason": "Daftar masuk dengan sebab",
+    "reasonLabel": "Kenapa anda mendaftar masuk di luar pusat?",
+    "reasonPlaceholder": "cth. Lawatan ke rumah klien",
+    "reasonRequired": "Masukkan sebab untuk mendaftar masuk."
+  },
+  "Design": {
+    "title": "Sistem reka bentuk",
+    "intro": "Setiap komponen daripada ui-system.md §4 dengan keadaannya, dan tiga skrin rujukan yang dibina semula dengan data contoh. Untuk pembangunan sahaja.",
+    "interactiveNote": "Halakan tetikus, tekan, atau tekan Tab untuk melihat keadaan halaan, tekan dan fokus.",
+    "jumpTo": "Pergi ke",
+    "states": {
+      "default": "Biasa",
+      "disabled": "Dinyahdayakan",
+      "loading": "Memuatkan",
+      "empty": "Kosong",
+      "error": "Ralat",
+      "inside": "Di dalam kawasan geopagar",
+      "outside": "Di luar kawasan geopagar (pembetulan §6.3)"
+    },
+    "sections": {
+      "colours": "Warna",
+      "type": "Tipografi",
+      "buttons": "Butang",
+      "tags": "Tag kategori dan cip status",
+      "rows": "Kad dan baris tindakan",
+      "heroes": "Kad utama",
+      "tiles": "Tindakan pantas dan sepanduk perhatian",
+      "stats": "Kad statistik dan kemajuan",
+      "stepper": "Penunjuk langkah status gaji",
+      "people": "Orang, tarikh dan nilai bertopeng",
+      "credentials": "Cip penapis, baris kredensial dan FAB",
+      "fields": "Medan borang",
+      "screens": "Skrin rujukan"
+    },
+    "typeSample": "Selamat pagi — RM 3,354.65",
+    "emptyApprovals": "Tiada apa-apa yang perlu anda luluskan sekarang.",
+    "emptyAction": "Lihat kelulusan lepas",
+    "fieldLabel": "Nombor akaun bank",
+    "fieldHint": "Perubahan sentiasa memerlukan kelulusan HR.",
+    "fieldError": "Masukkan 10 hingga 16 digit.",
+    "fabNote": "FAB terletak tetap di bahagian bawah kanan skrin; ditunjukkan di sini sahaja.",
+    "reference": "Imej rujukan",
+    "rebuilt": "Dibina semula dalam kod",
+    "openFull": "Buka skrin penuh",
+    "screens": {
+      "owner": "Laman utama pemilik (desktop)",
+      "staff": "Laman utama kakitangan (mudah alih)",
+      "credentials": "Kredensial Saya (mudah alih)"
+    }
+  },
+  "Demo": {
+    "branch": "Sinar Therapy Centre",
+    "owner": {
+      "name": "Pemilik",
+      "summary": "{count} perkara memerlukan anda. Tarikh bayaran gaji ialah hari Jumaat.",
+      "runPayroll": "Jalankan gaji",
+      "addEmployee": "Tambah pekerja",
+      "postJob": "Iklankan jawatan",
+      "verifyCredentials": "Sahkan kredensial",
+      "attentionTitle": "Perlu perhatian anda",
+      "allApprovals": "Semua kelulusan",
+      "review": "Semak",
+      "approve": "Luluskan",
+      "rows": {
+        "credentialTitle": "Nurul Aina memuat naik sijil perlindungan kanak-kanak",
+        "credentialMeta": "Menunggu pengesahan · dihantar 27 Okt · 2 halaman",
+        "leaveTitle": "Daniel Tan · Cuti tahunan, 3–4 Nov (2 hari)",
+        "leaveMeta": "Tiada pertindihan jadual · baki 6 hari selepas ini",
+        "overtimeTitle": "Farah Hanis · Kerja hari rehat, Sab 24 Okt (8 jam)",
+        "overtimeMeta": "Dibayar 1 × kadar bayaran biasa (sehingga waktu biasa) mengikut Akta Kerja",
+        "claimTitle": "Amir Hakim · Perjalanan lawatan rumah, {amount}",
+        "claimMeta": "Resit dilampirkan · dalam had bulanan",
+        "bankTitle": "Daniel Tan meminta pertukaran akaun bank",
+        "bankMeta": "Ditandakan: pertukaran bank sentiasa memerlukan kelulusan HR"
+      },
+      "payrollTitle": "Gaji · Oktober 2026",
+      "payrollContext": "Tarikh bayaran {date} · dibayar dari {account} (lalai)",
+      "payrollBody": "Dikira untuk 8 pekerja. 2 semakan perlu diselesaikan sebelum kelulusan: perbezaan pada satu slip gaji, satu nombor PERKESO tiada.",
+      "continueReview": "Teruskan semakan",
+      "whosOut": "Siapa tiada",
+      "out": {
+        "farah": "Cuti sakit · hari ini",
+        "daniel": "Cuti tahunan · 3–4 Nov (menunggu)",
+        "amir": "Ganti cuti umum · Sab 7 Nov"
+      },
+      "credentialHealth": "Status kredensial",
+      "healthBody": "Kredensial wajib sah bagi 8 kakitangan. Penguatkuasaan lembut dihidupkan.",
+      "health": {
+        "amirTitle": "Amir Hakim · BLS / CPR",
+        "amirMeta": "Tamat tempoh 17 hari lalu",
+        "nurulTitle": "Nurul Aina · Sijil amalan",
+        "nurulMeta": "Tamat 31 Dis · 63 hari",
+        "danielTitle": "Daniel Tan · Hepatitis B",
+        "danielMeta": "Tiada rekod dimuat naik"
+      },
+      "comingUp": "Akan datang",
+      "salariesTitle": "Gaji Oktober dibayar sebelum",
+      "salariesMeta": "7 hari selepas tempoh gaji tamat",
+      "statutoryTitle": "KWSP, PERKESO, SIP, PCB",
+      "statutoryMeta": "Gaji Oktober · muat naik fail",
+      "checklist": "Senarai semak persediaan majikan",
+      "checklistValue": "{done} daripada {total}"
+    },
+    "staff": {
+      "name": "Aina",
+      "detail": "Terapi pertuturan · Bilik 2",
+      "leave": "Cuti",
+      "claim": "Tuntutan",
+      "overtime": "Lebih masa",
+      "payslips": "Slip gaji",
+      "bannerTitle": "{count} kredensial memerlukan anda",
+      "bannerMeta": "BLS / CPR tamat tempoh 12 Okt · Sijil amalan tamat dalam 63 hari",
+      "annualLeave": "Cuti tahunan",
+      "ofDays": "daripada {total} hari",
+      "latestPayslip": "Slip gaji terkini",
+      "payslipMeta": "Sep 2026 · dibayar 30 Sep"
+    },
+    "credentials": {
+      "title": "Kredensial Saya",
+      "role": "Ahli Terapi Pertuturan-Bahasa",
+      "headline": "{valid} daripada {total} wajib sah",
+      "advice": "Perbaharui BLS sebelum syif klinikal anda yang seterusnya.",
+      "filterLabel": "Tapis kredensial",
+      "all": "Semua",
+      "actionNeeded": "Perlu tindakan",
+      "valid": "Sah",
+      "add": "Tambah kredensial",
+      "actions": {
+        "renewNow": "Perbaharui sekarang",
+        "renew": "Perbaharui",
+        "view": "Lihat",
+        "add": "Tambah"
+      },
+      "items": {
+        "bls": "BLS / CPR",
+        "blsMeta": "Tamat tempoh 12 Okt 2026 · wajib",
+        "practising": "Sijil amalan 2026",
+        "practisingMeta": "Baki 63 hari · tamat 31 Dis",
+        "safeguarding": "Perlindungan kanak-kanak",
+        "safeguardingMeta": "Dihantar 27 Okt · menunggu HR",
+        "mahpc": "Pendaftaran MAHPC",
+        "mahpcMeta": "Disahkan 3 Okt · tamat 31 Dis 2027",
+        "hepb": "Vaksinasi Hepatitis B",
+        "hepbMeta": "Disahkan 3 Okt · tiada tarikh tamat",
+        "firstAid": "Pertolongan cemas (pilihan)",
+        "firstAidMeta": "Belum dimuat naik"
+      },
+      "empty": "Tiada kredensial yang sepadan dengan penapis ini."
+    }
   }
 }

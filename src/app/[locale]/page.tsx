@@ -35,6 +35,16 @@ export default function LandingPage() {
               {t("staffPreview")}
             </Link>
           </li>
+          {process.env.NODE_ENV !== "production" ? (
+            <li>
+              <Link
+                href="/design"
+                className="font-semibold text-primary underline-offset-4 hover:underline"
+              >
+                {t("designPreview")}
+              </Link>
+            </li>
+          ) : null}
         </ul>
       </section>
     </main>

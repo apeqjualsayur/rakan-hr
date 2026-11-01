@@ -15,7 +15,8 @@
     "subtitle": "HR and payroll for healthcare and therapy centres. The app is being set up.",
     "previewHeading": "Layout previews",
     "adminPreview": "Admin layout (desktop)",
-    "staffPreview": "Staff layout (mobile)"
+    "staffPreview": "Staff layout (mobile)",
+    "designPreview": "Design system and reference screens"
   },
   "AdminNav": {
     "label": "Main",
@@ -28,6 +29,7 @@
     "reports": "Reports",
     "search": "Search people, forms…",
     "notifications": "Notifications",
+    "notificationsUnread": "Notifications (unread)",
     "account": "Your account"
   },
   "StaffNav": {
@@ -43,5 +45,230 @@
     "staffTitle": "Home",
     "body": "This is a placeholder layout. Screens are added in later build steps.",
     "notBuilt": "Coming in a later build step"
+  },
+  "Greeting": {
+    "morning": "Good morning, {name}",
+    "afternoon": "Good afternoon, {name}",
+    "evening": "Good evening, {name}",
+    "hi": "Hi, {name}"
+  },
+  "Category": {
+    "credential": "Credential",
+    "leave": "Leave",
+    "claim": "Claim",
+    "overtime": "Overtime",
+    "bank_change": "Bank change"
+  },
+  "Status": {
+    "credential": {
+      "upcoming": "Upcoming",
+      "valid": "Valid",
+      "expiring_soon": "Expiring soon",
+      "expired": "Expired",
+      "missing": "Missing",
+      "pending": "Pending",
+      "rejected": "Rejected"
+    },
+    "cpd": {
+      "pending": "Pending",
+      "verified": "Verified",
+      "rejected": "Rejected"
+    },
+    "leave": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
+    },
+    "claim": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "paid": "Paid"
+    },
+    "ot": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "payroll": {
+      "draft": "Draft",
+      "calculated": "Calculated",
+      "reviewed": "Reviewed",
+      "approved": "Approved",
+      "locked": "Locked",
+      "paid": "Paid"
+    },
+    "policy": {
+      "awaiting_signature": "Awaiting signature",
+      "overdue": "Overdue",
+      "signed": "Signed"
+    },
+    "short": {
+      "credential": {
+        "expiring_soon": "Expiring"
+      }
+    }
+  },
+  "Stepper": {
+    "done": "done",
+    "current": "current step",
+    "upcoming": "not started",
+    "stepOf": "step {step} of {total}"
+  },
+  "Shift": {
+    "todaysShift": "Today's shift",
+    "insideCentre": "At the centre",
+    "outsideCentre": "Outside the centre",
+    "clockIn": "Clock in",
+    "clockInWithReason": "Clock in with reason",
+    "reasonLabel": "Why are you clocking in outside the centre?",
+    "reasonPlaceholder": "e.g. Home visit at a client's house",
+    "reasonRequired": "Enter a reason to clock in."
+  },
+  "Design": {
+    "title": "Design system",
+    "intro": "Every component from ui-system.md §4 with its states, and the three reference screens rebuilt with dummy data. Development only.",
+    "interactiveNote": "Hover, press, or press Tab to see the hover, pressed and focus states.",
+    "jumpTo": "Jump to",
+    "states": {
+      "default": "Default",
+      "disabled": "Disabled",
+      "loading": "Loading",
+      "empty": "Empty",
+      "error": "Error",
+      "inside": "Inside the geofence",
+      "outside": "Outside the geofence (fix §6.3)"
+    },
+    "sections": {
+      "colours": "Colours",
+      "type": "Typography",
+      "buttons": "Buttons",
+      "tags": "Category tags and status chips",
+      "rows": "Card and action rows",
+      "heroes": "Hero cards",
+      "tiles": "Quick actions and attention banner",
+      "stats": "Stat cards and progress",
+      "stepper": "Payroll status stepper",
+      "people": "People, dates and masked values",
+      "credentials": "Filter chips, credential rows and FAB",
+      "fields": "Form fields",
+      "screens": "Reference screens"
+    },
+    "typeSample": "Selamat pagi — RM 3,354.65",
+    "emptyApprovals": "Nothing needs your approval right now.",
+    "emptyAction": "View past approvals",
+    "fieldLabel": "Bank account number",
+    "fieldHint": "Changes always need HR approval.",
+    "fieldError": "Enter 10 to 16 digits.",
+    "fabNote": "The FAB is fixed to the bottom-right of the screen; shown in place here.",
+    "reference": "Reference image",
+    "rebuilt": "Rebuilt in code",
+    "openFull": "Open full screen",
+    "screens": {
+      "owner": "Owner home (desktop)",
+      "staff": "Staff home (mobile)",
+      "credentials": "My Credentials (mobile)"
+    }
+  },
+  "Demo": {
+    "branch": "Sinar Therapy Centre",
+    "owner": {
+      "name": "Owner",
+      "summary": "{count} items need you. Payroll pay date is Friday.",
+      "runPayroll": "Run payroll",
+      "addEmployee": "Add employee",
+      "postJob": "Post a job",
+      "verifyCredentials": "Verify credentials",
+      "attentionTitle": "Needs your attention",
+      "allApprovals": "All approvals",
+      "review": "Review",
+      "approve": "Approve",
+      "rows": {
+        "credentialTitle": "Nurul Aina uploaded Child-safeguarding certificate",
+        "credentialMeta": "Pending verification · submitted 27 Oct · 2 pages",
+        "leaveTitle": "Daniel Tan · Annual leave, 3–4 Nov (2 days)",
+        "leaveMeta": "No roster clash · 6 days left after this",
+        "overtimeTitle": "Farah Hanis · Rest-day work, Sat 24 Oct (8 h)",
+        "overtimeMeta": "Pays 1 × ORP (up to normal hours) per Employment Act",
+        "claimTitle": "Amir Hakim · Travel to home visit, {amount}",
+        "claimMeta": "Receipt attached · within monthly limit",
+        "bankTitle": "Daniel Tan requested a bank account change",
+        "bankMeta": "Flagged: bank changes always need HR approval"
+      },
+      "payrollTitle": "Payroll · October 2026",
+      "payrollContext": "Pay date {date} · paying from {account} (default)",
+      "payrollBody": "Calculated for 8 employees. 2 checks to clear before approval: variance on one payslip, one missing SOCSO number.",
+      "continueReview": "Continue review",
+      "whosOut": "Who's out",
+      "out": {
+        "farah": "Sick leave · today",
+        "daniel": "Annual leave · 3–4 Nov (pending)",
+        "amir": "Public holiday cover · Sat 7 Nov"
+      },
+      "credentialHealth": "Credential health",
+      "healthBody": "Mandatory credentials valid across 8 staff. Soft enforcement is on.",
+      "health": {
+        "amirTitle": "Amir Hakim · BLS / CPR",
+        "amirMeta": "Expired 17 days ago",
+        "nurulTitle": "Nurul Aina · Practising cert.",
+        "nurulMeta": "Expires 31 Dec · 63 days",
+        "danielTitle": "Daniel Tan · Hepatitis B",
+        "danielMeta": "No record uploaded"
+      },
+      "comingUp": "Coming up",
+      "salariesTitle": "October salaries paid by",
+      "salariesMeta": "7 days after wage period ends",
+      "statutoryTitle": "EPF, SOCSO, EIS, PCB",
+      "statutoryMeta": "October wages · file upload",
+      "checklist": "Employer setup checklist",
+      "checklistValue": "{done} of {total}"
+    },
+    "staff": {
+      "name": "Aina",
+      "detail": "Speech therapy · Room 2",
+      "leave": "Leave",
+      "claim": "Claim",
+      "overtime": "Overtime",
+      "payslips": "Payslips",
+      "bannerTitle": "{count} credentials need you",
+      "bannerMeta": "BLS / CPR expired 12 Oct · Practising certificate expires in 63 days",
+      "annualLeave": "Annual leave",
+      "ofDays": "of {total} days",
+      "latestPayslip": "Latest payslip",
+      "payslipMeta": "Sep 2026 · paid 30 Sep"
+    },
+    "credentials": {
+      "title": "My Credentials",
+      "role": "Speech-Language Therapist",
+      "headline": "{valid} of {total} mandatory valid",
+      "advice": "Renew BLS before your next clinical shift.",
+      "filterLabel": "Filter credentials",
+      "all": "All",
+      "actionNeeded": "Action needed",
+      "valid": "Valid",
+      "add": "Add credential",
+      "actions": {
+        "renewNow": "Renew now",
+        "renew": "Renew",
+        "view": "View",
+        "add": "Add"
+      },
+      "items": {
+        "bls": "BLS / CPR",
+        "blsMeta": "Expired 12 Oct 2026 · mandatory",
+        "practising": "Practising certificate 2026",
+        "practisingMeta": "63 days left · expires 31 Dec",
+        "safeguarding": "Child safeguarding",
+        "safeguardingMeta": "Submitted 27 Oct · awaiting HR",
+        "mahpc": "MAHPC registration",
+        "mahpcMeta": "Verified 3 Oct · expires 31 Dec 2027",
+        "hepb": "Hepatitis B vaccination",
+        "hepbMeta": "Verified 3 Oct · no expiry",
+        "firstAid": "First aid (optional)",
+        "firstAidMeta": "Not uploaded yet"
+      },
+      "empty": "No credentials match this filter."
+    }
   }
 }
