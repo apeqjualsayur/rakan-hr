@@ -1,0 +1,84 @@
+# Rakan — company configuration (fill this in; Claude Code reads it to seed the system)
+# Leave a value as "TBC" if you don't know it yet. Do NOT put IC numbers, passwords or API keys here.
+# Used by build steps 4, 5, 8, 9, 10, 11 and 14 in build-order.md.
+
+company:
+  legal_name: TBC                 # as registered with SSM
+  trading_name: TBC               # name staff and clients see
+  ssm_no: TBC
+  address: TBC
+  state: Wilayah Persekutuan Kuala Lumpur   # drives public holidays
+  is_msme: true                   # annual sales < RM50m (affects minimum wage rule from Jun 2027)
+  business_type: therapy_centre   # therapy_centre | clinic | health_consultancy
+  first_hire_target_date: TBC     # YYYY-MM-DD
+  first_payday_target_date: TBC   # YYYY-MM-DD
+
+employer_numbers:                 # "TBC" until registered; tracked in the Employer Setup Checklist
+  epf_employer_no: TBC
+  socso_employer_code: TBC
+  lhdn_e_no: TBC
+  hrdcorp_no: not_applicable
+
+branch:
+  name: TBC
+  address: TBC
+  geofence_lat: TBC               # get from Google Maps: right-click the building > copy coordinates
+  geofence_lng: TBC
+  geofence_radius_m: 100
+  operating_hours: "Mon-Fri 08:30-17:30, Sat 08:30-13:00"
+
+work_pattern:
+  normal_hours_per_day: 8
+  work_days_per_week: 5.5         # 5 | 5.5 | 6
+  rest_day: Sunday
+  wage_period: monthly
+  pay_day: 28                     # day of month (must be within 7 days after the wage period ends)
+
+payroll_bank:
+  bank: TBC                       # e.g. Maybank, CIMB, Public Bank, RHB, Bank Islam, Hong Leong, AmBank
+  corporate_banking_product: TBC  # e.g. Maybank2u Biz, CIMB BizChannel
+
+roles_to_hire:                    # first hires; drives credential requirements and job openings
+  - title: Speech-Language Therapist
+    clinical: true
+    employment_type: full_time    # full_time | part_time | contract | locum_contractor
+    pay_model: monthly            # monthly | hourly | per_session | hybrid
+    headcount: 1
+  - title: Occupational Therapist
+    clinical: true
+    employment_type: full_time
+    pay_model: monthly
+    headcount: 1
+  - title: Centre Administrator
+    clinical: false
+    employment_type: full_time
+    pay_model: monthly
+    headcount: 1
+
+credential_enforcement: soft      # soft = warning on roster | hard = block clinical shifts when expired
+
+leave_policy:                     # company entitlements; must be >= Employment Act minimums
+  annual_leave_days: { under_2_years: 12, two_to_5_years: 14, over_5_years: 18 }
+  sick_leave_days: { under_2_years: 14, two_to_5_years: 18, over_5_years: 22 }
+  carry_forward_max_days: 5
+  carry_forward_expiry_months: 3
+  extra_leave_types: [compassionate, marriage, exam]   # remove any you don't offer
+
+claim_types:                      # monthly limits in RM
+  - { name: Travel / mileage, monthly_limit: 300, taxable: false }
+  - { name: Parking & toll, monthly_limit: 150, taxable: false }
+  - { name: Medical (outpatient), monthly_limit: 100, taxable: false }
+  - { name: CPD / course fees, monthly_limit: 500, taxable: false }
+  - { name: Phone bill, monthly_limit: 50, taxable: false }
+
+notifications:
+  sender_name: Rakan
+  sender_email: TBC               # e.g. hello@yourdomain.my (needs a verified domain in Resend)
+  whatsapp_via_n8n: false
+
+people:
+  owner_name: TBC
+  owner_email: TBC
+  hr_admin_email: TBC             # can be the same as owner
+  payroll_approver_email: TBC     # can be the same as owner
+  accountant_email: TBC           # gets Auditor (read-only) access

@@ -1,0 +1,42 @@
+# dependencies
+node_modules/
+.pnp*
+
+# Next.js
+.next/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
+
+# env — never commit keys
+.env
+.env.local
+.env.*.local
+
+# tests
+/coverage/
+/playwright-report/
+/test-results/
+/blob-report/
+/playwright/.cache/
+
+# Supabase local
+supabase/.branches/
+supabase/.temp/
+
+# logs & OS
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+
+# editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# local data exports (may contain personal data)
+/exports/
+*.sql.gz

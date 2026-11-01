@@ -1,0 +1,47 @@
+{
+  "Metadata": {
+    "description": "Sumber manusia dan gaji untuk pusat penjagaan kesihatan dan terapi di Malaysia."
+  },
+  "Brand": {
+    "logoLabel": "Laman utama Rakan"
+  },
+  "LanguageToggle": {
+    "label": "Bahasa",
+    "en": "EN",
+    "ms": "BM"
+  },
+  "Landing": {
+    "title": "Rakan",
+    "subtitle": "Sumber manusia dan gaji untuk pusat penjagaan kesihatan dan terapi. Aplikasi sedang disediakan.",
+    "previewHeading": "Pratonton susun atur",
+    "adminPreview": "Susun atur pentadbir (desktop)",
+    "staffPreview": "Susun atur kakitangan (mudah alih)"
+  },
+  "AdminNav": {
+    "label": "Utama",
+    "home": "Utama",
+    "people": "Kakitangan",
+    "hiring": "Pengambilan",
+    "timeOff": "Cuti",
+    "payroll": "Gaji",
+    "compliance": "Pematuhan",
+    "reports": "Laporan",
+    "search": "Cari kakitangan, borang…",
+    "notifications": "Pemberitahuan",
+    "account": "Akaun anda"
+  },
+  "StaffNav": {
+    "label": "Utama",
+    "home": "Utama",
+    "time": "Masa",
+    "credentials": "Kredensial",
+    "pay": "Gaji",
+    "me": "Saya"
+  },
+  "Placeholder": {
+    "adminTitle": "Laman utama pentadbir",
+    "staffTitle": "Utama",
+    "body": "Ini susun atur sementara. Skrin akan ditambah dalam langkah pembinaan seterusnya.",
+    "notBuilt": "Akan datang dalam langkah pembinaan seterusnya"
+  }
+}

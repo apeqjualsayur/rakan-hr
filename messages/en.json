@@ -1,0 +1,47 @@
+{
+  "Metadata": {
+    "description": "HR and payroll for Malaysian healthcare and therapy centres."
+  },
+  "Brand": {
+    "logoLabel": "Rakan home"
+  },
+  "LanguageToggle": {
+    "label": "Language",
+    "en": "EN",
+    "ms": "BM"
+  },
+  "Landing": {
+    "title": "Rakan",
+    "subtitle": "HR and payroll for healthcare and therapy centres. The app is being set up.",
+    "previewHeading": "Layout previews",
+    "adminPreview": "Admin layout (desktop)",
+    "staffPreview": "Staff layout (mobile)"
+  },
+  "AdminNav": {
+    "label": "Main",
+    "home": "Home",
+    "people": "People",
+    "hiring": "Hiring",
+    "timeOff": "Time off",
+    "payroll": "Payroll",
+    "compliance": "Compliance",
+    "reports": "Reports",
+    "search": "Search people, forms…",
+    "notifications": "Notifications",
+    "account": "Your account"
+  },
+  "StaffNav": {
+    "label": "Main",
+    "home": "Home",
+    "time": "Time",
+    "credentials": "Credentials",
+    "pay": "Pay",
+    "me": "Me"
+  },
+  "Placeholder": {
+    "adminTitle": "Admin home",
+    "staffTitle": "Home",
+    "body": "This is a placeholder layout. Screens are added in later build steps.",
+    "notBuilt": "Coming in a later build step"
+  }
+}

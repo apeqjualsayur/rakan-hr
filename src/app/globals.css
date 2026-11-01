@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+/* Design tokens from _specs/hr-system/ui-system.md §2 / §7.
+   Tailwind v4 reads tokens from this CSS file (there is no tailwind.config.ts). */
+@theme {
+  --color-canvas: #f6f3ea;
+  --color-surface: #ffffff;
+  --color-border: #e4dfd0;
+  --color-track: #efebdd;
+
+  --color-ink: #1e2a24;
+  --color-ink-muted: #5b6b62;
+  --color-ink-soft: #3c4a42;
+
+  --color-primary: #1e6b52;
+  --color-primary-strong: #14503d;
+  --color-primary-tint: #ddeee5;
+  --color-primary-on-hero: #478671;
+
+  --color-accent: #c4461f;
+
+  --color-info: #2d4f9c;
+  --color-info-tint: #e1e9fb;
+  --color-warning: #7a4f00;
+  --color-warning-tint: #fbebc5;
+  --color-danger: #a12a17;
+  --color-danger-tint: #faddd6;
+  --color-neutral: #4b5750;
+  --color-neutral-tint: #e8e5da;
+
+  --color-avatar-amber: #f2c879;
+  --color-avatar-mint: #bfe0d0;
+  --color-avatar-rose: #f4b9a6;
+
+  --radius-control: 14px;
+  --radius-tile: 20px;
+  --radius-card: 24px;
+  --radius-hero: 32px;
+
+  --font-sans:
+    var(--font-inter), Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    sans-serif;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

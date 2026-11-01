@@ -1,0 +1,3 @@
+-- Local development seed data. Runs after migrations on `supabase db reset`.
+-- Build step 3 adds the tenant and branch from _specs/hr-system/company-config.yaml.
+-- Test data only: fake names and fake IC numbers.

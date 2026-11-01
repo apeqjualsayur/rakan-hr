@@ -1,0 +1,12 @@
+# Owner-written docs and specs: never reformat
+_specs/
+*.md
+
+# Generated / tool output
+.next/
+node_modules/
+package-lock.json
+next-env.d.ts
+playwright-report/
+test-results/
+supabase/.temp/
