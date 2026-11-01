@@ -10,13 +10,68 @@
     "en": "EN",
     "ms": "BM"
   },
-  "Landing": {
-    "title": "Rakan",
-    "subtitle": "Sumber manusia dan gaji untuk pusat penjagaan kesihatan dan terapi. Aplikasi sedang disediakan.",
-    "previewHeading": "Pratonton susun atur",
-    "adminPreview": "Susun atur pentadbir (desktop)",
-    "staffPreview": "Susun atur kakitangan (mudah alih)",
-    "designPreview": "Sistem reka bentuk dan skrin rujukan"
+  "Auth": {
+    "loginTitle": "Log masuk ke Rakan",
+    "loginIntro": "Masukkan e-mel kerja anda dan kami akan menghantar kod 6 digit.",
+    "emailLabel": "E-mel kerja",
+    "emailPlaceholder": "nama@contoh.com",
+    "sendCode": "Hantar kod",
+    "invalidEmail": "Masukkan alamat e-mel yang sah.",
+    "rateLimited": "Terlalu banyak cubaan. Tunggu seminit, kemudian cuba lagi.",
+    "genericError": "Ada masalah. Sila cuba lagi.",
+    "codeTitle": "Masukkan kod anda",
+    "codeIntro": "Jika {email} mempunyai akses ke Rakan, kod 6 digit sedang dihantar. Kod tamat tempoh dalam 1 jam.",
+    "codeLabel": "Kod 6 digit",
+    "verify": "Log masuk",
+    "invalidCode": "Kod itu salah atau telah tamat tempoh. Semak semula, atau minta kod baharu.",
+    "useDifferentEmail": "Guna e-mel lain",
+    "resend": "Hantar kod baharu",
+    "resent": "Kod baharu sedang dihantar.",
+    "mfaSetupTitle": "Sediakan log masuk dua langkah",
+    "mfaSetupIntro": "Peranan anda boleh melihat data gaji dan peribadi, jadi Rakan memerlukan langkah kedua. Imbas kod QR ini dengan aplikasi pengesah seperti Google Authenticator atau Microsoft Authenticator.",
+    "mfaManualKey": "Tidak boleh imbas? Taip kunci ini dalam aplikasi:",
+    "mfaVerifyTitle": "Log masuk dua langkah",
+    "mfaVerifyIntro": "Masukkan kod 6 digit daripada aplikasi pengesah anda.",
+    "mfaCodeLabel": "Kod daripada aplikasi",
+    "mfaConfirm": "Sahkan",
+    "mfaInvalid": "Kod itu tidak berjaya. Kod bertukar setiap 30 saat, jadi masukkan kod semasa.",
+    "qrAlt": "Kod QR untuk aplikasi pengesah anda",
+    "noAccessTitle": "Belum ada akses",
+    "noAccessBody": "Anda log masuk sebagai {email}, tetapi akaun ini belum dipautkan kepada syarikat dalam Rakan. Minta pentadbir HR menjemput anda.",
+    "signOut": "Log keluar",
+    "signedInAs": "Log masuk sebagai {email}",
+    "loading": "Memuatkan…"
+  },
+  "Notifications": {
+    "title": "Pemberitahuan",
+    "empty": "Tiada pemberitahuan baharu.",
+    "markAllRead": "Tandakan semua sudah dibaca",
+    "loadError": "Pemberitahuan tidak dapat dimuatkan.",
+    "sendTest": "Hantar pemberitahuan ujian",
+    "testSent": "Pemberitahuan ujian dihantar. Semak loceng dan e-mel anda.",
+    "testFailed": "Pemberitahuan ujian tidak dapat dihantar.",
+    "templates": {
+      "test": {
+        "title": "Pemberitahuan ujian",
+        "body": "Pemberitahuan dalam aplikasi dan e-mel berfungsi."
+      },
+      "approval_requested": {
+        "title": "Kelulusan diperlukan",
+        "body": "Permohonan {entity} memerlukan kelulusan anda (langkah {step})."
+      },
+      "approval_decided": {
+        "approvedTitle": "Permohonan {entity} anda diluluskan",
+        "rejectedTitle": "Permohonan {entity} anda ditolak",
+        "body": "Ulasan: {comment}"
+      },
+      "fallback": {
+        "title": "Pemberitahuan baharu"
+      }
+    },
+    "entity": {
+      "test": "ujian",
+      "fallback": "kelulusan"
+    }
   },
   "AdminNav": {
     "label": "Utama",

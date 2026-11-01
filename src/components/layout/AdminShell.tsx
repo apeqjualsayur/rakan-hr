@@ -8,15 +8,25 @@ export function AdminShell({
   active,
   unread,
   user,
+  bell,
+  account,
 }: {
   children: ReactNode;
   active?: AdminNavKey;
   unread?: boolean;
   user?: { id: string; name: string };
+  bell?: ReactNode;
+  account?: ReactNode;
 }) {
   return (
     <>
-      <TopNav active={active} unread={unread} user={user} />
+      <TopNav
+        active={active}
+        unread={unread}
+        user={user}
+        bell={bell}
+        account={account}
+      />
       <main className="mx-auto w-full max-w-[1800px] px-4 py-6 md:px-8 md:py-10 xl:px-16">
         {children}
       </main>

@@ -10,13 +10,68 @@
     "en": "EN",
     "ms": "BM"
   },
-  "Landing": {
-    "title": "Rakan",
-    "subtitle": "HR and payroll for healthcare and therapy centres. The app is being set up.",
-    "previewHeading": "Layout previews",
-    "adminPreview": "Admin layout (desktop)",
-    "staffPreview": "Staff layout (mobile)",
-    "designPreview": "Design system and reference screens"
+  "Auth": {
+    "loginTitle": "Sign in to Rakan",
+    "loginIntro": "Enter your work email and we'll send you a 6-digit code.",
+    "emailLabel": "Work email",
+    "emailPlaceholder": "name@example.com",
+    "sendCode": "Send code",
+    "invalidEmail": "Enter a valid email address.",
+    "rateLimited": "Too many attempts. Wait a minute, then try again.",
+    "genericError": "Something went wrong. Please try again.",
+    "codeTitle": "Enter your code",
+    "codeIntro": "If {email} has access to Rakan, a 6-digit code is on its way. It expires in 1 hour.",
+    "codeLabel": "6-digit code",
+    "verify": "Sign in",
+    "invalidCode": "That code is wrong or has expired. Check it, or ask for a new one.",
+    "useDifferentEmail": "Use a different email",
+    "resend": "Send a new code",
+    "resent": "A new code is on its way.",
+    "mfaSetupTitle": "Set up two-step sign-in",
+    "mfaSetupIntro": "Your role can see pay and personal data, so Rakan asks for a second step. Scan this QR code with an authenticator app such as Google Authenticator or Microsoft Authenticator.",
+    "mfaManualKey": "Can't scan it? Type this key into the app:",
+    "mfaVerifyTitle": "Two-step sign-in",
+    "mfaVerifyIntro": "Enter the 6-digit code from your authenticator app.",
+    "mfaCodeLabel": "Code from your app",
+    "mfaConfirm": "Confirm",
+    "mfaInvalid": "That code didn't work. Codes change every 30 seconds, so enter the current one.",
+    "qrAlt": "QR code for your authenticator app",
+    "noAccessTitle": "No access yet",
+    "noAccessBody": "You're signed in as {email}, but this account isn't linked to a company in Rakan. Ask your HR admin to invite you.",
+    "signOut": "Sign out",
+    "signedInAs": "Signed in as {email}",
+    "loading": "Loading…"
+  },
+  "Notifications": {
+    "title": "Notifications",
+    "empty": "You're all caught up.",
+    "markAllRead": "Mark all as read",
+    "loadError": "Couldn't load notifications.",
+    "sendTest": "Send test notification",
+    "testSent": "Test notification sent. Check the bell and your email.",
+    "testFailed": "Couldn't send the test notification.",
+    "templates": {
+      "test": {
+        "title": "Test notification",
+        "body": "In-app and email notifications are working."
+      },
+      "approval_requested": {
+        "title": "Approval needed",
+        "body": "A {entity} request needs your approval (step {step})."
+      },
+      "approval_decided": {
+        "approvedTitle": "Your {entity} request was approved",
+        "rejectedTitle": "Your {entity} request was rejected",
+        "body": "Comment: {comment}"
+      },
+      "fallback": {
+        "title": "New notification"
+      }
+    },
+    "entity": {
+      "test": "test",
+      "fallback": "approval"
+    }
   },
   "AdminNav": {
     "label": "Main",

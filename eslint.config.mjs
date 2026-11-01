@@ -19,6 +19,8 @@ const eslintConfig = defineConfig([
     "playwright-report/**",
     "test-results/**",
     "supabase/.temp/**",
+    // Deno code (Edge Functions), not part of the Next.js app:
+    "supabase/functions/**",
   ]),
 ]);
 

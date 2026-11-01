@@ -1,3 +1,4 @@
--- Local development seed data. Runs after migrations on `supabase db reset`.
--- Build step 3 adds the tenant and branch from _specs/hr-system/company-config.yaml.
+-- Seed data is not loaded from this file. `npm run db:seed` (scripts/seed.mjs) reads
+-- _specs/hr-system/company-config.yaml and upserts the tenant, branch and Owner memberships;
+-- `npm run db:reset` runs it after re-applying migrations.
 -- Test data only: fake names and fake IC numbers.

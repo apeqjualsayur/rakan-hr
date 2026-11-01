@@ -18,8 +18,10 @@
     "db:which": "node scripts/linked-project.mjs",
     "db:migrations": "node scripts/linked-project.mjs && supabase migration list --linked",
     "db:push": "node scripts/linked-project.mjs && supabase db push --linked",
-    "db:reset": "node scripts/linked-project.mjs --dev-only && supabase db reset --linked",
-    "functions:deploy": "node scripts/linked-project.mjs && supabase functions deploy --use-api"
+    "db:reset": "node scripts/linked-project.mjs --dev-only && supabase db reset --linked && node scripts/seed.mjs",
+    "functions:deploy": "node scripts/linked-project.mjs && supabase functions deploy --use-api",
+    "db:seed": "node scripts/linked-project.mjs --dev-only && node scripts/seed.mjs",
+    "notify:setup": "node scripts/linked-project.mjs --dev-only && node scripts/setup-notify-secrets.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -55,6 +57,7 @@
     "supabase": "^2.122.0",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "^5.0.5"
+    "vitest": "^5.0.5",
+    "yaml": "^2.9.1"
   }
 }

@@ -34,6 +34,10 @@ Next.js (App Router) + TypeScript + Tailwind, PWA · Supabase (Auth, Postgres + 
 - Commit after each build step with a clear message referencing requirement IDs.
 - Write migrations in `supabase/migrations/`; never edit a migration that has already been applied, add a new one.
 - Add pgTAP tests for RLS and payroll logic alongside each migration.
+- Every 🔒 table in data-model.md gets the audit trigger in the migration that creates it: `select audit.enable('public.<table>');`, and is added to the list in `supabase/tests/010_rls_enabled.test.sql`.
+- RLS policies use the helpers `auth_tenant_id()`, `auth_role()`, `auth_employee_id()`, `is_manager_of()`. Owner / HR admin / payroll approver get no role until they pass MFA (JWT `aal2`).
+- Notifications: call `public.notify(user_id, template, data, link)` from SQL (it is not callable by signed-in users). Each new template key needs text in `messages/*.json` (`Notifications.templates`) and in `supabase/functions/_shared/emails/templates.tsx`.
+- Approvals: `create_approval(entity_type, entity_id, steps)` and `act_on_approval(approval_id, decision, comment)`; react to `approvals.status` changes with a trigger in the feature's own migration.
 
 ## Commands
 Run from the repo root. The Supabase CLI is a project dev dependency, so `npm run db:*` works without a global install (or use `npx supabase …`). Cloud-only workflow: no Docker, no `supabase start`. The CLI is linked to the dev project `rakan-hr`, and `.env.local` points at the same project. Every `db:*` / `functions:deploy` script prints the linked project first.
@@ -50,8 +54,10 @@ Run from the repo root. The Supabase CLI is a project dev dependency, so `npm ru
 | Production build | `npm run build` |
 | List migrations: local files vs applied on the linked project | `npm run db:migrations` |
 | Push new migrations to the linked project (show `db:migrations` first) | `npm run db:push` |
-| Wipe the dev DB and re-apply all migrations + `supabase/seed.sql` (refuses unless linked to the `.env.local` dev project) | `npm run db:reset` |
-| Deploy Edge Functions without Docker (server-side bundling) | `npm run functions:deploy` (one function: `npm run functions:deploy -- <name>`) |
+| Seed / re-sync the tenant, branch and Owners from `company-config.yaml` (add or remove emails in `people.owner_emails`, then re-run; removed owners are deactivated) | `npm run db:seed` |
+| Wipe the dev DB, re-apply all migrations, then `db:seed` (refuses unless linked to the `.env.local` dev project) | `npm run db:reset` |
+| Connect notification emails: Vault secrets + Edge Function secrets from `.env.local` (`RESEND_API_KEY`, `EMAIL_FROM`, `APP_URL`) | `npm run notify:setup` |
+| Deploy Edge Functions without Docker (server-side bundling) | `npm run functions:deploy` (one function: `npm run functions:deploy -- <name>`; the email function: `npm run functions:deploy -- send-notification-email --no-verify-jwt`) |
 
 Do not use `supabase test db`: in CLI 2.122 it runs pg_prove in a Docker container. `supabase/config.toml` only configures the unused local stack; cloud Auth settings are changed in the dashboard.
 

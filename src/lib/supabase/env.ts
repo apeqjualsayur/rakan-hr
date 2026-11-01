@@ -1,7 +1,11 @@
 // Both values are public by design (browser-safe); data is protected by RLS.
 // The secret / service-role key must never be read here or anywhere in client code.
 export function getSupabaseEnv() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  // Accept the Data API URL (…/rest/v1/) by mistake: the clients need the project root.
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(
+    /\/(rest\/v1\/?)?$/,
+    "",
+  );
   const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   if (!url || !publishableKey) return null;
   return { url, publishableKey };

@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { Bell, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
@@ -12,15 +13,20 @@ import { cn } from "@/lib/utils";
 // §3.1 Desktop top nav: logo + wordmark · nav items (active = primary-tint pill) ·
 // search pill · bell (accent dot when unread) · avatar. White, 1 px bottom border.
 // Below 1280 px the nav items scroll sideways so tablets (≥ 768 px) stay usable.
+// The signed-in app passes live `bell` and `account` elements; /design uses the static ones.
 export function TopNav({
   active,
   unread = false,
   user,
+  bell,
+  account,
 }: {
   /** Override the active item (otherwise derived from the URL). */
   active?: AdminNavKey;
   unread?: boolean;
   user?: { id: string; name: string };
+  bell?: ReactNode;
+  account?: ReactNode;
 }) {
   const t = useTranslations("AdminNav");
   const tp = useTranslations("Placeholder");
@@ -81,20 +87,26 @@ export function TopNav({
             />
           </label>
           <LanguageToggle />
-          <button
-            type="button"
-            aria-label={unread ? t("notificationsUnread") : t("notifications")}
-            className="relative grid size-12 place-items-center rounded-full border border-border bg-surface text-ink-soft transition-colors hover:bg-canvas"
-          >
-            <Bell aria-hidden size={20} strokeWidth={1.75} />
-            {unread ? (
-              <span
-                aria-hidden
-                className="absolute top-2.5 right-3 size-2.5 rounded-full bg-accent ring-2 ring-surface"
-              />
-            ) : null}
-          </button>
-          {user ? (
+          {bell ?? (
+            <button
+              type="button"
+              aria-label={
+                unread ? t("notificationsUnread") : t("notifications")
+              }
+              className="relative grid size-12 place-items-center rounded-full border border-border bg-surface text-ink-soft transition-colors hover:bg-canvas"
+            >
+              <Bell aria-hidden size={20} strokeWidth={1.75} />
+              {unread ? (
+                <span
+                  aria-hidden
+                  className="absolute top-2.5 right-3 size-2.5 rounded-full bg-accent ring-2 ring-surface"
+                />
+              ) : null}
+            </button>
+          )}
+          {account ? (
+            account
+          ) : user ? (
             <button
               type="button"
               aria-label={t("account")}

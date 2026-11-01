@@ -78,7 +78,8 @@ notifications:
 
 people:
   owner_name: TBC
-  owner_email: TBC
-  hr_admin_email: TBC             # can be the same as owner
-  payroll_approver_email: TBC     # can be the same as owner
+  owner_emails:                   # everyone listed gets the Owner role. Add or remove a line,
+    - afiqsyazwan@gmail.com       # then run `npm run db:seed`. Removed owners are deactivated, not deleted.
+  hr_admin_email: afiqsyazwan@gmail.com          # can be the same as owner
+  payroll_approver_email: afiqsyazwan@gmail.com  # can be the same as owner
   accountant_email: TBC           # gets Auditor (read-only) access

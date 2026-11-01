@@ -1,9 +1,12 @@
 import { createServerClient } from "@supabase/ssr";
-import type { NextRequest, NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { getSupabaseEnv } from "./env";
 
+// Signed-in areas. Role and MFA checks happen in their layouts (src/lib/auth/member.ts);
+// here we only bounce signed-out visitors to the login page early.
+const PROTECTED = /^\/(en|ms)\/(admin|staff|mfa|no-access)(\/|$)/;
+
 // Refreshes the Supabase auth session cookie on the outgoing response.
-// Route protection by role is added in build step 3.
 export async function updateSession(
   request: NextRequest,
   response: NextResponse,
@@ -31,7 +34,12 @@ export async function updateSession(
 
   // Do not put code between createServerClient and getClaims():
   // getClaims() is what validates and refreshes the session.
-  await supabase.auth.getClaims();
+  const { data } = await supabase.auth.getClaims();
+
+  const match = request.nextUrl.pathname.match(PROTECTED);
+  if (!data?.claims && match) {
+    return NextResponse.redirect(new URL(`/${match[1]}/login`, request.url));
+  }
 
   return response;
 }
