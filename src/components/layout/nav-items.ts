@@ -28,7 +28,7 @@ export type StaffNavKey = "home" | "time" | "credentials" | "pay" | "me";
 // The desktop top nav is text-only (reference screen); the bottom nav has icons.
 export const adminNavItems: NavItem<AdminNavKey>[] = [
   { key: "home", href: "/admin" },
-  { key: "people" },
+  { key: "people", href: "/admin/people" },
   { key: "hiring" },
   { key: "timeOff" },
   { key: "payroll" },
@@ -36,10 +36,17 @@ export const adminNavItems: NavItem<AdminNavKey>[] = [
   { key: "reports" },
 ];
 
+/** Active when on the item's page or below it; Home only on its own page. */
+export function isNavActive(href: string | undefined, pathname: string) {
+  if (!href) return false;
+  if (href === "/admin" || href === "/staff") return pathname === href;
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export const staffNavItems: (NavItem<StaffNavKey> & { icon: LucideIcon })[] = [
   { key: "home", icon: House, href: "/staff" },
   { key: "time", icon: Clock },
   { key: "credentials", icon: ShieldCheck },
   { key: "pay", icon: Wallet },
-  { key: "me", icon: User },
+  { key: "me", icon: User, href: "/staff/me" },
 ];

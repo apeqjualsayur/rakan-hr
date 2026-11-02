@@ -13,7 +13,7 @@ import {
   FormFeedback,
   ReadOnlyNote,
   useFieldError,
-} from "../_components/FormFeedback";
+} from "@/components/forms/FormFeedback";
 import { saveCompany } from "./actions";
 
 type TextName = Exclude<

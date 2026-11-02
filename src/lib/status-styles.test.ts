@@ -15,10 +15,13 @@ describe("status-styles", () => {
   it("covers every status family the spec names", () => {
     expect(domains.sort()).toEqual(
       [
+        "bankAccount",
+        "changeRequest",
         "checklist",
         "claim",
         "cpd",
         "credential",
+        "employee",
         "leave",
         "membership",
         "ot",
@@ -58,6 +61,7 @@ describe("status-styles", () => {
       claim: "primary",
       overtime: "warning",
       bank_change: "danger",
+      profile_change: "info",
     });
   });
 

@@ -6,6 +6,7 @@ import {
   parseOperatingHours,
   stateCode,
   toBranch,
+  toJobRoles,
   toTenant,
 } from "./company-config.mjs";
 
@@ -118,5 +119,28 @@ describe("ownerEmails", () => {
     expect(() =>
       ownerEmails({ people: { owner_emails: ["not-an-email"] } }),
     ).toThrow(/Not an email/);
+  });
+});
+
+describe("toJobRoles", () => {
+  it("maps roles_to_hire to job roles in yaml order", () => {
+    expect(
+      toJobRoles({
+        roles_to_hire: [
+          { title: "Speech-Language Therapist", clinical: true },
+          { title: "Centre Administrator", clinical: false },
+          { title: "TBC" },
+        ],
+      }),
+    ).toEqual([
+      { name: "Speech-Language Therapist", is_clinical: true, sort_order: 10 },
+      { name: "Centre Administrator", is_clinical: false, sort_order: 20 },
+    ]);
+    expect(toJobRoles({})).toEqual([]);
+  });
+  it("refuses the same title twice", () => {
+    expect(() =>
+      toJobRoles({ roles_to_hire: [{ title: "OT" }, { title: "ot" }] }),
+    ).toThrow(/twice/);
   });
 });

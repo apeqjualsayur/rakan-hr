@@ -74,7 +74,9 @@
     },
     "entity": {
       "test": "ujian",
-      "fallback": "kelulusan"
+      "fallback": "kelulusan",
+      "profile_change": "perubahan profil",
+      "bank_change": "perubahan bank"
     }
   },
   "AdminNav": {
@@ -90,7 +92,8 @@
     "notifications": "Pemberitahuan",
     "notificationsUnread": "Pemberitahuan (belum dibaca)",
     "account": "Akaun anda",
-    "settings": "Tetapan"
+    "settings": "Tetapan",
+    "searchPeople": "Cari kakitangan"
   },
   "StaffNav": {
     "label": "Utama",
@@ -117,7 +120,8 @@
     "leave": "Cuti",
     "claim": "Tuntutan",
     "overtime": "Lebih masa",
-    "bank_change": "Tukar bank"
+    "bank_change": "Tukar bank",
+    "profile_change": "Tukar profil"
   },
   "Status": {
     "credential": {
@@ -180,6 +184,24 @@
       "invited": "Dijemput",
       "active": "Aktif",
       "deactivated": "Dinyahaktifkan"
+    },
+    "employee": {
+      "preboarding": "Pra-penyertaan",
+      "active": "Aktif",
+      "on_notice": "Dalam notis",
+      "left": "Telah berhenti"
+    },
+    "changeRequest": {
+      "pending": "Menunggu HR",
+      "approved": "Diluluskan",
+      "rejected": "Ditolak",
+      "cancelled": "Ditarik balik"
+    },
+    "bankAccount": {
+      "pending": "Menunggu HR",
+      "active": "Digunakan",
+      "retired": "Diganti",
+      "rejected": "Ditolak"
     }
   },
   "Stepper": {
@@ -379,7 +401,22 @@
       "forbidden": "Anda tiada kebenaran untuk melakukan ini.",
       "notFound": "Item ini sudah tiada. Muat semula halaman.",
       "saveFailed": "Tidak dapat menyimpan. Sila cuba lagi.",
-      "checkFields": "Semak ruangan yang ditanda merah."
+      "checkFields": "Semak ruangan yang ditanda merah.",
+      "invalidChoice": "Pilih satu pilihan daripada senarai.",
+      "invalidMykad": "Nombor MyKad mempunyai 12 digit, contohnya 880512-14-5432.",
+      "invalidMykadDate": "6 digit pertama MyKad ialah tarikh lahir (YYMMDD). Tarikh ini tidak wujud.",
+      "invalidMykadPlace": "Digit ke-7 hingga ke-8 MyKad ialah tempat lahir. Semak nombor ini dengan kad.",
+      "invalidPassport": "Nombor pasport mempunyai 5 hingga 20 huruf atau digit.",
+      "duplicateId": "Pekerja lain sudah menggunakan nombor IC atau pasport ini.",
+      "invalidPhone": "Masukkan nombor telefon dengan digit sahaja, contohnya 012-345 6789 atau +60 12-345 6789.",
+      "invalidMoney": "Masukkan amaun dalam RM, contohnya 3500 atau 3500.50.",
+      "invalidNumber": "Masukkan nombor dalam julat yang dibenarkan.",
+      "rateRequired": "Masukkan kadar bayaran untuk model gaji ini.",
+      "beforeStart": "Tarikh ini tidak boleh sebelum tarikh mula.",
+      "managerLoop": "Ini akan membuat gelung pelaporan: seseorang tidak boleh melapor kepada orang yang melapor kepadanya.",
+      "invalidAccountNo": "Nombor akaun bank mempunyai 6 hingga 20 digit.",
+      "pendingExists": "Sudah ada perubahan untuk ini yang menunggu HR. Tarik balik dahulu untuk menghantar yang baharu.",
+      "notLinked": "Log masuk anda belum dipautkan kepada rekod pekerja. Minta HR menambah e-mel kerja anda pada rekod anda."
     },
     "company": {
       "title": "Profil syarikat",
@@ -599,5 +636,389 @@
       "description": "Membaca rekod dan laporan tetapi tidak boleh mengubah apa-apa. Untuk akauntan anda atau pemeriksaan."
     },
     "mfaNote": "Memerlukan log masuk dua langkah."
+  },
+  "People": {
+    "title": "Kakitangan",
+    "intro": "Rekod kakitangan, direktori dan hubungan pelaporan.",
+    "nav": {
+      "label": "Bahagian kakitangan",
+      "list": "Semua kakitangan",
+      "directory": "Direktori",
+      "orgChart": "Carta organisasi",
+      "requests": "Permohonan perubahan"
+    },
+    "noBranch": "Tiada cawangan",
+    "noRole": "Tiada jawatan",
+    "clinical": "Klinikal",
+    "nonClinical": "Bukan klinikal",
+    "reveal": "Tunjuk",
+    "hide": "Sembunyi",
+    "revealFailed": "Tidak dapat menunjukkan nombor penuh.",
+    "notSet": "Belum ditetapkan",
+    "list": {
+      "title": "Semua kakitangan",
+      "add": "Tambah pekerja",
+      "search": "Cari mengikut nama, jawatan atau no. pekerja",
+      "filterStatus": "Tapis mengikut status",
+      "all": "Semua",
+      "branch": "Cawangan",
+      "allBranches": "Semua cawangan",
+      "role": "Jawatan",
+      "allRoles": "Semua jawatan",
+      "type": "Jenis pekerjaan",
+      "allTypes": "Semua jenis",
+      "count": "{count, plural, other {# orang}}",
+      "empty": "Tiada sesiapa yang sepadan dengan tapisan ini.",
+      "clear": "Kosongkan tapisan",
+      "none": "Belum ada pekerja. Tambah pekerja pertama untuk bermula.",
+      "open": "Buka",
+      "startsOn": "Mula {date}",
+      "noContract": "Belum ada kontrak"
+    },
+    "new": {
+      "title": "Tambah pekerja",
+      "intro": "Mulakan dengan butiran diri dan jawatan mereka. Nombor berkanun, bank, tanggungan dan dokumen diisi dalam tab pekerja selepas itu.",
+      "who": "Siapa mereka",
+      "job": "Jawatan mereka",
+      "contract": "Kontrak dan gaji",
+      "create": "Tambah pekerja"
+    },
+    "employee": {
+      "back": "Semua kakitangan",
+      "created": "Pekerja ditambah. Isi tab lain apabila anda mempunyai butirannya.",
+      "readOnly": "Anda boleh melihat rekod ini. Hanya pemilik atau pentadbir HR boleh mengubahnya.",
+      "tabs": {
+        "label": "Bahagian rekod pekerja",
+        "personal": "Peribadi",
+        "employment": "Pekerjaan",
+        "statutory": "Berkanun",
+        "bank": "Bank",
+        "dependents": "Tanggungan",
+        "documents": "Dokumen"
+      },
+      "account": {
+        "title": "Akaun Rakan",
+        "linked": "Log masuk sebagai {email}.",
+        "invited": "Dijemput sebagai {email}; belum log masuk.",
+        "none": "Belum ada akaun Rakan. Pemilik boleh menjemput {email} di Tetapan > Pengguna; ia dipautkan kepada rekod ini secara automatik.",
+        "noEmail": "Tambah e-mel kerja, kemudian pemilik boleh menjemput mereka di Tetapan > Pengguna.",
+        "users": "Buka Tetapan > Pengguna"
+      }
+    },
+    "personal": {
+      "title": "Butiran peribadi",
+      "full_name": "Nama penuh (seperti dalam MyKad atau pasport)",
+      "id_type": "Jenis pengenalan",
+      "idTypes": {
+        "mykad": "MyKad",
+        "passport": "Pasport"
+      },
+      "id_no": "Nombor MyKad",
+      "id_noPassport": "Nombor pasport",
+      "id_noHint": "Tarikh lahir dan jantina diisi daripada nombor MyKad.",
+      "id_noStored": "Disimpan sebagai {masked}. Taip nombor baharu hanya untuk menggantikannya.",
+      "fromMykad": "Daripada MyKad: lahir {date} · {gender}",
+      "nationality": "Warganegara",
+      "nationalityMy": "Malaysia",
+      "nationalityOther": "Lain-lain",
+      "nationality_other": "Negara",
+      "is_pr": "Penduduk tetap Malaysia (PR)",
+      "date_of_birth": "Tarikh lahir",
+      "gender": "Jantina",
+      "genders": {
+        "male": "Lelaki",
+        "female": "Perempuan"
+      },
+      "marital_status": "Taraf perkahwinan",
+      "maritalStatuses": {
+        "single": "Bujang",
+        "married": "Berkahwin",
+        "divorced": "Bercerai",
+        "widowed": "Balu / duda"
+      },
+      "religion": "Agama (pilihan)",
+      "religionHint": "Hanya digunakan untuk potongan zakat.",
+      "religions": {
+        "islam": "Islam",
+        "buddhism": "Buddha",
+        "christianity": "Kristian",
+        "hinduism": "Hindu",
+        "sikhism": "Sikh",
+        "other": "Lain-lain"
+      },
+      "notStated": "Tidak dinyatakan",
+      "choose": "Pilih…",
+      "contacts": "Butiran hubungan",
+      "email": "E-mel peribadi",
+      "phone": "Telefon peribadi",
+      "address": "Alamat rumah",
+      "work_email": "E-mel kerja",
+      "work_emailHint": "Digunakan untuk log masuk ke Rakan dan dipaparkan dalam direktori.",
+      "work_phone": "Telefon kerja",
+      "work_phoneHint": "Dipaparkan dalam direktori.",
+      "emergency": "Hubungan kecemasan",
+      "emergency_name": "Nama",
+      "emergency_relationship": "Hubungan",
+      "emergency_phone": "Telefon",
+      "photo": "Foto profil",
+      "photoHint": "JPG, PNG atau WebP, sehingga 5 MB. Dipaparkan dalam direktori.",
+      "uploadPhoto": "Muat naik foto",
+      "replacePhoto": "Ganti foto",
+      "removePhoto": "Buang foto",
+      "problems": {
+        "fileType": "Gunakan imej JPG, PNG atau WebP.",
+        "fileTooBig": "Imej ini melebihi 5 MB.",
+        "uploadFailed": "Tidak dapat memuat naik foto. Sila cuba lagi."
+      }
+    },
+    "employment": {
+      "job": "Jawatan",
+      "job_role_id": "Jawatan",
+      "job_roleHint": "Jawatan klinikal memerlukan kredensial (disediakan dalam langkah pembinaan seterusnya).",
+      "job_title": "Gelaran jawatan",
+      "job_titleHint": "Biarkan kosong untuk menggunakan nama jawatan.",
+      "branch_id": "Cawangan",
+      "manager_id": "Melapor kepada",
+      "noManager": "Tiada (teratas dalam carta organisasi)",
+      "status": "Status",
+      "saveJob": "Simpan butiran jawatan",
+      "contract": "Kontrak semasa",
+      "noContract": "Belum ada kontrak direkodkan.",
+      "addFirstContract": "Tambah kontrak",
+      "employment_type": "Jenis pekerjaan",
+      "employmentTypes": {
+        "full_time": "Sepenuh masa",
+        "part_time": "Separuh masa",
+        "contract": "Kontrak",
+        "locum_contractor": "Lokum / kontraktor"
+      },
+      "pay_model": "Model gaji",
+      "payModels": {
+        "monthly": "Gaji bulanan",
+        "hourly": "Mengikut jam",
+        "per_session": "Mengikut sesi"
+      },
+      "basic_salary": "Gaji pokok (RM sebulan)",
+      "hourly_rate": "Kadar sejam (RM)",
+      "session_rate": "Kadar sesi (RM)",
+      "normal_hours_per_day": "Jam biasa sehari",
+      "work_days_per_week": "Hari bekerja seminggu",
+      "start_date": "Tarikh mula",
+      "end_date": "Tarikh tamat (pilihan)",
+      "end_dateHint": "Untuk kontrak bertempoh tetap.",
+      "probation_end": "Tamat percubaan (pilihan)",
+      "confirmed_on": "Disahkan pada (pilihan)",
+      "saveContract": "Simpan kontrak",
+      "newContract": "Mulakan kontrak baharu",
+      "newContractHint": "Untuk perubahan jenis, gaji atau syarat. Kontrak semasa tamat sehari sebelum kontrak baharu bermula dan kekal dalam sejarah.",
+      "cancelNew": "Batal",
+      "history": "Sejarah kontrak",
+      "current": "Semasa",
+      "period": "{start} – {end}",
+      "ongoing": "kini",
+      "rateMonthly": "{amount} sebulan",
+      "rateHourly": "{amount} sejam",
+      "rateSession": "{amount} satu sesi"
+    },
+    "statutory": {
+      "numbers": "Nombor berkanun",
+      "intro": "Diperlukan untuk KWSP, PERKESO, SIP dan PCB. Biarkan kosong sehingga anda memilikinya.",
+      "epf_no": "No. ahli KWSP (EPF)",
+      "socso_no": "No. PERKESO (SOCSO)",
+      "socso_noHint": "Biasanya nombor MyKad.",
+      "tax_no": "No. cukai pendapatan",
+      "eis": "SIP (EIS)",
+      "eis_eligible": "Dilindungi SIP",
+      "eisAuto": "Automatik ({value})",
+      "eisYes": "Ya, sentiasa",
+      "eisNo": "Tidak, tidak sekali-kali",
+      "eisDefault": {
+        "yes": "dilindungi",
+        "no": "tidak dilindungi",
+        "unknown": "perlukan tarikh lahir"
+      },
+      "eisHint": "Warganegara Malaysia dan penduduk tetap berumur 18 hingga 59 tahun dilindungi; pekerja asing tidak. Sahkan dengan akauntan anda bagi pekerja yang pertama kali menyertai pada umur 57 tahun ke atas.",
+      "pcb": "PCB (potongan cukai bulanan)",
+      "pcb_category": "Kategori PCB",
+      "pcbCategories": {
+        "single": "Bujang",
+        "married_spouse_not_working": "Berkahwin, pasangan tidak bekerja",
+        "married_spouse_working": "Berkahwin, pasangan bekerja"
+      },
+      "children_count_eligible": "Anak yang layak untuk pelepasan",
+      "children_count_eligibleHint": "Digunakan untuk PCB. Lihat tab Tanggungan untuk setiap anak.",
+      "zakat_monthly": "Zakat sebulan (RM, pilihan)",
+      "zakat_monthlyHint": "Mengurangkan PCB dengan amaun yang sama.",
+      "save": "Simpan butiran berkanun"
+    },
+    "bank": {
+      "title": "Akaun bank gaji",
+      "intro": "Gaji dibayar ke akaun utama. Nombor disimpan secara tersulit dan dipaparkan bertopeng.",
+      "primary": "Utama",
+      "holder": "Pemegang: {name}",
+      "verified": "Disahkan {date}",
+      "none": "Belum ada akaun bank.",
+      "pendingTitle": "Menunggu HR",
+      "pendingBody": "Pekerja meminta gaji dibayar ke {account}. Akaun ini tidak digunakan sehingga HR meluluskannya.",
+      "review": "Semak di Permohonan perubahan",
+      "history": "Akaun terdahulu",
+      "add": "Tambah akaun bank",
+      "replace": "Tukar akaun bank",
+      "replaceHint": "Akaun baharu terus menjadi akaun utama dan akaun lama disimpan dalam sejarah.",
+      "bank_code": "Bank",
+      "account_no": "Nombor akaun",
+      "holder_name": "Nama pemegang akaun",
+      "holder_nameHint": "Tepat seperti dalam rekod bank.",
+      "save": "Simpan akaun bank",
+      "cancel": "Batal"
+    },
+    "dependents": {
+      "title": "Tanggungan",
+      "intro": "Pasangan dan anak, untuk pelepasan PCB.",
+      "none": "Tiada tanggungan direkodkan.",
+      "add": "Tambah tanggungan",
+      "name": "Nama",
+      "relationship": "Hubungan",
+      "relationships": {
+        "spouse": "Pasangan",
+        "child": "Anak"
+      },
+      "date_of_birth": "Tarikh lahir (pilihan)",
+      "is_disabled": "Kurang upaya (OKU)",
+      "in_tertiary_education": "Dalam pendidikan tinggi sepenuh masa",
+      "born": "Lahir {date}",
+      "save": "Simpan",
+      "edit": "Ubah",
+      "remove": "Buang",
+      "removeConfirm": "Buang {name} daripada tanggungan?",
+      "cancel": "Batal"
+    },
+    "documents": {
+      "title": "Dokumen",
+      "intro": "Salinan IC, kontrak, surat tawaran dan dokumen lain. Fail adalah peribadi dan dibuka melalui pautan yang tamat selepas 5 minit.",
+      "none": "Belum ada dokumen.",
+      "upload": "Muat naik dokumen",
+      "doc_type": "Jenis",
+      "docTypes": {
+        "ic_copy": "Salinan IC",
+        "passport": "Pasport",
+        "work_permit": "Permit / pas kerja",
+        "contract": "Kontrak pekerjaan",
+        "offer_letter": "Surat tawaran",
+        "certificate": "Sijil",
+        "other": "Lain-lain"
+      },
+      "titleField": "Tajuk (pilihan)",
+      "expiry_date": "Tarikh luput (pilihan)",
+      "file": "Fail",
+      "fileHint": "PDF, JPG atau PNG, sehingga 10 MB.",
+      "chooseFile": "Pilih fail",
+      "view": "Lihat",
+      "remove": "Buang",
+      "removeConfirm": "Padam dokumen ini? Tindakan ini tidak boleh dibatalkan.",
+      "expires": "Luput {date}",
+      "expired": "Telah luput {date}",
+      "added": "Ditambah {date}",
+      "problems": {
+        "noFile": "Pilih fail untuk dimuat naik.",
+        "fileType": "Gunakan fail PDF, JPG atau PNG.",
+        "fileTooBig": "Fail ini melebihi 10 MB.",
+        "uploadFailed": "Tidak dapat memuat naik fail. Sila cuba lagi.",
+        "openFailed": "Tidak dapat membuka fail. Sila cuba lagi."
+      }
+    },
+    "directory": {
+      "title": "Direktori",
+      "intro": "Semua orang di syarikat, dengan butiran hubungan kerja.",
+      "search": "Cari mengikut nama atau jawatan",
+      "count": "{count, plural, other {# orang}}",
+      "empty": "Tiada sesiapa yang sepadan dengan “{query}”.",
+      "none": "Belum ada sesiapa dalam direktori.",
+      "email": "E-mel {name}",
+      "call": "Telefon {name}",
+      "reportsTo": "Melapor kepada {name}",
+      "reportsCount": "{count, plural, other {# orang melapor terus}}",
+      "openRecord": "Buka rekod pekerja",
+      "credentials": "Kredensial",
+      "close": "Tutup",
+      "onNotice": "Dalam notis"
+    },
+    "orgChart": {
+      "title": "Carta organisasi",
+      "intro": "Dibina daripada \"Melapor kepada\" setiap orang. Pilih seseorang untuk melihat kad mereka.",
+      "none": "Belum ada sesiapa dalam carta organisasi.",
+      "reports": "{count, plural, other {# orang bawahan}}",
+      "showReports": "Tunjuk orang bawahan",
+      "hideReports": "Sembunyi orang bawahan"
+    },
+    "requests": {
+      "title": "Permohonan perubahan",
+      "intro": "Kakitangan memohon untuk menukar butiran hubungan atau bank mereka di sini. Tiada apa yang berubah sehingga ia diluluskan.",
+      "pending": "Menunggu keputusan",
+      "decided": "Diputuskan baru-baru ini",
+      "none": "Tiada permohonan perubahan yang menunggu.",
+      "noneDecided": "Belum ada yang diputuskan.",
+      "fields": {
+        "phone": "Telefon peribadi",
+        "email": "E-mel peribadi",
+        "address": "Alamat rumah",
+        "emergency_contact": "Hubungan kecemasan",
+        "bank_account": "Akaun bank"
+      },
+      "from": "Kini",
+      "to": "Baharu",
+      "empty": "(tiada)",
+      "bankFlag": "Ditanda: perubahan bank sentiasa memerlukan kelulusan HR. Semak dengan pekerja secara bersemuka atau melalui telefon sebelum meluluskan.",
+      "note": "Nota daripada {name}: {note}",
+      "requested": "Dimohon {date}",
+      "decidedOn": "{status} {date}",
+      "approve": "Lulus",
+      "reject": "Tolak",
+      "rejectReason": "Sebab menolak",
+      "rejectReasonHint": "Pekerja akan melihat sebab ini.",
+      "confirmReject": "Tolak permohonan",
+      "cancel": "Batal",
+      "ownRequest": "Ini permohonan anda sendiri, jadi orang lain mesti meluluskannya.",
+      "cannotAct": "Hanya pemilik atau pentadbir HR boleh membuat keputusan.",
+      "done": "Selesai.",
+      "failed": "Tidak dapat menyimpan keputusan. Sila cuba lagi.",
+      "openRecord": "Buka rekod"
+    },
+    "search": {
+      "hint": "Taip sekurang-kurangnya 2 huruf.",
+      "none": "Tiada kakitangan ditemui.",
+      "results": "Kakitangan",
+      "failed": "Carian tidak berfungsi buat masa ini."
+    },
+    "me": {
+      "title": "Profil saya",
+      "intro": "Butiran anda seperti dalam rekod HR. Gunakan Mohon perubahan untuk mengemas kini butiran hubungan atau bank anda.",
+      "notLinked": "Profil anda belum dipautkan. Minta HR menambah e-mel kerja anda pada rekod pekerja anda.",
+      "personal": "Peribadi",
+      "contacts": "Hubungan",
+      "job": "Jawatan",
+      "statutory": "Berkanun",
+      "bank": "Bank",
+      "dependents": "Tanggungan",
+      "documents": "Dokumen",
+      "requestChange": "Mohon perubahan",
+      "send": "Hantar kepada HR",
+      "cancel": "Batal",
+      "sent": "Dihantar. HR akan menyemaknya dan anda akan menerima pemberitahuan.",
+      "note": "Nota untuk HR (pilihan)",
+      "bankNote": "Perubahan bank sentiasa memerlukan kelulusan HR sebelum digunakan untuk gaji.",
+      "requests": "Permohonan anda",
+      "withdraw": "Tarik balik",
+      "withdrawConfirm": "Tarik balik permohonan ini?",
+      "reason": "Sebab HR: {comment}",
+      "colleagues": "Rakan sekerja",
+      "directory": "Direktori",
+      "orgChart": "Carta organisasi",
+      "reportsTo": "Melapor kepada",
+      "noDocuments": "Belum ada dokumen.",
+      "noDependents": "Tiada tanggungan direkodkan.",
+      "probationEnds": "Tamat percubaan"
+    },
+    "unnamedBranch": "Cawangan (nama belum ditetapkan)"
   }
 }

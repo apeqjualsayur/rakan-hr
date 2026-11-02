@@ -21,7 +21,12 @@ type Data = Record<string, unknown>;
 
 const copy = {
   en: {
-    entity: { test: "test", fallback: "approval" } as Record<string, string>,
+    entity: {
+      test: "test",
+      fallback: "approval",
+      profile_change: "profile change",
+      bank_change: "bank change",
+    } as Record<string, string>,
     open: "Open Rakan",
     footer:
       "You get this email because you use Rakan. Sign in to see all your notifications.",
@@ -54,7 +59,12 @@ const copy = {
     fallback: { title: "New notification", body: "" },
   },
   ms: {
-    entity: { test: "ujian", fallback: "kelulusan" } as Record<string, string>,
+    entity: {
+      test: "ujian",
+      fallback: "kelulusan",
+      profile_change: "perubahan profil",
+      bank_change: "perubahan bank",
+    } as Record<string, string>,
     open: "Buka Rakan",
     footer:
       "Anda menerima e-mel ini kerana anda menggunakan Rakan. Log masuk untuk melihat semua pemberitahuan anda.",

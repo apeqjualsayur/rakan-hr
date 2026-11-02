@@ -8,7 +8,7 @@ import { Card, CardHeader } from "@/components/ui/Card";
 import { TextField } from "@/components/ui/TextField";
 import { idle } from "@/lib/settings/form";
 import { useFormAction } from "@/lib/use-form-action";
-import { FormFeedback, useFieldError } from "../_components/FormFeedback";
+import { FormFeedback, useFieldError } from "@/components/forms/FormFeedback";
 import { inviteMember } from "./actions";
 import { RoleFields, type BranchOption } from "./RoleFields";
 

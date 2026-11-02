@@ -1,7 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { staffNavItems, type StaffNavKey } from "@/components/layout/nav-items";
+import {
+  isNavActive,
+  staffNavItems,
+  type StaffNavKey,
+} from "@/components/layout/nav-items";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
@@ -19,7 +23,9 @@ export function BottomNav({ active }: { active?: StaffNavKey }) {
     >
       <ul className="mx-auto grid max-w-lg grid-cols-5">
         {staffNavItems.map(({ key, icon: Icon, href }) => {
-          const isActive = active ? key === active : href === pathname;
+          const isActive = active
+            ? key === active
+            : isNavActive(href, pathname);
           const content = (
             <>
               <span

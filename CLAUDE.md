@@ -37,6 +37,7 @@ Next.js (App Router) + TypeScript + Tailwind, PWA · Supabase (Auth, Postgres + 
 - Every 🔒 table in data-model.md gets the audit trigger in the migration that creates it: `select audit.enable('public.<table>');`, and is added to the list in `supabase/tests/010_rls_enabled.test.sql`.
 - RLS policies use the helpers `auth_tenant_id()`, `auth_role()`, `auth_employee_id()`, `is_manager_of()`. Owner / HR admin / payroll approver get no role until they pass MFA (JWT `aal2`).
 - Notifications: call `public.notify(user_id, template, data, link)` from SQL (it is not callable by signed-in users). Each new template key needs text in `messages/*.json` (`Notifications.templates`) and in `supabase/functions/_shared/emails/templates.tsx`.
+- Encrypted numbers (IC / passport, bank accounts): write the plain number to the write-only column (`employees.id_no`, `bank_accounts.account_no`); a trigger encrypts it with pgcrypto using the Vault key `pii_encryption_key` and keeps `*_last4` for masked display. Never select the `*_encrypted` / `*_hash` columns (not granted). Full numbers only via `reveal_*()` (owner / HR admin, audit-logged) or server-side `pii_decrypt()`. Never delete the Vault key.
 - Approvals: `create_approval(entity_type, entity_id, steps)` and `act_on_approval(approval_id, decision, comment)`; react to `approvals.status` changes with a trigger in the feature's own migration.
 
 ## Commands

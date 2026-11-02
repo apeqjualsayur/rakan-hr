@@ -92,6 +92,25 @@ export const statusTones = {
     active: "primary",
     deactivated: "neutral",
   },
+  // People (Step 5): employees.status, profile change requests, bank accounts.
+  employee: {
+    preboarding: "info",
+    active: "primary",
+    on_notice: "warning",
+    left: "neutral",
+  },
+  changeRequest: {
+    pending: "info",
+    approved: "primary",
+    rejected: "danger",
+    cancelled: "neutral",
+  },
+  bankAccount: {
+    pending: "info",
+    active: "primary",
+    retired: "neutral",
+    rejected: "danger",
+  },
 } as const satisfies Record<string, Record<string, Tone>>;
 
 export type StatusDomain = keyof typeof statusTones;
@@ -115,6 +134,7 @@ export const categoryTones = {
   claim: "primary",
   overtime: "warning",
   bank_change: "danger",
+  profile_change: "info",
 } as const satisfies Record<string, Tone>;
 
 export type Category = keyof typeof categoryTones;

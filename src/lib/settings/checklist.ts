@@ -1,5 +1,6 @@
 // ORG-04 Employer Setup Checklist. Rows are created by the database
 // (seed_setup_checklist); this file reads them for the checklist screen and the Owner home card.
+import { displayFileName, storageFileName } from "@/lib/files";
 
 export const CHECKLIST_STATUSES = [
   "not_started",
@@ -119,15 +120,7 @@ export function evidencePath(
   fileName: string,
   now = Date.now(),
 ) {
-  const dot = fileName.lastIndexOf(".");
-  const ext = dot > 0 ? fileName.slice(dot + 1).toLowerCase() : "";
-  const base = (dot > 0 ? fileName.slice(0, dot) : fileName)
-    .normalize("NFKD")
-    .replace(/[^\w-]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 60);
-  const name = `${now}-${base || "evidence"}${/^[a-z0-9]{1,5}$/.test(ext) ? `.${ext}` : ""}`;
-  return `${evidenceFolder(tenantId, itemId)}${name}`;
+  return `${evidenceFolder(tenantId, itemId)}${storageFileName(fileName, "evidence", now)}`;
 }
 
 export function evidenceFolder(tenantId: string, itemId: string) {
@@ -135,6 +128,4 @@ export function evidenceFolder(tenantId: string, itemId: string) {
 }
 
 /** The original-looking file name, for display ("1730000000000-epf.pdf" → "epf.pdf"). */
-export function evidenceFileName(path: string) {
-  return (path.split("/").at(-1) ?? path).replace(/^\d+-/, "");
-}
+export const evidenceFileName = displayFileName;

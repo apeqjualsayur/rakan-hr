@@ -68,9 +68,9 @@ export function needsMfa(state: MemberState): boolean {
   );
 }
 
-// Settings permissions (Step 4). These mirror the RLS policies; the UI uses them only to
-// show or hide controls, the database enforces them.
-const SETTINGS_ACCESS = {
+// Screen permissions (Settings: Step 4, People: Step 5). These mirror the RLS policies; the
+// UI uses them only to show or hide controls, the database enforces them.
+const ACCESS = {
   /** Company profile and employer numbers (tenants_update). */
   editCompany: ["owner"],
   /** Branches, geofence and operating hours (branches_insert / _update). */
@@ -83,13 +83,20 @@ const SETTINGS_ACCESS = {
   editChecklist: ["owner", "hr_admin"],
   /** See the Employer Setup Checklist (setup_checklist_items_select). */
   viewChecklist: ["owner", "hr_admin", "payroll_approver", "auditor"],
+  /** People list and employee records (employees_select). */
+  viewPeople: ["owner", "hr_admin", "payroll_approver", "auditor"],
+  /** Add and edit employees, contracts, dependents, documents (employees_insert / _update). */
+  editPeople: ["owner", "hr_admin"],
+  /** IC numbers, bank accounts and documents (bank_accounts_select, documents_select). */
+  viewSensitive: ["owner", "hr_admin"],
+  /** Approve or reject profile and bank change requests (profile_change_reviewer). */
+  reviewChanges: ["owner", "hr_admin"],
+  /** See the change request queue (profile_change_requests_select). */
+  viewChanges: ["owner", "hr_admin", "auditor"],
 } as const satisfies Record<string, readonly AppRole[]>;
 
-export type SettingsAction = keyof typeof SETTINGS_ACCESS;
+export type Action = keyof typeof ACCESS;
 
-export function can(role: AppRole | null, action: SettingsAction): boolean {
-  return (
-    role !== null &&
-    (SETTINGS_ACCESS[action] as readonly AppRole[]).includes(role)
-  );
+export function can(role: AppRole | null, action: Action): boolean {
+  return role !== null && (ACCESS[action] as readonly AppRole[]).includes(role);
 }

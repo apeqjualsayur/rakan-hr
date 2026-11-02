@@ -148,3 +148,25 @@ export function ownerEmails(config) {
   }
   return emails;
 }
+
+/**
+ * roles_to_hire → job_roles rows (Step 5; Step 6 adds credential requirements).
+ * Titles must be unique; the yaml order becomes sort_order.
+ */
+export function toJobRoles(config) {
+  const list = Array.isArray(config.roles_to_hire) ? config.roles_to_hire : [];
+  const roles = list
+    .map((role, index) => ({
+      name: known(role?.title),
+      is_clinical: role?.clinical === true,
+      sort_order: (index + 1) * 10,
+    }))
+    .filter((role) => role.name);
+  const names = roles.map((r) => r.name.toLowerCase());
+  const duplicate = names.find((n, i) => names.indexOf(n) !== i);
+  if (duplicate)
+    throw new Error(
+      `roles_to_hire lists "${duplicate}" twice in company-config.yaml`,
+    );
+  return roles;
+}

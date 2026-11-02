@@ -32,6 +32,9 @@ test("admin and staff areas redirect signed-out visitors to login", async ({
     "/en/admin/settings/branches/new",
     "/ms/admin/settings/users",
     "/en/admin/settings/setup-checklist",
+    "/en/admin/people",
+    "/en/admin/people/directory",
+    "/ms/staff/me",
   ]) {
     await page.goto(path);
     await expect(page).toHaveURL(/\/(en|ms)\/login$/);

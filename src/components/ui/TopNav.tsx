@@ -1,17 +1,22 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Bell, Search } from "lucide-react";
+import { Bell } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { LanguageToggle } from "@/components/layout/LanguageToggle";
 import { Logo } from "@/components/layout/Logo";
-import { adminNavItems, type AdminNavKey } from "@/components/layout/nav-items";
+import {
+  adminNavItems,
+  isNavActive,
+  type AdminNavKey,
+} from "@/components/layout/nav-items";
+import { PeopleSearch } from "@/components/people/PeopleSearch";
 import { PersonAvatar } from "@/components/ui/PersonRow";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 // §3.1 Desktop top nav: logo + wordmark · nav items (active = primary-tint pill) ·
-// search pill · bell (accent dot when unread) · avatar. White, 1 px bottom border.
+// people search pill (EMP-08) · bell (accent dot when unread) · avatar. White, 1 px bottom border.
 // Below 1280 px the nav items scroll sideways so tablets (≥ 768 px) stay usable.
 // The signed-in app passes live `bell` and `account` elements; /design uses the static ones.
 export function TopNav({
@@ -40,7 +45,9 @@ export function TopNav({
         <nav aria-label={t("label")} className="min-w-0 flex-1 overflow-x-auto">
           <ul className="flex items-center gap-1">
             {adminNavItems.map(({ key, href }) => {
-              const isActive = active ? key === active : href === pathname;
+              const isActive = active
+                ? key === active
+                : isNavActive(href, pathname);
               const classes = cn(
                 "flex min-h-11 items-center rounded-full px-4 text-body whitespace-nowrap transition-colors",
                 isActive
@@ -77,15 +84,7 @@ export function TopNav({
         </nav>
 
         <div className="flex shrink-0 items-center gap-2 xl:gap-3">
-          <label className="hidden min-h-11 items-center gap-2 rounded-full bg-canvas px-4 text-ink-muted xl:flex">
-            <Search aria-hidden size={20} strokeWidth={1.75} />
-            <span className="sr-only">{t("search")}</span>
-            <input
-              type="search"
-              placeholder={t("search")}
-              className="w-36 bg-transparent text-body text-ink outline-none placeholder:text-ink-muted 2xl:w-52"
-            />
-          </label>
+          <PeopleSearch />
           <LanguageToggle />
           {bell ?? (
             <button

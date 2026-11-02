@@ -18,7 +18,23 @@ export type ErrorKey =
   | "lastOwner"
   | "forbidden"
   | "notFound"
-  | "saveFailed";
+  | "saveFailed"
+  // People (Step 5)
+  | "invalidChoice"
+  | "invalidMykad"
+  | "invalidMykadDate"
+  | "invalidMykadPlace"
+  | "invalidPassport"
+  | "duplicateId"
+  | "invalidPhone"
+  | "invalidMoney"
+  | "invalidNumber"
+  | "rateRequired"
+  | "beforeStart"
+  | "managerLoop"
+  | "invalidAccountNo"
+  | "pendingExists"
+  | "notLinked";
 
 export type FieldErrors = Partial<Record<string, ErrorKey>>;
 

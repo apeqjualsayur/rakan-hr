@@ -74,7 +74,9 @@
     },
     "entity": {
       "test": "test",
-      "fallback": "approval"
+      "fallback": "approval",
+      "profile_change": "profile change",
+      "bank_change": "bank change"
     }
   },
   "AdminNav": {
@@ -90,7 +92,8 @@
     "notifications": "Notifications",
     "notificationsUnread": "Notifications (unread)",
     "account": "Your account",
-    "settings": "Settings"
+    "settings": "Settings",
+    "searchPeople": "Search people"
   },
   "StaffNav": {
     "label": "Main",
@@ -117,7 +120,8 @@
     "leave": "Leave",
     "claim": "Claim",
     "overtime": "Overtime",
-    "bank_change": "Bank change"
+    "bank_change": "Bank change",
+    "profile_change": "Profile change"
   },
   "Status": {
     "credential": {
@@ -180,6 +184,24 @@
       "invited": "Invited",
       "active": "Active",
       "deactivated": "Deactivated"
+    },
+    "employee": {
+      "preboarding": "Pre-boarding",
+      "active": "Active",
+      "on_notice": "On notice",
+      "left": "Left"
+    },
+    "changeRequest": {
+      "pending": "Waiting for HR",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Withdrawn"
+    },
+    "bankAccount": {
+      "pending": "Waiting for HR",
+      "active": "In use",
+      "retired": "Replaced",
+      "rejected": "Rejected"
     }
   },
   "Stepper": {
@@ -379,7 +401,22 @@
       "forbidden": "You don't have permission to do this.",
       "notFound": "This item no longer exists. Refresh the page.",
       "saveFailed": "Couldn't save. Please try again.",
-      "checkFields": "Check the fields marked in red."
+      "checkFields": "Check the fields marked in red.",
+      "invalidChoice": "Choose an option from the list.",
+      "invalidMykad": "A MyKad number has 12 digits, like 880512-14-5432.",
+      "invalidMykadDate": "The first 6 digits of a MyKad are the date of birth (YYMMDD). This date doesn't exist.",
+      "invalidMykadPlace": "Digits 7–8 of a MyKad are the place of birth. Check this number against the card.",
+      "invalidPassport": "A passport number has 5 to 20 letters or digits.",
+      "duplicateId": "Another employee already has this IC or passport number.",
+      "invalidPhone": "Enter a phone number with digits only, like 012-345 6789 or +60 12-345 6789.",
+      "invalidMoney": "Enter an amount in RM, like 3500 or 3500.50.",
+      "invalidNumber": "Enter a number in the allowed range.",
+      "rateRequired": "Enter the pay rate for this pay model.",
+      "beforeStart": "This date can't be before the start date.",
+      "managerLoop": "This would make a reporting loop: someone can't report to a person who reports to them.",
+      "invalidAccountNo": "A bank account number has 6 to 20 digits.",
+      "pendingExists": "There's already a change to this waiting for HR. Withdraw it first to send a new one.",
+      "notLinked": "Your sign-in isn't linked to an employee record yet. Ask HR to add your work email to your record."
     },
     "company": {
       "title": "Company profile",
@@ -599,5 +636,389 @@
       "description": "Reads records and reports but can't change anything. For your accountant or an inspection."
     },
     "mfaNote": "Needs two-step sign-in."
+  },
+  "People": {
+    "title": "People",
+    "intro": "Staff records, the directory and reporting lines.",
+    "nav": {
+      "label": "People sections",
+      "list": "All people",
+      "directory": "Directory",
+      "orgChart": "Org chart",
+      "requests": "Change requests"
+    },
+    "noBranch": "No branch",
+    "noRole": "No job role",
+    "clinical": "Clinical",
+    "nonClinical": "Non-clinical",
+    "reveal": "Show",
+    "hide": "Hide",
+    "revealFailed": "Couldn't show the full number.",
+    "notSet": "Not set",
+    "list": {
+      "title": "All people",
+      "add": "Add employee",
+      "search": "Search by name, title or employee no.",
+      "filterStatus": "Filter by status",
+      "all": "All",
+      "branch": "Branch",
+      "allBranches": "All branches",
+      "role": "Job role",
+      "allRoles": "All job roles",
+      "type": "Employment type",
+      "allTypes": "All types",
+      "count": "{count, plural, one {# person} other {# people}}",
+      "empty": "No one matches these filters.",
+      "clear": "Clear filters",
+      "none": "No employees yet. Add the first one to start.",
+      "open": "Open",
+      "startsOn": "Starts {date}",
+      "noContract": "No contract yet"
+    },
+    "new": {
+      "title": "Add employee",
+      "intro": "Start with who they are and their job. Statutory numbers, bank, dependents and documents go in the employee's tabs afterwards.",
+      "who": "Who they are",
+      "job": "Their job",
+      "contract": "Contract and pay",
+      "create": "Add employee"
+    },
+    "employee": {
+      "back": "All people",
+      "created": "Employee added. Fill in the other tabs when you have the details.",
+      "readOnly": "You can view this record. Only the owner or HR admin can change it.",
+      "tabs": {
+        "label": "Employee record sections",
+        "personal": "Personal",
+        "employment": "Employment",
+        "statutory": "Statutory",
+        "bank": "Bank",
+        "dependents": "Dependents",
+        "documents": "Documents"
+      },
+      "account": {
+        "title": "Rakan account",
+        "linked": "Signs in as {email}.",
+        "invited": "Invited as {email}; hasn't signed in yet.",
+        "none": "No Rakan account yet. The owner can invite {email} in Settings > Users; it links to this record automatically.",
+        "noEmail": "Add a work email, then the owner can invite them in Settings > Users.",
+        "users": "Open Settings > Users"
+      }
+    },
+    "personal": {
+      "title": "Personal details",
+      "full_name": "Full name (as in MyKad or passport)",
+      "id_type": "ID type",
+      "idTypes": {
+        "mykad": "MyKad",
+        "passport": "Passport"
+      },
+      "id_no": "MyKad number",
+      "id_noPassport": "Passport number",
+      "id_noHint": "Date of birth and gender fill in from the MyKad number.",
+      "id_noStored": "Saved as {masked}. Type a new number only to replace it.",
+      "fromMykad": "From the MyKad: born {date} · {gender}",
+      "nationality": "Nationality",
+      "nationalityMy": "Malaysian",
+      "nationalityOther": "Other",
+      "nationality_other": "Country",
+      "is_pr": "Malaysian permanent resident (PR)",
+      "date_of_birth": "Date of birth",
+      "gender": "Gender",
+      "genders": {
+        "male": "Male",
+        "female": "Female"
+      },
+      "marital_status": "Marital status",
+      "maritalStatuses": {
+        "single": "Single",
+        "married": "Married",
+        "divorced": "Divorced",
+        "widowed": "Widowed"
+      },
+      "religion": "Religion (optional)",
+      "religionHint": "Only used for zakat deductions.",
+      "religions": {
+        "islam": "Islam",
+        "buddhism": "Buddhism",
+        "christianity": "Christianity",
+        "hinduism": "Hinduism",
+        "sikhism": "Sikhism",
+        "other": "Other"
+      },
+      "notStated": "Not stated",
+      "choose": "Choose…",
+      "contacts": "Contact details",
+      "email": "Personal email",
+      "phone": "Personal phone",
+      "address": "Home address",
+      "work_email": "Work email",
+      "work_emailHint": "Used to sign in to Rakan and shown in the directory.",
+      "work_phone": "Work phone",
+      "work_phoneHint": "Shown in the directory.",
+      "emergency": "Emergency contact",
+      "emergency_name": "Name",
+      "emergency_relationship": "Relationship",
+      "emergency_phone": "Phone",
+      "photo": "Profile photo",
+      "photoHint": "JPG, PNG or WebP, up to 5 MB. Shown in the directory.",
+      "uploadPhoto": "Upload photo",
+      "replacePhoto": "Replace photo",
+      "removePhoto": "Remove photo",
+      "problems": {
+        "fileType": "Use a JPG, PNG or WebP image.",
+        "fileTooBig": "This image is over 5 MB.",
+        "uploadFailed": "Couldn't upload the photo. Please try again."
+      }
+    },
+    "employment": {
+      "job": "Job",
+      "job_role_id": "Job role",
+      "job_roleHint": "Clinical roles need credentials (set up in the next build step).",
+      "job_title": "Job title",
+      "job_titleHint": "Leave blank to use the job role name.",
+      "branch_id": "Branch",
+      "manager_id": "Reports to",
+      "noManager": "No one (top of the org chart)",
+      "status": "Status",
+      "saveJob": "Save job details",
+      "contract": "Current contract",
+      "noContract": "No contract recorded yet.",
+      "addFirstContract": "Add contract",
+      "employment_type": "Employment type",
+      "employmentTypes": {
+        "full_time": "Full-time",
+        "part_time": "Part-time",
+        "contract": "Contract",
+        "locum_contractor": "Locum / contractor"
+      },
+      "pay_model": "Pay model",
+      "payModels": {
+        "monthly": "Monthly salary",
+        "hourly": "Hourly",
+        "per_session": "Per session"
+      },
+      "basic_salary": "Basic salary (RM per month)",
+      "hourly_rate": "Hourly rate (RM)",
+      "session_rate": "Rate per session (RM)",
+      "normal_hours_per_day": "Normal hours per day",
+      "work_days_per_week": "Work days per week",
+      "start_date": "Start date",
+      "end_date": "End date (optional)",
+      "end_dateHint": "For fixed-term contracts.",
+      "probation_end": "Probation ends (optional)",
+      "confirmed_on": "Confirmed on (optional)",
+      "saveContract": "Save contract",
+      "newContract": "Start a new contract",
+      "newContractHint": "For a change of type, pay or terms. The current contract ends the day before the new one starts and stays in the history.",
+      "cancelNew": "Cancel",
+      "history": "Contract history",
+      "current": "Current",
+      "period": "{start} – {end}",
+      "ongoing": "now",
+      "rateMonthly": "{amount} a month",
+      "rateHourly": "{amount} an hour",
+      "rateSession": "{amount} a session"
+    },
+    "statutory": {
+      "numbers": "Statutory numbers",
+      "intro": "Needed for EPF, SOCSO, EIS and PCB. Leave blank until you have them.",
+      "epf_no": "EPF (KWSP) member no.",
+      "socso_no": "SOCSO (PERKESO) no.",
+      "socso_noHint": "Usually the MyKad number.",
+      "tax_no": "Income tax no.",
+      "eis": "EIS",
+      "eis_eligible": "Covered by EIS",
+      "eisAuto": "Automatic ({value})",
+      "eisYes": "Yes, always",
+      "eisNo": "No, never",
+      "eisDefault": {
+        "yes": "covered",
+        "no": "not covered",
+        "unknown": "needs a date of birth"
+      },
+      "eisHint": "Malaysians and permanent residents aged 18 to 59 are covered; foreign workers are not. Confirm first-time joiners aged 57 and over with your accountant.",
+      "pcb": "PCB (monthly tax deduction)",
+      "pcb_category": "PCB category",
+      "pcbCategories": {
+        "single": "Single",
+        "married_spouse_not_working": "Married, spouse not working",
+        "married_spouse_working": "Married, spouse working"
+      },
+      "children_count_eligible": "Children eligible for relief",
+      "children_count_eligibleHint": "Used for PCB. See the Dependents tab for each child.",
+      "zakat_monthly": "Zakat per month (RM, optional)",
+      "zakat_monthlyHint": "Reduces PCB by the same amount.",
+      "save": "Save statutory details"
+    },
+    "bank": {
+      "title": "Salary bank account",
+      "intro": "Payroll pays the primary account. Numbers are stored encrypted and shown masked.",
+      "primary": "Primary",
+      "holder": "Holder: {name}",
+      "verified": "Verified {date}",
+      "none": "No bank account yet.",
+      "pendingTitle": "Waiting for HR",
+      "pendingBody": "The employee asked to be paid into {account}. It isn't used until HR approves it.",
+      "review": "Review in Change requests",
+      "history": "Earlier accounts",
+      "add": "Add bank account",
+      "replace": "Change bank account",
+      "replaceHint": "The new account becomes the primary one straight away and the old one is kept in the history.",
+      "bank_code": "Bank",
+      "account_no": "Account number",
+      "holder_name": "Account holder name",
+      "holder_nameHint": "Exactly as the bank has it.",
+      "save": "Save bank account",
+      "cancel": "Cancel"
+    },
+    "dependents": {
+      "title": "Dependents",
+      "intro": "Spouse and children, for PCB reliefs.",
+      "none": "No dependents recorded.",
+      "add": "Add dependent",
+      "name": "Name",
+      "relationship": "Relationship",
+      "relationships": {
+        "spouse": "Spouse",
+        "child": "Child"
+      },
+      "date_of_birth": "Date of birth (optional)",
+      "is_disabled": "Disabled (OKU)",
+      "in_tertiary_education": "In full-time tertiary education",
+      "born": "Born {date}",
+      "save": "Save",
+      "edit": "Edit",
+      "remove": "Remove",
+      "removeConfirm": "Remove {name} from dependents?",
+      "cancel": "Cancel"
+    },
+    "documents": {
+      "title": "Documents",
+      "intro": "IC copy, contract, offer letter and other papers. Files are private and open through a link that expires after 5 minutes.",
+      "none": "No documents yet.",
+      "upload": "Upload document",
+      "doc_type": "Type",
+      "docTypes": {
+        "ic_copy": "IC copy",
+        "passport": "Passport",
+        "work_permit": "Work permit / pass",
+        "contract": "Employment contract",
+        "offer_letter": "Offer letter",
+        "certificate": "Certificate",
+        "other": "Other"
+      },
+      "titleField": "Title (optional)",
+      "expiry_date": "Expiry date (optional)",
+      "file": "File",
+      "fileHint": "PDF, JPG or PNG, up to 10 MB.",
+      "chooseFile": "Choose file",
+      "view": "View",
+      "remove": "Remove",
+      "removeConfirm": "Delete this document? This can't be undone.",
+      "expires": "Expires {date}",
+      "expired": "Expired {date}",
+      "added": "Added {date}",
+      "problems": {
+        "noFile": "Choose a file to upload.",
+        "fileType": "Use a PDF, JPG or PNG file.",
+        "fileTooBig": "This file is over 10 MB.",
+        "uploadFailed": "Couldn't upload the file. Please try again.",
+        "openFailed": "Couldn't open the file. Please try again."
+      }
+    },
+    "directory": {
+      "title": "Directory",
+      "intro": "Everyone at the company, with work contact details.",
+      "search": "Search by name or title",
+      "count": "{count, plural, one {# person} other {# people}}",
+      "empty": "No one matches “{query}”.",
+      "none": "No one is in the directory yet.",
+      "email": "Email {name}",
+      "call": "Call {name}",
+      "reportsTo": "Reports to {name}",
+      "reportsCount": "{count, plural, one {# direct report} other {# direct reports}}",
+      "openRecord": "Open employee record",
+      "credentials": "Credentials",
+      "close": "Close",
+      "onNotice": "On notice"
+    },
+    "orgChart": {
+      "title": "Org chart",
+      "intro": "Built from each person's “Reports to”. Select a person to see their card.",
+      "none": "No one is in the org chart yet.",
+      "reports": "{count, plural, one {# report} other {# reports}}",
+      "showReports": "Show reports",
+      "hideReports": "Hide reports"
+    },
+    "requests": {
+      "title": "Change requests",
+      "intro": "Staff ask to change their contact or bank details here. Nothing changes until it is approved.",
+      "pending": "Waiting for a decision",
+      "decided": "Recently decided",
+      "none": "No change requests are waiting.",
+      "noneDecided": "Nothing decided yet.",
+      "fields": {
+        "phone": "Personal phone",
+        "email": "Personal email",
+        "address": "Home address",
+        "emergency_contact": "Emergency contact",
+        "bank_account": "Bank account"
+      },
+      "from": "Now",
+      "to": "New",
+      "empty": "(none)",
+      "bankFlag": "Flagged: bank changes always need HR approval. Check with the employee in person or by phone before approving.",
+      "note": "Note from {name}: {note}",
+      "requested": "Requested {date}",
+      "decidedOn": "{status} {date}",
+      "approve": "Approve",
+      "reject": "Reject",
+      "rejectReason": "Reason for rejecting",
+      "rejectReasonHint": "The employee sees this.",
+      "confirmReject": "Reject request",
+      "cancel": "Cancel",
+      "ownRequest": "This is your own request, so someone else must approve it.",
+      "cannotAct": "Only the owner or HR admin can decide.",
+      "done": "Done.",
+      "failed": "Couldn't save the decision. Please try again.",
+      "openRecord": "Open record"
+    },
+    "search": {
+      "hint": "Type at least 2 letters.",
+      "none": "No people found.",
+      "results": "People",
+      "failed": "Search isn't working right now."
+    },
+    "me": {
+      "title": "My profile",
+      "intro": "Your details as HR has them. Use Request change to update your contact or bank details.",
+      "notLinked": "Your profile isn't linked yet. Ask HR to add your work email to your employee record.",
+      "personal": "Personal",
+      "contacts": "Contact",
+      "job": "Job",
+      "statutory": "Statutory",
+      "bank": "Bank",
+      "dependents": "Dependents",
+      "documents": "Documents",
+      "requestChange": "Request change",
+      "send": "Send to HR",
+      "cancel": "Cancel",
+      "sent": "Sent. HR will review it, and you'll get a notification.",
+      "note": "Note for HR (optional)",
+      "bankNote": "Bank changes always need HR approval before payroll uses them.",
+      "requests": "Your requests",
+      "withdraw": "Withdraw",
+      "withdrawConfirm": "Withdraw this request?",
+      "reason": "HR's reason: {comment}",
+      "colleagues": "Colleagues",
+      "directory": "Directory",
+      "orgChart": "Org chart",
+      "reportsTo": "Reports to",
+      "noDocuments": "No documents yet.",
+      "noDependents": "No dependents recorded.",
+      "probationEnds": "Probation ends"
+    },
+    "unnamedBranch": "Branch (name not set)"
   }
 }

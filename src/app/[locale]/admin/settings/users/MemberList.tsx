@@ -10,7 +10,7 @@ import { formatDate } from "@/lib/format";
 import { idle, type FormState } from "@/lib/settings/form";
 import { memberStatus, type MemberRow } from "@/lib/settings/members";
 import { useFormAction } from "@/lib/use-form-action";
-import { FormFeedback, useErrorText } from "../_components/FormFeedback";
+import { FormFeedback, useErrorText } from "@/components/forms/FormFeedback";
 import {
   removeInvite,
   resendInvite,

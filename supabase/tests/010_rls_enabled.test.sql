@@ -18,7 +18,10 @@ select is(
 select is(
   array(
     select t.name from unnest(array[
-      'memberships'
+      'memberships',
+      'employees',
+      'employment_records',
+      'bank_accounts'
     ]) as t (name)
     where not exists (
       select 1 from pg_trigger tr

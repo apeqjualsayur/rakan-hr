@@ -25,7 +25,7 @@ import type { FormState } from "@/lib/settings/form";
 import { createClient } from "@/lib/supabase/client";
 import { toneTileClasses, statusTone } from "@/lib/status-styles";
 import { cn } from "@/lib/utils";
-import { useErrorText } from "../_components/FormFeedback";
+import { useErrorText } from "@/components/forms/FormFeedback";
 import {
   attachEvidence,
   evidenceUrl,
