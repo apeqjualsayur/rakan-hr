@@ -418,3 +418,6 @@ enabled = true
 # Called by the notifications trigger with a shared secret, not a user JWT (step 3).
 [functions.send-notification-email]
 verify_jwt = false
+
+[functions.upload-credential-file]
+verify_jwt = false

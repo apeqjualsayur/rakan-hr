@@ -26,6 +26,7 @@ const copy = {
       fallback: "approval",
       profile_change: "profile change",
       bank_change: "bank change",
+      credential: "credential",
     } as Record<string, string>,
     open: "Open Rakan",
     footer:
@@ -56,6 +57,47 @@ const copy = {
       title: "You're invited to Rakan",
       body: `${company} has invited you to Rakan as ${role}. Sign in with this email address and we'll send you a 6-digit code.`,
     }),
+    // Step 6 credential reminders and CPD (data.for_hr = the HR version).
+    credentialExpiring: (
+      type: string,
+      days: number,
+      name: string,
+      hr: boolean,
+    ) => ({
+      title: hr
+        ? days === 0
+          ? `${name}'s ${type} expires today`
+          : `${name}'s ${type} expires in ${days} day${days === 1 ? "" : "s"}`
+        : days === 0
+          ? `${type} expires today`
+          : `${type} expires in ${days} day${days === 1 ? "" : "s"}`,
+      body: hr
+        ? "Check they renew it in time."
+        : "Upload the renewed certificate in Rakan before it expires.",
+    }),
+    credentialExpired: (type: string, name: string, hr: boolean) => ({
+      title: hr ? `${name}'s ${type} has expired` : `${type} has expired`,
+      body: hr
+        ? "Follow up today: clinical work may not be covered until it is renewed."
+        : "Upload the renewed certificate now. Expired credentials are flagged on the roster.",
+    }),
+    cpdBehind: (
+      type: string,
+      name: string,
+      hr: boolean,
+      points: string,
+      target: string,
+      date: string,
+    ) => ({
+      title: hr
+        ? `${name} is behind on CPD for ${type}`
+        : `CPD behind target: ${type}`,
+      body: `${points} of ${target} points expected by now; renewal on ${date}.`,
+    }),
+    cpdDecided: (title: string, verified: boolean, reason?: string) => ({
+      title: `Your CPD “${title}” was ${verified ? "verified" : "rejected"}`,
+      body: reason ? `Reason: ${reason}` : "",
+    }),
     fallback: { title: "New notification", body: "" },
   },
   ms: {
@@ -64,6 +106,7 @@ const copy = {
       fallback: "kelulusan",
       profile_change: "perubahan profil",
       bank_change: "perubahan bank",
+      credential: "kredensial",
     } as Record<string, string>,
     open: "Buka Rakan",
     footer:
@@ -93,9 +136,56 @@ const copy = {
       title: "Anda dijemput ke Rakan",
       body: `${company} telah menjemput anda ke Rakan sebagai ${role}. Log masuk dengan alamat e-mel ini dan kami akan menghantar kod 6 digit kepada anda.`,
     }),
+    credentialExpiring: (
+      type: string,
+      days: number,
+      name: string,
+      hr: boolean,
+    ) => ({
+      title: hr
+        ? days === 0
+          ? `${type} ${name} luput hari ini`
+          : `${type} ${name} luput dalam ${days} hari`
+        : days === 0
+          ? `${type} luput hari ini`
+          : `${type} luput dalam ${days} hari`,
+      body: hr
+        ? "Pastikan mereka memperbaharuinya tepat pada masanya."
+        : "Muat naik sijil yang diperbaharui dalam Rakan sebelum ia luput.",
+    }),
+    credentialExpired: (type: string, name: string, hr: boolean) => ({
+      title: hr ? `${type} ${name} telah luput` : `${type} telah luput`,
+      body: hr
+        ? "Susuli hari ini: kerja klinikal mungkin tidak dilindungi sehingga ia diperbaharui."
+        : "Muat naik sijil yang diperbaharui sekarang. Kredensial yang luput ditanda dalam jadual tugas.",
+    }),
+    cpdBehind: (
+      type: string,
+      name: string,
+      hr: boolean,
+      points: string,
+      target: string,
+      date: string,
+    ) => ({
+      title: hr
+        ? `${name} ketinggalan CPD untuk ${type}`
+        : `CPD di bawah sasaran: ${type}`,
+      body: `${points} daripada ${target} mata dijangka setakat ini; pembaharuan pada ${date}.`,
+    }),
+    cpdDecided: (title: string, verified: boolean, reason?: string) => ({
+      title: `CPD anda “${title}” telah ${verified ? "disahkan" : "ditolak"}`,
+      body: reason ? `Sebab: ${reason}` : "",
+    }),
     fallback: { title: "Pemberitahuan baharu", body: "" },
   },
 };
+
+const typeName = (data: Data, locale: Locale) =>
+  String(
+    (locale === "ms" ? data.type_name_ms : data.type_name_en) ??
+      data.type_code ??
+      "",
+  );
 
 function text(template: string, data: Data, locale: Locale) {
   const c = copy[locale];
@@ -115,6 +205,34 @@ function text(template: string, data: Data, locale: Locale) {
       return c.invite(
         data.company ? String(data.company) : c.yourCompany,
         c.roles[String(data.role)] ?? String(data.role ?? ""),
+      );
+    case "credential_expiring":
+      return c.credentialExpiring(
+        typeName(data, locale),
+        Number(data.days_left ?? 0),
+        String(data.employee_name ?? ""),
+        data.for_hr === true,
+      );
+    case "credential_expired":
+      return c.credentialExpired(
+        typeName(data, locale),
+        String(data.employee_name ?? ""),
+        data.for_hr === true,
+      );
+    case "cpd_behind":
+      return c.cpdBehind(
+        typeName(data, locale),
+        String(data.employee_name ?? ""),
+        data.for_hr === true,
+        String(data.points ?? 0),
+        String(data.target ?? 0),
+        String(data.cycle_end ?? ""),
+      );
+    case "cpd_decided":
+      return c.cpdDecided(
+        String(data.title ?? ""),
+        data.decision === "verified",
+        data.reason ? String(data.reason) : undefined,
       );
     default:
       return c.fallback;

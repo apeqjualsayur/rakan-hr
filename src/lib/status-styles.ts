@@ -47,6 +47,16 @@ export const statusTones = {
     pending: "info",
     verified: "primary",
     rejected: "danger",
+    withdrawn: "neutral",
+  },
+  // A single credential record (staff_credentials.status), on its detail page and history.
+  credentialRecord: {
+    draft: "neutral",
+    pending: "info",
+    verified: "primary",
+    rejected: "danger",
+    superseded: "neutral",
+    withdrawn: "neutral",
   },
   leave: {
     pending: "info",

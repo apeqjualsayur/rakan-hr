@@ -21,7 +21,10 @@ select is(
       'memberships',
       'employees',
       'employment_records',
-      'bank_accounts'
+      'bank_accounts',
+      'staff_credentials',
+      'credential_verifications',
+      'cpd_activities'
     ]) as t (name)
     where not exists (
       select 1 from pg_trigger tr

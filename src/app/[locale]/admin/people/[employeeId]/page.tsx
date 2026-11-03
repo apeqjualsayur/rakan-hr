@@ -27,6 +27,10 @@ import {
   type EmploymentRecord,
 } from "@/lib/people/records";
 import { photoUrls } from "@/lib/people/server";
+import { CredentialList } from "@/components/credentials/CredentialList";
+import { buttonVariants } from "@/components/ui/button";
+import { loadStatusRows } from "@/lib/credentials/server";
+import { cn } from "@/lib/utils";
 import { isUuid } from "@/lib/settings/form";
 import { createClient } from "@/lib/supabase/server";
 import { BankSection } from "./BankSection";
@@ -76,7 +80,10 @@ export default async function EmployeePage({
   const canEdit = can(member.role, "editPeople");
   const sensitive = can(member.role, "viewSensitive");
   const tabs = EMPLOYEE_TABS.filter(
-    (tab) => sensitive || (tab !== "bank" && tab !== "documents"),
+    (tab) =>
+      (sensitive || (tab !== "bank" && tab !== "documents")) &&
+      // Credential status: owner, HR admin, auditor (v_credential_status).
+      (tab !== "credentials" || can(member.role, "viewChanges")),
   );
   const tab: EmployeeTab = tabs.includes(tabParam as EmployeeTab)
     ? (tabParam as EmployeeTab)
@@ -178,6 +185,9 @@ export default async function EmployeePage({
             showAccount={can(member.role, "viewUsers")}
           />
         ) : null}
+        {tab === "credentials" ? (
+          <CredentialsTab employee={employee} canEdit={canEdit} />
+        ) : null}
         {tab === "statutory" ? (
           <StatutoryForm
             employee={employee}
@@ -252,6 +262,40 @@ async function EmploymentTab({
           }
         />
       ) : null}
+    </>
+  );
+}
+
+async function CredentialsTab({
+  employee,
+  canEdit,
+}: {
+  employee: Employee;
+  canEdit: boolean;
+}) {
+  const t = await getTranslations("People.credentialsTab");
+  const rows = await loadStatusRows(await createClient(), employee.id);
+  const addHref = `/admin/people/${employee.id}/credentials/new`;
+  return (
+    <>
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <p className="max-w-3xl text-meta text-ink-muted">
+          {employee.job_role_id ? t("intro") : t("noRole")}
+        </p>
+        {canEdit ? (
+          <Link
+            href={addHref}
+            className={cn(buttonVariants({ variant: "accent" }), "w-fit")}
+          >
+            {t("add")}
+          </Link>
+        ) : null}
+      </div>
+      <CredentialList
+        rows={rows}
+        viewHref="/admin/compliance/credentials"
+        addHref={addHref}
+      />
     </>
   );
 }

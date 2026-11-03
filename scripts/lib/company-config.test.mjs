@@ -7,6 +7,7 @@ import {
   stateCode,
   toBranch,
   toJobRoles,
+  toRoleRequirements,
   toTenant,
 } from "./company-config.mjs";
 
@@ -142,5 +143,71 @@ describe("toJobRoles", () => {
     expect(() =>
       toJobRoles({ roles_to_hire: [{ title: "OT" }, { title: "ot" }] }),
     ).toThrow(/twice/);
+  });
+});
+
+describe("toRoleRequirements", () => {
+  it("maps each role's credential lists, blocking the roster for clinical mandatory ones", () => {
+    expect(
+      toRoleRequirements({
+        roles_to_hire: [
+          {
+            title: "OT",
+            clinical: true,
+            credentials: { mandatory: ["BLS"], optional: ["HEPB_VAX"] },
+          },
+          {
+            title: "Admin",
+            clinical: false,
+            credentials: { mandatory: ["SAFEGUARDING"] },
+          },
+          { title: "No list" },
+        ],
+      }),
+    ).toEqual([
+      {
+        role: "OT",
+        code: "BLS",
+        requirement: "mandatory",
+        blocks_roster: true,
+      },
+      {
+        role: "OT",
+        code: "HEPB_VAX",
+        requirement: "optional",
+        blocks_roster: false,
+      },
+      {
+        role: "Admin",
+        code: "SAFEGUARDING",
+        requirement: "mandatory",
+        blocks_roster: false,
+      },
+    ]);
+  });
+  it("refuses unknown codes and duplicates", () => {
+    expect(() =>
+      toRoleRequirements({
+        roles_to_hire: [{ title: "X", credentials: { mandatory: ["NOPE"] } }],
+      }),
+    ).toThrow(/unknown credential code/);
+    expect(() =>
+      toRoleRequirements({
+        roles_to_hire: [
+          {
+            title: "X",
+            credentials: { mandatory: ["BLS"], optional: ["BLS"] },
+          },
+        ],
+      }),
+    ).toThrow(/twice/);
+  });
+  it("the real company-config.yaml is valid", async () => {
+    const { readFileSync } = await import("node:fs");
+    const { parse } = await import("yaml");
+    const rows = toRoleRequirements(
+      parse(readFileSync("_specs/hr-system/company-config.yaml", "utf8")),
+    );
+    expect(rows.length).toBeGreaterThan(0);
   });
 });

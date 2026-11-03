@@ -70,13 +70,38 @@
       "invite": {
         "title": "Anda dijemput ke Rakan",
         "body": "Log masuk dengan alamat e-mel ini dan kami akan menghantar kod 6 digit kepada anda."
+      },
+      "credential_expiring": {
+        "title": "{type} luput dalam {days} hari",
+        "titleToday": "{type} luput hari ini",
+        "titleHr": "{type} {name} luput dalam {days} hari",
+        "titleHrToday": "{type} {name} luput hari ini",
+        "body": "Muat naik sijil yang diperbaharui dalam Rakan sebelum ia luput.",
+        "bodyHr": "Pastikan mereka memperbaharuinya tepat pada masanya."
+      },
+      "credential_expired": {
+        "title": "{type} telah luput",
+        "titleHr": "{type} {name} telah luput",
+        "body": "Muat naik sijil yang diperbaharui sekarang. Kredensial yang luput ditanda dalam jadual tugas.",
+        "bodyHr": "Susuli hari ini: kerja klinikal mungkin tidak dilindungi sehingga ia diperbaharui."
+      },
+      "cpd_behind": {
+        "title": "CPD di bawah sasaran: {type}",
+        "titleHr": "{name} ketinggalan CPD untuk {type}",
+        "body": "{points} daripada {target} mata dijangka setakat ini; pembaharuan pada {date}."
+      },
+      "cpd_decided": {
+        "approvedTitle": "CPD anda “{title}” telah disahkan",
+        "rejectedTitle": "CPD anda “{title}” telah ditolak",
+        "body": "Sebab: {reason}"
       }
     },
     "entity": {
       "test": "ujian",
       "fallback": "kelulusan",
       "profile_change": "perubahan profil",
-      "bank_change": "perubahan bank"
+      "bank_change": "perubahan bank",
+      "credential": "kredensial"
     }
   },
   "AdminNav": {
@@ -136,7 +161,8 @@
     "cpd": {
       "pending": "Menunggu",
       "verified": "Disahkan",
-      "rejected": "Ditolak"
+      "rejected": "Ditolak",
+      "withdrawn": "Ditarik balik"
     },
     "leave": {
       "pending": "Menunggu",
@@ -202,6 +228,14 @@
       "active": "Digunakan",
       "retired": "Diganti",
       "rejected": "Ditolak"
+    },
+    "credentialRecord": {
+      "draft": "Draf",
+      "pending": "Menunggu",
+      "verified": "Disahkan",
+      "rejected": "Ditolak",
+      "superseded": "Diganti oleh pembaharuan",
+      "withdrawn": "Ditarik balik"
     }
   },
   "Stepper": {
@@ -381,7 +415,8 @@
       "company": "Syarikat",
       "branches": "Cawangan",
       "users": "Pengguna",
-      "checklist": "Senarai semak persediaan"
+      "checklist": "Senarai semak persediaan",
+      "credentials": "Kredensial"
     },
     "errors": {
       "required": "Ruangan ini wajib diisi.",
@@ -416,7 +451,13 @@
       "managerLoop": "Ini akan membuat gelung pelaporan: seseorang tidak boleh melapor kepada orang yang melapor kepadanya.",
       "invalidAccountNo": "Nombor akaun bank mempunyai 6 hingga 20 digit.",
       "pendingExists": "Sudah ada perubahan untuk ini yang menunggu HR. Tarik balik dahulu untuk menghantar yang baharu.",
-      "notLinked": "Log masuk anda belum dipautkan kepada rekod pekerja. Minta HR menambah e-mel kerja anda pada rekod anda."
+      "notLinked": "Log masuk anda belum dipautkan kepada rekod pekerja. Minta HR menambah e-mel kerja anda pada rekod anda.",
+      "expiryBeforeEffective": "Tarikh luput mesti selepas tarikh berkuat kuasa.",
+      "noFiles": "Muat naik sekurang-kurangnya satu fail sijil.",
+      "methodRequired": "Nyatakan cara anda menyemaknya.",
+      "reasonRequired": "Berikan sebab. Kakitangan akan melihatnya.",
+      "ownCredential": "Ini penghantaran anda sendiri, jadi orang lain mesti mengesahkannya.",
+      "notPending": "Ini sudah diputuskan. Muat semula halaman."
     },
     "company": {
       "title": "Profil syarikat",
@@ -608,6 +649,50 @@
           "why": "Pilihan jika kurang daripada 10 kakitangan warganegara Malaysia, wajib mulai 10. Biarkan sebagai tidak berkaitan sehingga itu."
         }
       }
+    },
+    "credentials": {
+      "title": "Kredensial",
+      "intro": "Kredensial yang dijejaki oleh Rakan, dan yang diperlukan oleh setiap jawatan.",
+      "typesTitle": "Jenis kredensial",
+      "typesIntro": "Namakan semula, tetapkan tempoh sah, atau tambah jenis anda sendiri (contohnya pensijilan kaedah terapi).",
+      "add": "Tambah jenis kredensial",
+      "edit": "Ubah",
+      "cancel": "Batal",
+      "save": "Simpan",
+      "name_en": "Nama (Bahasa Inggeris)",
+      "name_ms": "Nama (Bahasa Malaysia)",
+      "issuing_body": "Badan pengeluar biasa (pilihan)",
+      "has_expiry": "Mempunyai tarikh luput",
+      "default_validity_months": "Biasanya sah selama (bulan, pilihan)",
+      "reminder_offsets_days": "Peringatan (hari sebelum luput)",
+      "reminder_offsetsHint": "Pisahkan dengan koma, contohnya 90, 60, 30, 7.",
+      "tracks_cpd": "Menjejaki mata CPD",
+      "cpd_points_required": "Mata CPD diperlukan setiap kitaran (pilihan)",
+      "cpd_cycle_months": "Kitaran CPD (bulan, pilihan)",
+      "cpdVerify": "⚠ Semak peraturan CPD terkini badan profesional sebelum menetapkan sasaran.",
+      "restricted": "Rekod kesihatan: hanya pekerja dan HR boleh melihatnya",
+      "is_active": "Digunakan",
+      "notInUse": "Tidak digunakan",
+      "expires": "Ada tarikh luput",
+      "noExpiry": "Tiada tarikh luput",
+      "validFor": "Biasanya {months} bulan",
+      "cpd": "CPD",
+      "restrictedTag": "Rekod kesihatan",
+      "matrixTitle": "Keperluan mengikut jawatan",
+      "matrixIntro": "Kredensial wajib dikira dalam pematuhan setiap orang. “Sekat jadual” terpakai apabila penguatkuasaan ialah Ketat.",
+      "enforcement": "Penguatkuasaan jadual: {mode}",
+      "enforcementModes": {
+        "soft": "Lembut (amaran semasa menjadual)",
+        "hard": "Ketat (sekat syif klinikal)"
+      },
+      "none": "Tidak diperlukan",
+      "mandatory": "Wajib",
+      "optional": "Pilihan",
+      "blocksRoster": "Sekat jadual",
+      "noRoles": "Belum ada jawatan.",
+      "clinical": "Klinikal",
+      "nonClinical": "Bukan klinikal",
+      "invalidOffsets": "Gunakan nombor bulat hari dari 1 hingga 365, dipisahkan dengan koma."
     }
   },
   "Roles": {
@@ -694,7 +779,8 @@
         "statutory": "Berkanun",
         "bank": "Bank",
         "dependents": "Tanggungan",
-        "documents": "Dokumen"
+        "documents": "Dokumen",
+        "credentials": "Kredensial"
       },
       "account": {
         "title": "Akaun Rakan",
@@ -1019,6 +1105,231 @@
       "noDependents": "Tiada tanggungan direkodkan.",
       "probationEnds": "Tamat percubaan"
     },
-    "unnamedBranch": "Cawangan (nama belum ditetapkan)"
+    "unnamedBranch": "Cawangan (nama belum ditetapkan)",
+    "credentialsTab": {
+      "intro": "Kredensial orang ini. Tambah satu bagi pihak mereka (contohnya semasa onboarding); ia kemudian menunggu di Sahkan kredensial.",
+      "add": "Tambah kredensial",
+      "noRole": "Tetapkan jawatan di tab Pekerjaan untuk melihat kredensial yang mereka perlukan."
+    }
+  },
+  "Credentials": {
+    "title": "Kredensial Saya",
+    "tabs": {
+      "label": "Bahagian kredensial",
+      "mine": "Kredensial",
+      "cpd": "CPD",
+      "team": "Pasukan saya"
+    },
+    "ring": {
+      "headline": "{valid} daripada {total} wajib sah",
+      "noneRequired": "Tiada kredensial wajib untuk jawatan anda",
+      "advice": {
+        "expired": "Perbaharui {name} sebelum syif klinikal anda yang seterusnya.",
+        "missing": "Tambah {name} anda.",
+        "rejected": "Hantar semula {name} anda: HR tidak dapat mengesahkannya.",
+        "expiring": "Perbaharui {name} sebelum {date}.",
+        "allGood": "Semua kredensial wajib anda sah."
+      }
+    },
+    "filters": {
+      "label": "Tapis kredensial",
+      "all": "Semua",
+      "actionNeeded": "Perlu tindakan",
+      "valid": "Sah"
+    },
+    "optional": "{name} (pilihan)",
+    "requirement": {
+      "mandatory": "wajib",
+      "optional": "pilihan"
+    },
+    "meta": {
+      "expired": "Luput {date}",
+      "expiring": "{days} hari lagi · luput {date}",
+      "pending": "Dihantar {date} · menunggu HR",
+      "valid": "Disahkan {verified} · luput {expiry}",
+      "validNoExpiry": "Disahkan {verified} · tiada tarikh luput",
+      "upcoming": "Bermula {date}",
+      "missing": "Belum dimuat naik",
+      "rejected": "Tidak disahkan: {reason}"
+    },
+    "actions": {
+      "renewNow": "Perbaharui sekarang",
+      "renew": "Perbaharui",
+      "view": "Lihat",
+      "add": "Tambah",
+      "resubmit": "Hantar semula"
+    },
+    "add": "Tambah kredensial",
+    "empty": "Tiada apa-apa di sini.",
+    "noRole": "HR belum menetapkan jawatan anda, jadi Rakan tidak tahu kredensial yang anda perlukan. Anda masih boleh menambah sebarang kredensial.",
+    "form": {
+      "titleNew": "Tambah kredensial",
+      "titleRenew": "Perbaharui {name}",
+      "titleEdit": "Ubah {name}",
+      "forPerson": "Untuk {name}",
+      "type": "Kredensial",
+      "choose": "Pilih…",
+      "reference_no": "No. pendaftaran / sijil",
+      "issuing_body": "Badan pengeluar",
+      "effective_date": "Tarikh berkuat kuasa (dikeluarkan)",
+      "effectiveHint": "Tarikh akan datang dibenarkan: ia dipaparkan sebagai Akan datang sehingga tarikh itu.",
+      "expiry_date": "Tarikh luput",
+      "noExpiry": "Kredensial ini tidak luput.",
+      "cpd_points": "Mata CPD (pilihan)",
+      "notes": "Nota (pilihan)",
+      "files": "Sijil",
+      "filesHint": "PDF, JPG atau PNG, sehingga 10 MB setiap satu. Tambah setiap halaman.",
+      "takePhoto": "Ambil gambar",
+      "chooseFiles": "Pilih fail",
+      "remove": "Buang",
+      "submit": "Hantar untuk pengesahan",
+      "saveChanges": "Simpan perubahan",
+      "uploading": "Memuat naik {done} daripada {total}…",
+      "restrictedNote": "Rekod kesihatan: hanya anda dan HR boleh melihatnya.",
+      "renewsNote": "Memperbaharui rekod yang disahkan {date}. Rekod lama kekal dalam sejarah anda.",
+      "cancel": "Batal",
+      "problems": {
+        "fileType": "Gunakan fail PDF, JPG atau PNG.",
+        "fileTooBig": "Satu fail melebihi 10 MB.",
+        "uploadFailed": "Satu fail gagal dimuat naik. Sila cuba lagi.",
+        "forbidden": "Anda tidak boleh menambah fail pada kredensial ini.",
+        "noFiles": "Tambah sekurang-kurangnya satu fail sijil."
+      }
+    },
+    "detail": {
+      "back": "Kredensial Saya",
+      "backHr": "Kembali",
+      "status": "Status",
+      "reference_no": "No. pendaftaran / sijil",
+      "issuing_body": "Badan pengeluar",
+      "effective_date": "Berkuat kuasa",
+      "expiry_date": "Luput",
+      "noExpiry": "Tiada tarikh luput",
+      "cpd_points": "Mata CPD",
+      "notes": "Nota",
+      "verified": "Disahkan {date} · {method}",
+      "rejected": "Tidak disahkan: {reason}",
+      "submitted": "Dihantar {date}",
+      "files": "Fail",
+      "page": "Halaman {n}",
+      "noFiles": "Tiada fail.",
+      "open": "Buka",
+      "edit": "Ubah",
+      "withdraw": "Tarik balik",
+      "withdrawConfirm": "Tarik balik penghantaran ini? Anda boleh menghantarnya semula kemudian.",
+      "addFiles": "Tambah fail",
+      "history": "Sejarah",
+      "renew": "Perbaharui"
+    },
+    "cpd": {
+      "intro": "Rekod kursus, bengkel dan acara. HR mengesahkannya seperti kredensial.",
+      "progress": "{points} daripada {required} mata",
+      "progressNoTarget": "{points} mata disahkan",
+      "noTarget": "Belum ada sasaran CPD untuk kredensial ini.",
+      "cycle": "Kitaran {start} – {end}",
+      "noCycle": "Kitaran bermula apabila kredensial ini disahkan.",
+      "pendingPoints": "{points} lagi menunggu HR",
+      "onTrack": "Mengikut sasaran",
+      "behind": "Ketinggalan: {target} mata dijangka setakat ini",
+      "log": "Rekod CPD",
+      "credential_type_id": "Dikira untuk",
+      "title": "Tajuk",
+      "provider": "Penganjur (pilihan)",
+      "activity_date": "Tarikh",
+      "points": "Mata",
+      "hours": "Jam (pilihan)",
+      "category": "Jenis",
+      "categories": {
+        "course": "Kursus",
+        "conference": "Persidangan",
+        "workshop": "Bengkel",
+        "webinar": "Webinar",
+        "reading": "Bacaan / jurnal",
+        "other": "Lain-lain"
+      },
+      "certificate": "Sijil (pilihan)",
+      "save": "Simpan",
+      "cancel": "Batal",
+      "activities": "Aktiviti",
+      "none": "Belum ada CPD direkodkan.",
+      "noTypes": "Tiada kredensial anda yang menjejaki CPD.",
+      "withdraw": "Tarik balik",
+      "withdrawConfirm": "Tarik balik aktiviti ini?",
+      "rejected": "Tidak disahkan: {reason}",
+      "viewFile": "Sijil",
+      "pointsMeta": "{points} mata"
+    },
+    "team": {
+      "intro": "Status kredensial bagi orang di cawangan anda. Anda hanya melihat status, bukan fail atau rekod kesihatan.",
+      "none": "Belum ada sesiapa dalam pasukan anda.",
+      "compliance": "{pct}% wajib sah",
+      "noRequirements": "Tiada kredensial wajib"
+    }
+  },
+  "Compliance": {
+    "title": "Pematuhan",
+    "intro": "Kredensial, latihan wajib dan CPD di seluruh syarikat.",
+    "nav": {
+      "label": "Bahagian pematuhan",
+      "matrix": "Matriks kredensial",
+      "verify": "Sahkan kredensial",
+      "cpd": "CPD untuk disahkan"
+    },
+    "matrix": {
+      "intro": "Kredensial yang diperlukan bagi setiap orang. Yang wajib dikira dalam pematuhan; yang pilihan ditanda.",
+      "person": "Nama",
+      "compliance": "Pematuhan",
+      "exportPdf": "Muat turun PDF",
+      "notRequired": "Tidak diperlukan",
+      "optional": "pilihan",
+      "empty": "Belum ada sesiapa dengan kredensial yang diperlukan. Tetapkannya di Tetapan > Kredensial.",
+      "pdfTitle": "Pematuhan kredensial",
+      "pdfGenerated": "Dijana {date} · status setakat hari ini",
+      "legend": "Petunjuk"
+    },
+    "verify": {
+      "intro": "Semak setiap fail dengan daftar badan pengeluar jika boleh, kemudian sahkan atau tolak.",
+      "none": "Tiada apa-apa yang menunggu pengesahan.",
+      "submitted": "Dihantar {date}",
+      "byHr": "ditambah oleh HR",
+      "files": "{count} fail",
+      "review": "Semak"
+    },
+    "review": {
+      "back": "Sahkan kredensial",
+      "entered": "Butiran yang dimasukkan",
+      "person": "Nama",
+      "files": "Fail",
+      "method": "Bagaimana anda menyemaknya?",
+      "methods": {
+        "register": "Disemak dalam daftar dalam talian badan pengeluar",
+        "original": "Sijil asal dilihat",
+        "issuer": "Disahkan dengan pengeluar",
+        "other": "Lain-lain"
+      },
+      "methodOther": "Terangkan caranya",
+      "verify": "Sahkan",
+      "reject": "Tolak",
+      "reason": "Sebab",
+      "reasonHint": "Kakitangan akan melihat sebab ini dan boleh menghantar semula.",
+      "confirmReject": "Tolak kredensial",
+      "cancel": "Batal",
+      "noPreview": "Tiada pratonton untuk fail ini.",
+      "openFile": "Buka dalam tab baharu",
+      "restricted": "Rekod kesihatan: hanya pekerja dan HR boleh melihatnya.",
+      "decided": "Telah diputuskan.",
+      "selfNote": "Ini penghantaran anda sendiri, jadi pentadbir HR lain atau pemilik mesti mengesahkannya."
+    },
+    "cpd": {
+      "intro": "Aktiviti CPD yang direkodkan oleh kakitangan. Sahkan mata atau tolak dengan sebab.",
+      "none": "Tiada CPD yang menunggu.",
+      "verify": "Sahkan",
+      "reject": "Tolak",
+      "reason": "Sebab",
+      "confirmReject": "Tolak aktiviti",
+      "cancel": "Batal",
+      "viewFile": "Sijil",
+      "noFile": "Tiada sijil"
+    }
   }
 }

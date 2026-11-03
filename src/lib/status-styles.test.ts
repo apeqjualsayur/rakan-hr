@@ -21,6 +21,7 @@ describe("status-styles", () => {
         "claim",
         "cpd",
         "credential",
+        "credentialRecord",
         "employee",
         "leave",
         "membership",

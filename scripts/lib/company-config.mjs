@@ -170,3 +170,52 @@ export function toJobRoles(config) {
     );
   return roles;
 }
+
+export const CREDENTIAL_CODES = [
+  "MAHPC_REG",
+  "MMC_REG",
+  "MNB_REG",
+  "APC",
+  "BLS",
+  "FIRST_AID",
+  "INFECTION_CONTROL",
+  "FIRE_SAFETY",
+  "INDEMNITY",
+  "HEPB_VAX",
+  "SAFEGUARDING",
+];
+
+/**
+ * roles_to_hire[].credentials → role_credential_requirements rows (Step 6, CRD-03):
+ * [{ role, code, requirement, blocks_roster }]. Mandatory credentials of clinical roles
+ * block the roster when hard enforcement is on. Unknown codes are an error, not a guess.
+ */
+export function toRoleRequirements(config) {
+  const rows = [];
+  for (const role of Array.isArray(config.roles_to_hire)
+    ? config.roles_to_hire
+    : []) {
+    const name = known(role?.title);
+    if (!name) continue;
+    for (const requirement of ["mandatory", "optional"]) {
+      const list = role?.credentials?.[requirement] ?? [];
+      if (!Array.isArray(list))
+        throw new Error(`${name}: credentials.${requirement} must be a list`);
+      for (const code of list) {
+        if (!CREDENTIAL_CODES.includes(code))
+          throw new Error(
+            `${name}: unknown credential code "${code}" in company-config.yaml`,
+          );
+        if (rows.some((r) => r.role === name && r.code === code))
+          throw new Error(`${name}: ${code} is listed twice`);
+        rows.push({
+          role: name,
+          code,
+          requirement,
+          blocks_roster: requirement === "mandatory" && role.clinical === true,
+        });
+      }
+    }
+  }
+  return rows;
+}

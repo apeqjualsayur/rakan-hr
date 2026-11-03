@@ -4,13 +4,15 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-export type SettingsSection = "company" | "branches" | "users" | "checklist";
+export type SettingsSection =
+  "company" | "branches" | "users" | "checklist" | "credentials";
 
 export const settingsHref: Record<SettingsSection, string> = {
   company: "/admin/settings/company",
   branches: "/admin/settings/branches",
   users: "/admin/settings/users",
   checklist: "/admin/settings/setup-checklist",
+  credentials: "/admin/settings/credentials",
 };
 
 // Section pills, styled like the top nav (active = primary-tint pill). Scrolls sideways

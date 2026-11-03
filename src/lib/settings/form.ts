@@ -34,7 +34,14 @@ export type ErrorKey =
   | "managerLoop"
   | "invalidAccountNo"
   | "pendingExists"
-  | "notLinked";
+  | "notLinked"
+  // Credentials (Step 6)
+  | "expiryBeforeEffective"
+  | "noFiles"
+  | "methodRequired"
+  | "reasonRequired"
+  | "ownCredential"
+  | "notPending";
 
 export type FieldErrors = Partial<Record<string, ErrorKey>>;
 

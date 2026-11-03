@@ -44,16 +44,25 @@ roles_to_hire:                    # first hires; drives credential requirements 
     employment_type: full_time    # full_time | part_time | contract | locum_contractor
     pay_model: monthly            # monthly | hourly | per_session | hybrid
     headcount: 1
+    credentials:                  # codes: MAHPC_REG MMC_REG MNB_REG APC BLS FIRST_AID INFECTION_CONTROL
+      mandatory: [MAHPC_REG, APC, BLS, SAFEGUARDING]   # FIRE_SAFETY INDEMNITY HEPB_VAX SAFEGUARDING
+      optional: [INDEMNITY, HEPB_VAX, FIRE_SAFETY]     # seeded once; change later in Settings > Credentials
   - title: Occupational Therapist
     clinical: true
     employment_type: full_time
     pay_model: monthly
     headcount: 1
+    credentials:
+      mandatory: [MAHPC_REG, APC, BLS, SAFEGUARDING]
+      optional: [INDEMNITY, HEPB_VAX, FIRE_SAFETY]
   - title: Centre Administrator
     clinical: false
     employment_type: full_time
     pay_model: monthly
     headcount: 1
+    credentials:
+      mandatory: [SAFEGUARDING]
+      optional: [BLS, FIRST_AID, FIRE_SAFETY]
 
 credential_enforcement: soft      # soft = warning on roster | hard = block clinical shifts when expired
 

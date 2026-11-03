@@ -70,13 +70,38 @@
       "invite": {
         "title": "You're invited to Rakan",
         "body": "Sign in with this email address and we'll send you a 6-digit code."
+      },
+      "credential_expiring": {
+        "title": "{type} expires in {days, plural, one {# day} other {# days}}",
+        "titleToday": "{type} expires today",
+        "titleHr": "{name}'s {type} expires in {days, plural, one {# day} other {# days}}",
+        "titleHrToday": "{name}'s {type} expires today",
+        "body": "Upload the renewed certificate in Rakan before it expires.",
+        "bodyHr": "Check they renew it in time."
+      },
+      "credential_expired": {
+        "title": "{type} has expired",
+        "titleHr": "{name}'s {type} has expired",
+        "body": "Upload the renewed certificate now. Expired credentials are flagged on the roster.",
+        "bodyHr": "Follow up today: clinical work may not be covered until it is renewed."
+      },
+      "cpd_behind": {
+        "title": "CPD behind target: {type}",
+        "titleHr": "{name} is behind on CPD for {type}",
+        "body": "{points} of {target} points expected by now; renewal on {date}."
+      },
+      "cpd_decided": {
+        "approvedTitle": "Your CPD “{title}” was verified",
+        "rejectedTitle": "Your CPD “{title}” was rejected",
+        "body": "Reason: {reason}"
       }
     },
     "entity": {
       "test": "test",
       "fallback": "approval",
       "profile_change": "profile change",
-      "bank_change": "bank change"
+      "bank_change": "bank change",
+      "credential": "credential"
     }
   },
   "AdminNav": {
@@ -136,7 +161,8 @@
     "cpd": {
       "pending": "Pending",
       "verified": "Verified",
-      "rejected": "Rejected"
+      "rejected": "Rejected",
+      "withdrawn": "Withdrawn"
     },
     "leave": {
       "pending": "Pending",
@@ -202,6 +228,14 @@
       "active": "In use",
       "retired": "Replaced",
       "rejected": "Rejected"
+    },
+    "credentialRecord": {
+      "draft": "Draft",
+      "pending": "Pending",
+      "verified": "Verified",
+      "rejected": "Rejected",
+      "superseded": "Replaced by renewal",
+      "withdrawn": "Withdrawn"
     }
   },
   "Stepper": {
@@ -381,7 +415,8 @@
       "company": "Company",
       "branches": "Branches",
       "users": "Users",
-      "checklist": "Setup checklist"
+      "checklist": "Setup checklist",
+      "credentials": "Credentials"
     },
     "errors": {
       "required": "This is required.",
@@ -416,7 +451,13 @@
       "managerLoop": "This would make a reporting loop: someone can't report to a person who reports to them.",
       "invalidAccountNo": "A bank account number has 6 to 20 digits.",
       "pendingExists": "There's already a change to this waiting for HR. Withdraw it first to send a new one.",
-      "notLinked": "Your sign-in isn't linked to an employee record yet. Ask HR to add your work email to your record."
+      "notLinked": "Your sign-in isn't linked to an employee record yet. Ask HR to add your work email to your record.",
+      "expiryBeforeEffective": "The expiry date must be after the effective date.",
+      "noFiles": "Upload at least one file of the certificate.",
+      "methodRequired": "Say how you checked it.",
+      "reasonRequired": "Give a reason. The staff member sees it.",
+      "ownCredential": "This is your own submission, so someone else must verify it.",
+      "notPending": "This has already been decided. Refresh the page."
     },
     "company": {
       "title": "Company profile",
@@ -608,6 +649,50 @@
           "why": "Optional under 10 Malaysian staff, required from 10. Leave as not applicable until then."
         }
       }
+    },
+    "credentials": {
+      "title": "Credentials",
+      "intro": "The credentials Rakan tracks, and which ones each job role needs.",
+      "typesTitle": "Credential types",
+      "typesIntro": "Rename them, set how long they last, or add your own (for example a therapy-method certification).",
+      "add": "Add credential type",
+      "edit": "Edit",
+      "cancel": "Cancel",
+      "save": "Save",
+      "name_en": "Name (English)",
+      "name_ms": "Name (Bahasa Malaysia)",
+      "issuing_body": "Usual issuing body (optional)",
+      "has_expiry": "Has an expiry date",
+      "default_validity_months": "Usually valid for (months, optional)",
+      "reminder_offsets_days": "Reminders (days before expiry)",
+      "reminder_offsetsHint": "Separate with commas, e.g. 90, 60, 30, 7.",
+      "tracks_cpd": "Tracks CPD points",
+      "cpd_points_required": "CPD points needed per cycle (optional)",
+      "cpd_cycle_months": "CPD cycle (months, optional)",
+      "cpdVerify": "⚠ Check the professional body's current CPD rule before setting a target.",
+      "restricted": "Health record: only the employee and HR can see it",
+      "is_active": "In use",
+      "notInUse": "Not in use",
+      "expires": "Expires",
+      "noExpiry": "No expiry",
+      "validFor": "Usually {months} months",
+      "cpd": "CPD",
+      "restrictedTag": "Health record",
+      "matrixTitle": "Requirements by job role",
+      "matrixIntro": "Mandatory credentials count toward each person's compliance. “Blocks roster” applies when enforcement is Hard.",
+      "enforcement": "Roster enforcement: {mode}",
+      "enforcementModes": {
+        "soft": "Soft (warn when rostering)",
+        "hard": "Hard (block clinical shifts)"
+      },
+      "none": "Not required",
+      "mandatory": "Mandatory",
+      "optional": "Optional",
+      "blocksRoster": "Blocks roster",
+      "noRoles": "No job roles yet.",
+      "clinical": "Clinical",
+      "nonClinical": "Non-clinical",
+      "invalidOffsets": "Use whole numbers of days from 1 to 365, separated by commas."
     }
   },
   "Roles": {
@@ -694,7 +779,8 @@
         "statutory": "Statutory",
         "bank": "Bank",
         "dependents": "Dependents",
-        "documents": "Documents"
+        "documents": "Documents",
+        "credentials": "Credentials"
       },
       "account": {
         "title": "Rakan account",
@@ -1019,6 +1105,231 @@
       "noDependents": "No dependents recorded.",
       "probationEnds": "Probation ends"
     },
-    "unnamedBranch": "Branch (name not set)"
+    "unnamedBranch": "Branch (name not set)",
+    "credentialsTab": {
+      "intro": "This person's credentials. Add one for them (for example during onboarding); it then waits in Verify credentials.",
+      "add": "Add credential",
+      "noRole": "Set a job role on the Employment tab to see which credentials they need."
+    }
+  },
+  "Credentials": {
+    "title": "My Credentials",
+    "tabs": {
+      "label": "Credential sections",
+      "mine": "Credentials",
+      "cpd": "CPD",
+      "team": "My team"
+    },
+    "ring": {
+      "headline": "{valid} of {total} mandatory valid",
+      "noneRequired": "No mandatory credentials for your role",
+      "advice": {
+        "expired": "Renew {name} before your next clinical shift.",
+        "missing": "Add your {name}.",
+        "rejected": "Resubmit your {name}: HR could not verify it.",
+        "expiring": "Renew {name} before {date}.",
+        "allGood": "All your mandatory credentials are valid."
+      }
+    },
+    "filters": {
+      "label": "Filter credentials",
+      "all": "All",
+      "actionNeeded": "Action needed",
+      "valid": "Valid"
+    },
+    "optional": "{name} (optional)",
+    "requirement": {
+      "mandatory": "mandatory",
+      "optional": "optional"
+    },
+    "meta": {
+      "expired": "Expired {date}",
+      "expiring": "{days, plural, one {# day left} other {# days left}} · expires {date}",
+      "pending": "Submitted {date} · awaiting HR",
+      "valid": "Verified {verified} · expires {expiry}",
+      "validNoExpiry": "Verified {verified} · no expiry",
+      "upcoming": "Starts {date}",
+      "missing": "Not uploaded yet",
+      "rejected": "Not verified: {reason}"
+    },
+    "actions": {
+      "renewNow": "Renew now",
+      "renew": "Renew",
+      "view": "View",
+      "add": "Add",
+      "resubmit": "Resubmit"
+    },
+    "add": "Add credential",
+    "empty": "Nothing here.",
+    "noRole": "HR hasn't set your job role yet, so Rakan doesn't know which credentials you need. You can still add any credential.",
+    "form": {
+      "titleNew": "Add credential",
+      "titleRenew": "Renew {name}",
+      "titleEdit": "Edit {name}",
+      "forPerson": "For {name}",
+      "type": "Credential",
+      "choose": "Choose…",
+      "reference_no": "Registration / certificate no.",
+      "issuing_body": "Issuing body",
+      "effective_date": "Effective (issue) date",
+      "effectiveHint": "A future date is fine: it shows as Upcoming until then.",
+      "expiry_date": "Expiry date",
+      "noExpiry": "This credential doesn't expire.",
+      "cpd_points": "CPD points (optional)",
+      "notes": "Notes (optional)",
+      "files": "Certificate",
+      "filesHint": "PDF, JPG or PNG, up to 10 MB each. Add every page.",
+      "takePhoto": "Take photo",
+      "chooseFiles": "Choose files",
+      "remove": "Remove",
+      "submit": "Submit for verification",
+      "saveChanges": "Save changes",
+      "uploading": "Uploading {done} of {total}…",
+      "restrictedNote": "Health record: only you and HR can see it.",
+      "renewsNote": "Renews the one verified {date}. The old record stays in your history.",
+      "cancel": "Cancel",
+      "problems": {
+        "fileType": "Use a PDF, JPG or PNG file.",
+        "fileTooBig": "A file is over 10 MB.",
+        "uploadFailed": "A file didn't upload. Please try again.",
+        "forbidden": "You can't add files to this credential.",
+        "noFiles": "Add at least one file of the certificate."
+      }
+    },
+    "detail": {
+      "back": "My Credentials",
+      "backHr": "Back",
+      "status": "Status",
+      "reference_no": "Registration / certificate no.",
+      "issuing_body": "Issuing body",
+      "effective_date": "Effective",
+      "expiry_date": "Expires",
+      "noExpiry": "No expiry",
+      "cpd_points": "CPD points",
+      "notes": "Notes",
+      "verified": "Verified {date} · {method}",
+      "rejected": "Not verified: {reason}",
+      "submitted": "Submitted {date}",
+      "files": "Files",
+      "page": "Page {n}",
+      "noFiles": "No files.",
+      "open": "Open",
+      "edit": "Edit",
+      "withdraw": "Withdraw",
+      "withdrawConfirm": "Withdraw this submission? You can submit it again later.",
+      "addFiles": "Add files",
+      "history": "History",
+      "renew": "Renew"
+    },
+    "cpd": {
+      "intro": "Log courses, workshops and events. HR verifies them like credentials.",
+      "progress": "{points} of {required} points",
+      "progressNoTarget": "{points} points verified",
+      "noTarget": "No CPD target is set for this credential yet.",
+      "cycle": "Cycle {start} – {end}",
+      "noCycle": "The cycle starts when this credential is verified.",
+      "pendingPoints": "{points} more waiting for HR",
+      "onTrack": "On track",
+      "behind": "Behind: {target} points expected by now",
+      "log": "Log CPD",
+      "credential_type_id": "Counts toward",
+      "title": "Title",
+      "provider": "Provider (optional)",
+      "activity_date": "Date",
+      "points": "Points",
+      "hours": "Hours (optional)",
+      "category": "Type",
+      "categories": {
+        "course": "Course",
+        "conference": "Conference",
+        "workshop": "Workshop",
+        "webinar": "Webinar",
+        "reading": "Reading / journal",
+        "other": "Other"
+      },
+      "certificate": "Certificate (optional)",
+      "save": "Save",
+      "cancel": "Cancel",
+      "activities": "Activities",
+      "none": "No CPD logged yet.",
+      "noTypes": "None of your credentials track CPD.",
+      "withdraw": "Withdraw",
+      "withdrawConfirm": "Withdraw this activity?",
+      "rejected": "Not verified: {reason}",
+      "viewFile": "Certificate",
+      "pointsMeta": "{points} pts"
+    },
+    "team": {
+      "intro": "Credential status for people in your branches. You see status only, not files or health records.",
+      "none": "No one in your team yet.",
+      "compliance": "{pct}% mandatory valid",
+      "noRequirements": "No mandatory credentials"
+    }
+  },
+  "Compliance": {
+    "title": "Compliance",
+    "intro": "Credentials, mandatory training and CPD across the company.",
+    "nav": {
+      "label": "Compliance sections",
+      "matrix": "Credential matrix",
+      "verify": "Verify credentials",
+      "cpd": "CPD to verify"
+    },
+    "matrix": {
+      "intro": "Required credentials per person. Mandatory ones count toward compliance; optional ones are marked.",
+      "person": "Person",
+      "compliance": "Compliance",
+      "exportPdf": "Download PDF",
+      "notRequired": "Not required",
+      "optional": "optional",
+      "empty": "No one has required credentials yet. Set them in Settings > Credentials.",
+      "pdfTitle": "Credential compliance",
+      "pdfGenerated": "Generated {date} · statuses as of today",
+      "legend": "Key"
+    },
+    "verify": {
+      "intro": "Check each file against the issuing body's register where you can, then verify or reject.",
+      "none": "Nothing is waiting for verification.",
+      "submitted": "Submitted {date}",
+      "byHr": "added by HR",
+      "files": "{count, plural, one {# file} other {# files}}",
+      "review": "Review"
+    },
+    "review": {
+      "back": "Verify credentials",
+      "entered": "Entered details",
+      "person": "Person",
+      "files": "Files",
+      "method": "How did you check it?",
+      "methods": {
+        "register": "Checked the issuing body's online register",
+        "original": "Original certificate sighted",
+        "issuer": "Confirmed with the issuer",
+        "other": "Other"
+      },
+      "methodOther": "Describe how",
+      "verify": "Verify",
+      "reject": "Reject",
+      "reason": "Reason",
+      "reasonHint": "The staff member sees this and can resubmit.",
+      "confirmReject": "Reject credential",
+      "cancel": "Cancel",
+      "noPreview": "No preview for this file.",
+      "openFile": "Open in new tab",
+      "restricted": "Health record: only the employee and HR can see it.",
+      "decided": "Decided.",
+      "selfNote": "This is your own submission, so another HR admin or the owner must verify it."
+    },
+    "cpd": {
+      "intro": "CPD activities staff have logged. Verify the points or reject with a reason.",
+      "none": "No CPD is waiting.",
+      "verify": "Verify",
+      "reject": "Reject",
+      "reason": "Reason",
+      "confirmReject": "Reject activity",
+      "cancel": "Cancel",
+      "viewFile": "Certificate",
+      "noFile": "No certificate"
+    }
   }
 }

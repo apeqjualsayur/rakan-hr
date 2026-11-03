@@ -18,9 +18,10 @@ import {
   ownerEmails,
   toBranch,
   toJobRoles,
+  toRoleRequirements,
   toTenant,
 } from "./lib/company-config.mjs";
-import { testPeople } from "./lib/test-people.mjs";
+import { TEST_CREDENTIALS, testPeople } from "./lib/test-people.mjs";
 
 // Fixed ids keep the seed idempotent across re-runs and `db:reset`.
 const TENANT_ID = "5eed0000-0000-4000-8000-000000000001";
@@ -45,13 +46,14 @@ if (!dbUrl.includes(linkedRef) || !appUrl.includes(linkedRef)) {
   );
 }
 
-let config, tenant, branch, owners, jobRoles;
+let config, tenant, branch, owners, jobRoles, requirements;
 try {
   config = parse(readFileSync("_specs/hr-system/company-config.yaml", "utf8"));
   tenant = toTenant(config);
   branch = toBranch(config);
   owners = ownerEmails(config);
   jobRoles = toJobRoles(config);
+  requirements = toRoleRequirements(config);
 } catch (error) {
   fail(error.message);
 }
@@ -129,7 +131,21 @@ try {
       )
     ).rows.map((r) => [r.name, r.id]),
   );
+  // Step 6: credential requirements per role, added once (Settings > Credentials edits them).
+  let requirementsAdded = 0;
+  for (const r of requirements) {
+    const res = await client.query(
+      `insert into public.role_credential_requirements
+         (job_role_id, credential_type_id, requirement, blocks_roster)
+       select $1, t.id, $3, $4 from public.credential_types t
+       where t.tenant_id = $5 and t.code = $2
+       on conflict (job_role_id, credential_type_id) do nothing`,
+      [roleIds.get(r.role), r.code, r.requirement, r.blocks_roster, TENANT_ID],
+    );
+    requirementsAdded += res.rowCount;
+  }
   const seededPeople = await seedTestPeople(client, roleIds, owners[0]);
+  const seededCredentials = await seedTestCredentials(client);
   await client.query("commit");
 
   const saved = await client.query(
@@ -152,6 +168,10 @@ try {
   console.log(
     `✔ Job roles: ${jobRoles.map((r) => r.name).join(", ") || "none in the yaml"}`,
   );
+  console.log(
+    `✔ Credential requirements: ${requirementsAdded} added (${requirements.length} in the yaml)`,
+  );
+  console.log(`✔ Test credentials: ${seededCredentials} added`);
   console.log(
     `✔ Test employees: ${seededPeople.added} added, ${seededPeople.kept} already there` +
       (seededPeople.skipped.length
@@ -283,4 +303,35 @@ async function seedTestPeople(client, roleIds, ownerEmail) {
 
 function seedId(n) {
   return `5eed0000-0000-4000-8000-${String(n).padStart(12, "0")}`;
+}
+
+// Dev-only demo credentials (Step 6): verified records without files, dated relative to
+// today. Each is added once (fixed id) and then left alone.
+async function seedTestCredentials(client) {
+  const people = new Map(testPeople("").map((p) => [p.slug, p.id]));
+  let added = 0;
+  for (const [index, [slug, code, from, to]] of TEST_CREDENTIALS.entries()) {
+    const res = await client.query(
+      `insert into public.staff_credentials
+         (id, employee_id, credential_type_id, reference_no, effective_date, expiry_date,
+          status, submitted_at, verified_at, verify_method)
+       select $1, $2, t.id, $3, current_date + $4::int, current_date + $5::int,
+              'verified', now(), now(), 'Seeded test data'
+       from public.credential_types t
+       where t.tenant_id = $6 and t.code = $7
+         and exists (select 1 from public.employees e where e.id = $2)
+       on conflict (id) do nothing`,
+      [
+        seedId(501 + index),
+        people.get(slug),
+        `TEST-${code}-${index + 1}`,
+        from,
+        to,
+        TENANT_ID,
+        code,
+      ],
+    );
+    added += res.rowCount;
+  }
+  return added;
 }

@@ -274,3 +274,32 @@ export function testPeople(ownerEmail) {
     phone: null,
   }));
 }
+
+/**
+ * Step 6 demo credentials, in days relative to the seed date so the screens show a mix:
+ * valid, expiring soon, expired and missing. Seeded as already verified, without files.
+ * [person slug, code, effective (days from today), expiry (days from today) or null]
+ */
+export const TEST_CREDENTIALS = [
+  ["aina", "MAHPC_REG", -3650, null],
+  ["aina", "APC", -165, 200],
+  ["aina", "BLS", -685, 45],
+  ["aina", "SAFEGUARDING", -400, null],
+  ["aina", "HEPB_VAX", -2000, null],
+  ["daniel", "MAHPC_REG", -900, null],
+  ["daniel", "APC", -60, 305],
+  ["daniel", "BLS", -750, -20],
+  ["kavitha", "MAHPC_REG", -300, null],
+  ["kavitha", "APC", -300, 65],
+  ["kavitha", "BLS", -100, 630],
+  ["kavitha", "SAFEGUARDING", -90, null],
+  ["hafiz", "MAHPC_REG", -2500, null],
+  ["hafiz", "APC", -30, 335],
+  ["hafiz", "BLS", -200, 530],
+  ["hafiz", "SAFEGUARDING", -200, null],
+  ["siti", "MAHPC_REG", -120, null],
+  ["siti", "BLS", -60, 670],
+  ["jason", "MAHPC_REG", -1200, null],
+  ["farah", "SAFEGUARDING", -300, null],
+  ["farah", "FIRST_AID", -400, 20],
+];

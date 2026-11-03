@@ -26,6 +26,7 @@ export default async function SettingsLayout({
           ...(can(member.role, "viewChecklist")
             ? (["checklist"] as const)
             : []),
+          "credentials",
         ]}
       />
       {children}

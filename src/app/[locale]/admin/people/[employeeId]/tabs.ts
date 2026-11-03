@@ -2,6 +2,7 @@
 export const EMPLOYEE_TABS = [
   "personal",
   "employment",
+  "credentials",
   "statutory",
   "bank",
   "dependents",
