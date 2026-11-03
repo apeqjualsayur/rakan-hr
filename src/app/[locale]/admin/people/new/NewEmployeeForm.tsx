@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { FormFeedback, useFieldError } from "@/components/forms/FormFeedback";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/Card";
@@ -32,11 +32,13 @@ export function NewEmployeeForm({
   >;
 }) {
   const t = useTranslations("People.new");
+  const locale = useLocale();
   const { state, onSubmit, pending } = useFormAction(createEmployee, idle);
   const error = useFieldError(state);
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-6" noValidate>
+      <input type="hidden" name="locale" value={locale} />
       <div className="flex flex-col gap-1">
         <h2 className="text-h2 text-ink">{t("title")}</h2>
         <p className="max-w-3xl text-meta text-ink-muted">{t("intro")}</p>

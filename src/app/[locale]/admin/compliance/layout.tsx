@@ -43,6 +43,7 @@ export default async function ComplianceLayout({
         label={t("nav.label")}
         items={[
           { href: "/admin/compliance", label: t("nav.matrix") },
+          { href: "/admin/compliance/policies", label: t("nav.policies") },
           ...(reviewer
             ? [
                 {

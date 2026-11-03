@@ -1,10 +1,9 @@
 "use server";
 
 import { refresh } from "next/cache";
-import { getLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { parseBranchForm } from "@/lib/settings/branch";
-import { isUuid, type FormState } from "@/lib/settings/form";
+import { formLocale, isUuid, type FormState } from "@/lib/settings/form";
 import { failed, saved, settingsContext } from "@/lib/settings/server";
 
 // ORG-03. Owner and HR admin (branches_insert / branches_update policies).
@@ -35,7 +34,7 @@ export async function saveBranch(
   if (!isUuid(id)) {
     redirect({
       href: `/admin/settings/branches/${data[0].id}?created=1`,
-      locale: await getLocale(),
+      locale: formLocale(formData),
     });
   }
   refresh();

@@ -24,7 +24,8 @@ select is(
       'bank_accounts',
       'staff_credentials',
       'credential_verifications',
-      'cpd_activities'
+      'cpd_activities',
+      'signatures'
     ]) as t (name)
     where not exists (
       select 1 from pg_trigger tr

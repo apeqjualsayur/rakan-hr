@@ -33,6 +33,9 @@ export function useNotificationText() {
       (locale === "ms" ? d.type_name_ms : d.type_name_en) ?? d.type_code ?? "",
     );
 
+  const localTitle = (d: Record<string, unknown>) =>
+    String((locale === "ms" ? d.title_ms : d.title_en) ?? "");
+
   return (n: NotificationRow): { title: string; body: string | null } => {
     const d = n.data ?? {};
     switch (n.template) {
@@ -124,6 +127,28 @@ export function useNotificationText() {
           }),
         };
       }
+      // Step 7: announcements and policies (data has title_en / title_ms).
+      case "announcement":
+        return {
+          title: t("templates.announcement.title", { title: localTitle(d) }),
+          body: null,
+        };
+      case "policy_published":
+        return {
+          title: t("templates.policy_published.title", {
+            title: localTitle(d),
+          }),
+          body: t("templates.policy_published.body", {
+            version: String(d.version ?? 1),
+          }),
+        };
+      case "policy_reminder":
+        return {
+          title: t("templates.policy_reminder.title", { title: localTitle(d) }),
+          body: t("templates.policy_reminder.body", {
+            days: String(d.days ?? 3),
+          }),
+        };
       case "cpd_decided":
         return {
           title:

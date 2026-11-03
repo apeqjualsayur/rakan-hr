@@ -94,6 +94,17 @@
         "approvedTitle": "Your CPD “{title}” was verified",
         "rejectedTitle": "Your CPD “{title}” was rejected",
         "body": "Reason: {reason}"
+      },
+      "announcement": {
+        "title": "New announcement: {title}"
+      },
+      "policy_published": {
+        "title": "Please read and sign: {title}",
+        "body": "Version {version} has been published."
+      },
+      "policy_reminder": {
+        "title": "Reminder: sign {title}",
+        "body": "It has been waiting for {days} days."
       }
     },
     "entity": {
@@ -457,7 +468,11 @@
       "methodRequired": "Say how you checked it.",
       "reasonRequired": "Give a reason. The staff member sees it.",
       "ownCredential": "This is your own submission, so someone else must verify it.",
-      "notPending": "This has already been decided. Refresh the page."
+      "notPending": "This has already been decided. Refresh the page.",
+      "nameMismatch": "Type your full name exactly as it is on your record.",
+      "alreadySigned": "You have already signed this.",
+      "documentChanged": "This document no longer matches its published version. Ask HR to publish it again.",
+      "notPdf": "Choose a PDF file."
     },
     "company": {
       "title": "Company profile",
@@ -1103,7 +1118,9 @@
       "reportsTo": "Reports to",
       "noDocuments": "No documents yet.",
       "noDependents": "No dependents recorded.",
-      "probationEnds": "Probation ends"
+      "probationEnds": "Probation ends",
+      "policies": "Policies",
+      "announcements": "Announcements"
     },
     "unnamedBranch": "Branch (name not set)",
     "credentialsTab": {
@@ -1273,7 +1290,8 @@
       "label": "Compliance sections",
       "matrix": "Credential matrix",
       "verify": "Verify credentials",
-      "cpd": "CPD to verify"
+      "cpd": "CPD to verify",
+      "policies": "Policies"
     },
     "matrix": {
       "intro": "Required credentials per person. Mandatory ones count toward compliance; optional ones are marked.",
@@ -1330,6 +1348,102 @@
       "cancel": "Cancel",
       "viewFile": "Certificate",
       "noFile": "No certificate"
+    }
+  },
+  "Announcements": {
+    "title": "Announcements",
+    "intro": "News for the whole team, a branch or a job role, in English and Bahasa Malaysia. See who has read each one.",
+    "none": "No announcements yet.",
+    "all": "All announcements",
+    "seeAll": "See all",
+    "new": "New announcement",
+    "pinned": "Pinned",
+    "title_en": "Title (English)",
+    "title_ms": "Title (Bahasa Malaysia)",
+    "body_en": "Message (English)",
+    "body_ms": "Message (Bahasa Malaysia)",
+    "publish_at": "Publish at (optional)",
+    "publish_atHint": "Malaysia time. Leave blank to publish now.",
+    "pinField": "Pin to the top",
+    "publish": "Publish",
+    "cancel": "Cancel",
+    "scheduledFor": "Scheduled for {when}",
+    "readCount": "Read by {read} of {total}",
+    "showReaders": "Who read it",
+    "hideReaders": "Hide readers",
+    "pin": "Pin",
+    "unpin": "Unpin",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this announcement? People will no longer see it.",
+    "unread": "Unread"
+  },
+  "Policies": {
+    "title": "Policies",
+    "library": "Policy library",
+    "none": "No policies yet. Start with your PDPA notice.",
+    "noPdpa": "Publish your PDPA privacy notice first: everyone signs it before using Rakan.",
+    "toSign": "Waiting for your signature",
+    "nothingToSign": "Nothing to sign. You're up to date.",
+    "versionMeta": "Version {version} · {date}",
+    "signedCount": "{done} of {total} signed",
+    "noSignature": "Read only",
+    "tracker": "Who has signed",
+    "trackerIntro": "Everyone this version applies to. Overdue = not signed after 7 days; reminders go out after 3 and 7 days.",
+    "noAccount": "no Rakan account yet",
+    "signedOn": "Signed {date}",
+    "signedCopy": "Signed copy",
+    "original": "Open PDF",
+    "fingerprint": "Document fingerprint (SHA-256): {sha}",
+    "versions": "Versions",
+    "supersededTag": "replaced",
+    "superseded": "A newer version replaced this one.",
+    "readOnly": "This policy is for reading; no signature is needed.",
+    "openFailed": "Couldn't open the file. Please try again.",
+    "bannerTitle": "{count, plural, one {# policy to sign} other {# policies to sign}}",
+    "audience": {
+      "label": "Who it's for",
+      "all": "Everyone",
+      "branches": "Some branches",
+      "job_roles": "Some job roles"
+    },
+    "sign": {
+      "document": "Document to sign",
+      "openPdf": "Open the PDF in a new tab",
+      "noPdf": "The document could not be loaded. Refresh the page.",
+      "typedName": "Type your full name to sign",
+      "typedNameHint": "Exactly as on your record: {name}",
+      "sign": "Sign",
+      "recorded": "Rakan records your name, the date and time, your IP address and device, and the document's fingerprint, and adds a signature page to your signed copy."
+    },
+    "privacy": {
+      "title": "Privacy notice",
+      "intro": "Before you use Rakan, please read how your personal data is handled and sign to confirm."
+    },
+    "publish": {
+      "title": "Publish a policy",
+      "intro": "Upload the PDF. Everyone it applies to is asked to read and sign it.",
+      "newVersion": "Publish a new version",
+      "newVersionIntro": "Upload the new PDF. Everyone it applies to is asked to sign again; earlier signatures stay on record.",
+      "code": "Policy",
+      "code_other": "Policy name",
+      "presets": {
+        "PDPA_NOTICE": "PDPA privacy notice",
+        "HANDBOOK": "Employee handbook",
+        "LEAVE_POLICY": "Leave policy",
+        "INFECTION_CONTROL_SOP": "Infection control SOP",
+        "CODE_OF_CONDUCT": "Code of conduct",
+        "OTHER": "Other…"
+      },
+      "title_en": "Title (English)",
+      "title_ms": "Title (Bahasa Malaysia)",
+      "pdpaNote": "The PDPA notice applies to everyone and must be signed before using Rakan.",
+      "requires_signature": "Ask people to sign it",
+      "file": "PDF",
+      "chooseFile": "Choose PDF",
+      "fileHint": "PDF only, up to 10 MB. It can't be changed after publishing: a correction is a new version.",
+      "publish": "Publish",
+      "publishVersion": "Publish new version",
+      "cancel": "Cancel"
     }
   }
 }

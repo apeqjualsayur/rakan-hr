@@ -40,9 +40,12 @@ export type MemberState = {
   aal: "aal1" | "aal2" | null;
   /** The user has a verified TOTP factor. */
   hasMfaFactor: boolean;
+  /** CMP-05: a PDPA notice is published that this user has not signed yet. */
+  mustSignPrivacy?: boolean;
 };
 
-export type GuardPath = "/login" | "/no-access" | "/mfa" | HomePath;
+export type GuardPath =
+  "/login" | "/no-access" | "/mfa" | "/privacy-notice" | HomePath;
 
 /**
  * Where a request should go instead, or null to let it through.
@@ -55,6 +58,8 @@ export function guardRedirect(
   if (!state.signedIn) return "/login";
   if (!state.role) return "/no-access";
   if (MFA_ROLES.includes(state.role) && state.aal !== "aal2") return "/mfa";
+  // CMP-05: nobody uses Rakan before signing the current PDPA notice.
+  if (state.mustSignPrivacy) return "/privacy-notice";
   if (allowed && !allowed.includes(state.role)) return homeFor(state.role);
   return null;
 }

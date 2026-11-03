@@ -38,6 +38,10 @@ test("admin and staff areas redirect signed-out visitors to login", async ({
     "/en/staff/credentials",
     "/en/admin/compliance",
     "/en/admin/settings/credentials",
+    "/en/privacy-notice",
+    "/en/staff/policies",
+    "/en/admin/announcements",
+    "/en/admin/compliance/policies",
   ]) {
     await page.goto(path);
     await expect(page).toHaveURL(/\/(en|ms)\/login$/);

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { LocateFixed, X } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Input } from "@/components/ui/input";
@@ -45,6 +45,7 @@ export function BranchForm({
   justCreated: boolean;
 }) {
   const t = useTranslations("Settings.branches");
+  const locale = useLocale();
   const { state, onSubmit, pending } = useFormAction(saveBranch, idle);
   const error = useFieldError(state);
 
@@ -102,6 +103,7 @@ export function BranchForm({
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-6" noValidate>
+      <input type="hidden" name="locale" value={locale} />
       {branch ? (
         <input type="hidden" name="branch_id" value={branch.id} />
       ) : null}

@@ -94,6 +94,17 @@
         "approvedTitle": "CPD anda “{title}” telah disahkan",
         "rejectedTitle": "CPD anda “{title}” telah ditolak",
         "body": "Sebab: {reason}"
+      },
+      "announcement": {
+        "title": "Pengumuman baharu: {title}"
+      },
+      "policy_published": {
+        "title": "Sila baca dan tandatangan: {title}",
+        "body": "Versi {version} telah diterbitkan."
+      },
+      "policy_reminder": {
+        "title": "Peringatan: tandatangan {title}",
+        "body": "Ia telah menunggu selama {days} hari."
       }
     },
     "entity": {
@@ -457,7 +468,11 @@
       "methodRequired": "Nyatakan cara anda menyemaknya.",
       "reasonRequired": "Berikan sebab. Kakitangan akan melihatnya.",
       "ownCredential": "Ini penghantaran anda sendiri, jadi orang lain mesti mengesahkannya.",
-      "notPending": "Ini sudah diputuskan. Muat semula halaman."
+      "notPending": "Ini sudah diputuskan. Muat semula halaman.",
+      "nameMismatch": "Taip nama penuh anda tepat seperti dalam rekod anda.",
+      "alreadySigned": "Anda sudah menandatangani ini.",
+      "documentChanged": "Dokumen ini tidak lagi sepadan dengan versi yang diterbitkan. Minta HR menerbitkannya semula.",
+      "notPdf": "Pilih fail PDF."
     },
     "company": {
       "title": "Profil syarikat",
@@ -1103,7 +1118,9 @@
       "reportsTo": "Melapor kepada",
       "noDocuments": "Belum ada dokumen.",
       "noDependents": "Tiada tanggungan direkodkan.",
-      "probationEnds": "Tamat percubaan"
+      "probationEnds": "Tamat percubaan",
+      "policies": "Polisi",
+      "announcements": "Pengumuman"
     },
     "unnamedBranch": "Cawangan (nama belum ditetapkan)",
     "credentialsTab": {
@@ -1273,7 +1290,8 @@
       "label": "Bahagian pematuhan",
       "matrix": "Matriks kredensial",
       "verify": "Sahkan kredensial",
-      "cpd": "CPD untuk disahkan"
+      "cpd": "CPD untuk disahkan",
+      "policies": "Polisi"
     },
     "matrix": {
       "intro": "Kredensial yang diperlukan bagi setiap orang. Yang wajib dikira dalam pematuhan; yang pilihan ditanda.",
@@ -1330,6 +1348,102 @@
       "cancel": "Batal",
       "viewFile": "Sijil",
       "noFile": "Tiada sijil"
+    }
+  },
+  "Announcements": {
+    "title": "Pengumuman",
+    "intro": "Berita untuk seluruh pasukan, satu cawangan atau satu jawatan, dalam Bahasa Inggeris dan Bahasa Malaysia. Lihat siapa yang telah membaca setiap satu.",
+    "none": "Belum ada pengumuman.",
+    "all": "Semua pengumuman",
+    "seeAll": "Lihat semua",
+    "new": "Pengumuman baharu",
+    "pinned": "Disemat",
+    "title_en": "Tajuk (Bahasa Inggeris)",
+    "title_ms": "Tajuk (Bahasa Malaysia)",
+    "body_en": "Mesej (Bahasa Inggeris)",
+    "body_ms": "Mesej (Bahasa Malaysia)",
+    "publish_at": "Terbitkan pada (pilihan)",
+    "publish_atHint": "Waktu Malaysia. Biarkan kosong untuk menerbitkan sekarang.",
+    "pinField": "Semat di bahagian atas",
+    "publish": "Terbitkan",
+    "cancel": "Batal",
+    "scheduledFor": "Dijadualkan pada {when}",
+    "readCount": "Dibaca oleh {read} daripada {total}",
+    "showReaders": "Siapa yang membaca",
+    "hideReaders": "Sembunyi pembaca",
+    "pin": "Semat",
+    "unpin": "Nyahsemat",
+    "delete": "Padam",
+    "deleteConfirm": "Padam pengumuman ini? Orang tidak akan melihatnya lagi.",
+    "unread": "Belum dibaca"
+  },
+  "Policies": {
+    "title": "Polisi",
+    "library": "Perpustakaan polisi",
+    "none": "Belum ada polisi. Mulakan dengan notis PDPA anda.",
+    "noPdpa": "Terbitkan notis privasi PDPA anda dahulu: semua orang menandatanganinya sebelum menggunakan Rakan.",
+    "toSign": "Menunggu tandatangan anda",
+    "nothingToSign": "Tiada apa-apa untuk ditandatangani. Anda sudah terkini.",
+    "versionMeta": "Versi {version} · {date}",
+    "signedCount": "{done} daripada {total} telah menandatangani",
+    "noSignature": "Untuk dibaca sahaja",
+    "tracker": "Siapa yang telah menandatangani",
+    "trackerIntro": "Semua orang yang tertakluk kepada versi ini. Lewat = belum menandatangani selepas 7 hari; peringatan dihantar selepas 3 dan 7 hari.",
+    "noAccount": "belum ada akaun Rakan",
+    "signedOn": "Ditandatangani {date}",
+    "signedCopy": "Salinan bertandatangan",
+    "original": "Buka PDF",
+    "fingerprint": "Cap jari dokumen (SHA-256): {sha}",
+    "versions": "Versi",
+    "supersededTag": "diganti",
+    "superseded": "Versi yang lebih baharu telah menggantikan versi ini.",
+    "readOnly": "Polisi ini untuk dibaca; tiada tandatangan diperlukan.",
+    "openFailed": "Tidak dapat membuka fail. Sila cuba lagi.",
+    "bannerTitle": "{count} polisi untuk ditandatangani",
+    "audience": {
+      "label": "Untuk siapa",
+      "all": "Semua orang",
+      "branches": "Cawangan tertentu",
+      "job_roles": "Jawatan tertentu"
+    },
+    "sign": {
+      "document": "Dokumen untuk ditandatangani",
+      "openPdf": "Buka PDF dalam tab baharu",
+      "noPdf": "Dokumen tidak dapat dimuatkan. Muat semula halaman.",
+      "typedName": "Taip nama penuh anda untuk menandatangani",
+      "typedNameHint": "Tepat seperti dalam rekod anda: {name}",
+      "sign": "Tandatangan",
+      "recorded": "Rakan merekod nama anda, tarikh dan masa, alamat IP dan peranti anda, serta cap jari dokumen, dan menambah halaman tandatangan pada salinan bertandatangan anda."
+    },
+    "privacy": {
+      "title": "Notis privasi",
+      "intro": "Sebelum anda menggunakan Rakan, sila baca cara data peribadi anda dikendalikan dan tandatangan untuk mengesahkan."
+    },
+    "publish": {
+      "title": "Terbitkan polisi",
+      "intro": "Muat naik PDF. Semua orang yang tertakluk kepadanya diminta membaca dan menandatanganinya.",
+      "newVersion": "Terbitkan versi baharu",
+      "newVersionIntro": "Muat naik PDF baharu. Semua orang yang tertakluk kepadanya diminta menandatangani semula; tandatangan terdahulu kekal dalam rekod.",
+      "code": "Polisi",
+      "code_other": "Nama polisi",
+      "presets": {
+        "PDPA_NOTICE": "Notis privasi PDPA",
+        "HANDBOOK": "Buku panduan pekerja",
+        "LEAVE_POLICY": "Polisi cuti",
+        "INFECTION_CONTROL_SOP": "SOP kawalan jangkitan",
+        "CODE_OF_CONDUCT": "Kod tatakelakuan",
+        "OTHER": "Lain-lain…"
+      },
+      "title_en": "Tajuk (Bahasa Inggeris)",
+      "title_ms": "Tajuk (Bahasa Malaysia)",
+      "pdpaNote": "Notis PDPA terpakai kepada semua orang dan mesti ditandatangani sebelum menggunakan Rakan.",
+      "requires_signature": "Minta orang menandatanganinya",
+      "file": "PDF",
+      "chooseFile": "Pilih PDF",
+      "fileHint": "PDF sahaja, sehingga 10 MB. Ia tidak boleh diubah selepas diterbitkan: pembetulan ialah versi baharu.",
+      "publish": "Terbitkan",
+      "publishVersion": "Terbitkan versi baharu",
+      "cancel": "Batal"
     }
   }
 }

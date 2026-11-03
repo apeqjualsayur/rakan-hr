@@ -41,7 +41,12 @@ export type ErrorKey =
   | "methodRequired"
   | "reasonRequired"
   | "ownCredential"
-  | "notPending";
+  | "notPending"
+  // Policies and signatures (Step 7)
+  | "nameMismatch"
+  | "alreadySigned"
+  | "documentChanged"
+  | "notPdf";
 
 export type FieldErrors = Partial<Record<string, ErrorKey>>;
 
@@ -86,6 +91,14 @@ export function isIsoDate(value: string) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
   const date = new Date(`${value}T00:00:00Z`);
   return !Number.isNaN(date.getTime()) && date.toISOString().startsWith(value);
+}
+
+/**
+ * The page language sent by a form (hidden "locale" field). Server Actions cannot read the
+ * URL's locale (see src/i18n/request.ts), so forms that redirect pass it along.
+ */
+export function formLocale(formData: FormData): "en" | "ms" {
+  return formData.get("locale") === "ms" ? "ms" : "en";
 }
 
 export function done<T>(values: T, errors: FieldErrors): Parsed<T> {

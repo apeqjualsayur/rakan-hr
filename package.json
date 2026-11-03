@@ -21,7 +21,8 @@
     "db:reset": "node scripts/linked-project.mjs --dev-only && supabase db reset --linked && node scripts/seed.mjs",
     "functions:deploy": "node scripts/linked-project.mjs && supabase functions deploy --use-api",
     "db:seed": "node scripts/linked-project.mjs --dev-only && node scripts/seed.mjs",
-    "notify:setup": "node scripts/linked-project.mjs --dev-only && node scripts/setup-notify-secrets.mjs"
+    "notify:setup": "node scripts/linked-project.mjs --dev-only && node scripts/setup-notify-secrets.mjs",
+    "make:test-policies": "node scripts/make-test-policies.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

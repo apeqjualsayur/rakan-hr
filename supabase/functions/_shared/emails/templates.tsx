@@ -98,6 +98,19 @@ const copy = {
       title: `Your CPD “${title}” was ${verified ? "verified" : "rejected"}`,
       body: reason ? `Reason: ${reason}` : "",
     }),
+    // Step 7 announcements and policies.
+    announcement: (title: string) => ({
+      title: `New announcement: ${title}`,
+      body: "",
+    }),
+    policyPublished: (title: string, version: string) => ({
+      title: `Please read and sign: ${title}`,
+      body: `Version ${version} has been published.`,
+    }),
+    policyReminder: (title: string, days: string) => ({
+      title: `Reminder: sign ${title}`,
+      body: `It has been waiting for ${days} days.`,
+    }),
     fallback: { title: "New notification", body: "" },
   },
   ms: {
@@ -176,9 +189,24 @@ const copy = {
       title: `CPD anda “${title}” telah ${verified ? "disahkan" : "ditolak"}`,
       body: reason ? `Sebab: ${reason}` : "",
     }),
+    announcement: (title: string) => ({
+      title: `Pengumuman baharu: ${title}`,
+      body: "",
+    }),
+    policyPublished: (title: string, version: string) => ({
+      title: `Sila baca dan tandatangan: ${title}`,
+      body: `Versi ${version} telah diterbitkan.`,
+    }),
+    policyReminder: (title: string, days: string) => ({
+      title: `Peringatan: tandatangan ${title}`,
+      body: `Ia telah menunggu selama ${days} hari.`,
+    }),
     fallback: { title: "Pemberitahuan baharu", body: "" },
   },
 };
+
+const localTitle = (data: Data, locale: Locale) =>
+  String((locale === "ms" ? data.title_ms : data.title_en) ?? "");
 
 const typeName = (data: Data, locale: Locale) =>
   String(
@@ -228,6 +256,15 @@ function text(template: string, data: Data, locale: Locale) {
         String(data.target ?? 0),
         String(data.cycle_end ?? ""),
       );
+    case "announcement":
+      return c.announcement(localTitle(data, locale));
+    case "policy_published":
+      return c.policyPublished(
+        localTitle(data, locale),
+        String(data.version ?? 1),
+      );
+    case "policy_reminder":
+      return c.policyReminder(localTitle(data, locale), String(data.days ?? 3));
     case "cpd_decided":
       return c.cpdDecided(
         String(data.title ?? ""),

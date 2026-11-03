@@ -3,7 +3,12 @@ import { cache } from "react";
 import { getLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { guardRedirect, type AppRole, type MemberState } from "./roles";
+import {
+  guardRedirect,
+  needsMfa,
+  type AppRole,
+  type MemberState,
+} from "./roles";
 
 export type CurrentMember = MemberState & {
   userId: string | null;
@@ -11,6 +16,8 @@ export type CurrentMember = MemberState & {
   membershipId: string | null;
   tenantId: string | null;
   employeeId: string | null;
+  /** CMP-05: the PDPA notice this user must sign before anything else, if any. */
+  pendingPrivacyNoticeId: string | null;
 };
 
 const signedOut: CurrentMember = {
@@ -23,6 +30,7 @@ const signedOut: CurrentMember = {
   membershipId: null,
   tenantId: null,
   employeeId: null,
+  pendingPrivacyNoticeId: null,
 };
 
 // The signed-in user, their active membership (FND-01) and MFA state.
@@ -45,6 +53,14 @@ export const getCurrentMember = cache(async (): Promise<CurrentMember> => {
     supabase.auth.mfa.getAuthenticatorAssuranceLevel(),
   ]);
 
+  const role = (membership?.role as AppRole | undefined) ?? null;
+  const aal = claims.aal === "aal2" ? "aal2" : "aal1";
+  // Only once they can see tenant data (after MFA for admin roles) can this be known.
+  const { data: pendingPrivacy } =
+    role && !needsMfa({ signedIn: true, role, aal, hasMfaFactor: false })
+      ? await supabase.rpc("pending_privacy_notice")
+      : { data: null };
+
   return {
     signedIn: true,
     userId: claims.sub,
@@ -53,9 +69,11 @@ export const getCurrentMember = cache(async (): Promise<CurrentMember> => {
     membershipId: membership?.id ?? null,
     tenantId: membership?.tenant_id ?? null,
     employeeId: membership?.employee_id ?? null,
-    aal: claims.aal === "aal2" ? "aal2" : "aal1",
+    aal,
     // nextLevel is aal2 once the user has a verified factor.
     hasMfaFactor: assurance?.nextLevel === "aal2",
+    pendingPrivacyNoticeId: (pendingPrivacy as string | null) ?? null,
+    mustSignPrivacy: Boolean(pendingPrivacy),
   };
 });
 
@@ -66,9 +84,13 @@ export const getCurrentMember = cache(async (): Promise<CurrentMember> => {
  */
 export async function requireMember(
   allowed?: readonly AppRole[],
+  { privacyNoticePage = false } = {},
 ): Promise<CurrentMember & { role: AppRole }> {
   const member = await getCurrentMember();
-  const target = guardRedirect(member, allowed);
+  const target = guardRedirect(
+    privacyNoticePage ? { ...member, mustSignPrivacy: false } : member,
+    allowed,
+  );
   if (target) {
     redirect({ href: target, locale: await getLocale() });
   }

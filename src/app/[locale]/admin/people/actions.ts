@@ -1,7 +1,6 @@
 "use server";
 
 import { refresh } from "next/cache";
-import { getLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { malaysiaToday } from "@/lib/format";
 import {
@@ -26,6 +25,7 @@ import {
   type DocType,
 } from "@/lib/people/records";
 import {
+  formLocale,
   isUuid,
   type ErrorKey,
   type FieldErrors,
@@ -117,7 +117,7 @@ export async function createEmployee(
 
   redirect({
     href: `/admin/people/${data.id}?created=1`,
-    locale: await getLocale(),
+    locale: formLocale(formData),
   });
   return saved();
 }

@@ -1,11 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import {
-  PDFDocument,
-  StandardFonts,
-  rgb,
-  type PDFFont,
-  type PDFPage,
-} from "pdf-lib";
+import { PDFDocument, StandardFonts, type PDFPage } from "pdf-lib";
+import { hex, safe, wrap } from "@/lib/pdf";
 import { getCurrentMember } from "@/lib/auth/member";
 import { needsMfa } from "@/lib/auth/roles";
 import { buildMatrix, summarise, typeName } from "@/lib/credentials/logic";
@@ -28,41 +23,6 @@ const TONE_COLOURS: Record<Tone, { fill: string; text: string }> = {
 const INK = hex("#1E2A24");
 const MUTED = hex("#5B6B62");
 const BORDER = hex("#E4DFD0");
-
-function hex(value: string) {
-  const n = parseInt(value.slice(1), 16);
-  return rgb(((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255);
-}
-
-/** The standard PDF fonts only cover Latin-1; anything else becomes "?". */
-function safe(font: PDFFont, text: string) {
-  return [...text]
-    .map((ch) => {
-      try {
-        font.encodeText(ch);
-        return ch;
-      } catch {
-        return "?";
-      }
-    })
-    .join("");
-}
-
-/** Splits text into lines that fit `width` at `size`. */
-function wrap(font: PDFFont, text: string, size: number, width: number) {
-  const lines: string[] = [];
-  let line = "";
-  for (const word of safe(font, text).split(/\s+/)) {
-    const next = line ? `${line} ${word}` : word;
-    if (font.widthOfTextAtSize(next, size) <= width || !line) line = next;
-    else {
-      lines.push(line);
-      line = word;
-    }
-  }
-  if (line) lines.push(line);
-  return lines;
-}
 
 export async function GET(
   _request: Request,

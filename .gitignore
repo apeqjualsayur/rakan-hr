@@ -40,3 +40,6 @@ Thumbs.db
 # local data exports (may contain personal data)
 /exports/
 *.sql.gz
+
+# Placeholder policy PDFs (npm run make:test-policies)
+/test-policies

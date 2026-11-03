@@ -35,6 +35,17 @@ describe("guardRedirect", () => {
     );
   });
 
+  it("sends anyone who has not signed the PDPA notice to sign it, after MFA", () => {
+    expect(guardRedirect(member({ mustSignPrivacy: true }))).toBe(
+      "/privacy-notice",
+    );
+    expect(
+      guardRedirect(
+        member({ role: "owner", aal: "aal1", mustSignPrivacy: true }),
+      ),
+    ).toBe("/mfa");
+  });
+
   it("sends users without an active membership to no-access", () => {
     expect(guardRedirect(member({ role: null }))).toBe("/no-access");
   });

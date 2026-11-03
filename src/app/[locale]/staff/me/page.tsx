@@ -1,5 +1,11 @@
 import type { ReactNode } from "react";
-import { ChevronRight, Network, Users } from "lucide-react";
+import {
+  ChevronRight,
+  FileSignature,
+  Megaphone,
+  Network,
+  Users,
+} from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -464,6 +470,39 @@ async function ColleagueLinks() {
           className="text-primary"
         />
         <span className="flex-1">{t("orgChart")}</span>
+        <ChevronRight
+          aria-hidden
+          size={20}
+          strokeWidth={1.75}
+          className="text-ink-muted"
+        />
+      </Link>
+      <Link href="/staff/policies" className={`${link} border-t border-border`}>
+        <FileSignature
+          aria-hidden
+          size={24}
+          strokeWidth={1.75}
+          className="text-primary"
+        />
+        <span className="flex-1">{t("policies")}</span>
+        <ChevronRight
+          aria-hidden
+          size={20}
+          strokeWidth={1.75}
+          className="text-ink-muted"
+        />
+      </Link>
+      <Link
+        href="/staff/announcements"
+        className={`${link} border-t border-border`}
+      >
+        <Megaphone
+          aria-hidden
+          size={24}
+          strokeWidth={1.75}
+          className="text-primary"
+        />
+        <span className="flex-1">{t("announcements")}</span>
         <ChevronRight
           aria-hidden
           size={20}
