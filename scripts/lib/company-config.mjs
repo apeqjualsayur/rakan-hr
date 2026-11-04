@@ -255,3 +255,91 @@ export function toJobOpenings(config) {
       return { role: title, title, employment_type, pay_model, headcount };
     });
 }
+
+const WEEKDAYS = [
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+];
+
+/**
+ * work_pattern → the company's rest day, off days and half days (Step 9, leave days and
+ * replacement holidays). 5.5 days: the day before the rest day is a half day; 5 days: it is
+ * an off day. Unknown values are an error, not a guess.
+ */
+export function toWorkPattern(config) {
+  const wp = config.work_pattern ?? {};
+  const rest = WEEKDAYS.indexOf(
+    String(wp.rest_day ?? "")
+      .trim()
+      .toLowerCase(),
+  );
+  if (rest < 0)
+    throw new Error(`work_pattern.rest_day "${wp.rest_day}" is not a weekday`);
+  const before = (rest + 6) % 7;
+  const days = Number(wp.work_days_per_week);
+  if (![5, 5.5, 6].includes(days))
+    throw new Error("work_pattern.work_days_per_week must be 5, 5.5 or 6");
+  return {
+    rest_day: rest,
+    off_days: days === 5 ? [before] : [],
+    half_days: days === 5.5 ? [before] : [],
+  };
+}
+
+const BANDS = [
+  ["under_2_years", 0, 24],
+  ["two_to_5_years", 24, 60],
+  ["over_5_years", 60, null],
+];
+
+/**
+ * leave_policy → company leave policies (Step 9, LVE-02): annual and sick leave per service
+ * band, and annual leave carry-forward. The database refuses anything below the
+ * Employment Act; extra_leave_types become leave types without days (HR sets them).
+ */
+export function toLeavePolicy(config) {
+  const lp = config.leave_policy ?? {};
+  const rows = [];
+  for (const [code, key] of [
+    ["ANNUAL", "annual_leave_days"],
+    ["SICK", "sick_leave_days"],
+  ]) {
+    for (const [band, min, max] of BANDS) {
+      const days = lp[key]?.[band];
+      if (days === undefined || known(String(days)) === null) continue;
+      if (typeof days !== "number" || days < 0)
+        throw new Error(`leave_policy.${key}.${band} must be a number of days`);
+      rows.push({
+        code,
+        min_service_months: min,
+        max_service_months: max,
+        days_per_year: days,
+        carry_forward_max:
+          code === "ANNUAL" ? (lp.carry_forward_max_days ?? 0) : 0,
+        carry_forward_expiry_months:
+          code === "ANNUAL" && lp.carry_forward_max_days
+            ? (lp.carry_forward_expiry_months ?? null)
+            : null,
+      });
+    }
+  }
+  const names = {
+    compassionate: ["Compassionate leave", "Cuti ihsan"],
+    marriage: ["Marriage leave", "Cuti perkahwinan"],
+    exam: ["Exam leave", "Cuti peperiksaan"],
+  };
+  const extra = (
+    Array.isArray(lp.extra_leave_types) ? lp.extra_leave_types : []
+  ).map((key) => {
+    const [name_en, name_ms] = names[key] ?? [];
+    if (!name_en)
+      throw new Error(`leave_policy.extra_leave_types: unknown type "${key}"`);
+    return { code: String(key).toUpperCase(), name_en, name_ms };
+  });
+  return { policies: rows, extraTypes: extra };
+}

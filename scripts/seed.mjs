@@ -18,6 +18,8 @@ import {
   ownerEmails,
   toBranch,
   toJobOpenings,
+  toLeavePolicy,
+  toWorkPattern,
   toJobRoles,
   toRoleRequirements,
   toTenant,
@@ -47,7 +49,15 @@ if (!dbUrl.includes(linkedRef) || !appUrl.includes(linkedRef)) {
   );
 }
 
-let config, tenant, branch, owners, jobRoles, requirements, openings;
+let config,
+  tenant,
+  branch,
+  owners,
+  jobRoles,
+  requirements,
+  openings,
+  workPattern,
+  leave;
 try {
   config = parse(readFileSync("_specs/hr-system/company-config.yaml", "utf8"));
   tenant = toTenant(config);
@@ -56,6 +66,8 @@ try {
   jobRoles = toJobRoles(config);
   requirements = toRoleRequirements(config);
   openings = toJobOpenings(config);
+  workPattern = toWorkPattern(config);
+  leave = toLeavePolicy(config);
 } catch (error) {
   fail(error.message);
 }
@@ -167,6 +179,49 @@ try {
     );
     openingsAdded += res.rowCount;
   }
+  // Step 9: work pattern (only while still the default) and leave policies. Floor rows
+  // seeded by the database are raised to company-config.yaml once; changes made later in
+  // Settings > Leave are kept.
+  await client.query(
+    `update public.tenants set rest_day = $2, off_days = $3, half_days = $4
+     where id = $1 and off_days = '{}' and half_days = '{}' and rest_day = 0`,
+    [
+      TENANT_ID,
+      workPattern.rest_day,
+      workPattern.off_days,
+      workPattern.half_days,
+    ],
+  );
+  for (const t of leave.extraTypes) {
+    await client.query(
+      `insert into public.leave_types (tenant_id, code, name_en, name_ms, sort_order)
+       values ($1, $2, $3, $4, 70) on conflict (tenant_id, code) do nothing`,
+      [TENANT_ID, t.code, t.name_en, t.name_ms],
+    );
+  }
+  let policiesRaised = 0;
+  for (const p of leave.policies) {
+    const res = await client.query(
+      `update public.leave_policies lp
+       set days_per_year = $3, carry_forward_max = $5, carry_forward_expiry_months = $6
+       from public.leave_types t
+       where lp.leave_type_id = t.id and t.tenant_id = $1 and t.code = $2
+         and lp.min_service_months = $4
+         and lp.days_per_year = (select m.days from public.statutory_leave_minimums m
+                                 where m.leave_code = t.code and m.min_service_months = lp.min_service_months
+                                 order by m.effective_from desc limit 1)
+         and lp.carry_forward_max = 0`,
+      [
+        TENANT_ID,
+        p.code,
+        p.days_per_year,
+        p.min_service_months,
+        p.carry_forward_max,
+        p.carry_forward_expiry_months,
+      ],
+    );
+    policiesRaised += res.rowCount;
+  }
   const seededPeople = await seedTestPeople(client, roleIds, owners[0]);
   const seededCredentials = await seedTestCredentials(client);
   await client.query("commit");
@@ -196,6 +251,9 @@ try {
   );
   console.log(
     `✔ Job openings: ${openingsAdded} added (${openings.length} roles in the yaml)`,
+  );
+  console.log(
+    `✔ Leave: ${policiesRaised} policy bands set from the yaml; extra types: ${leave.extraTypes.map((t) => t.code).join(", ") || "none"}`,
   );
   console.log(`✔ Test credentials: ${seededCredentials} added`);
   console.log(

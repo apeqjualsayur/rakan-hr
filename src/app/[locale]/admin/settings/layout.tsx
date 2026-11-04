@@ -27,6 +27,8 @@ export default async function SettingsLayout({
             ? (["checklist"] as const)
             : []),
           "credentials",
+          "leave",
+          "holidays",
           ...(can(member.role, "viewHiring") ? (["letters"] as const) : []),
         ]}
       />

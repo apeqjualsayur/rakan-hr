@@ -60,7 +60,22 @@ export type ErrorKey =
   | "sessionEnded"
   | "reviewOpen"
   | "noProbation"
-  | "letterFailed";
+  | "letterFailed"
+  // Leave (Step 9)
+  | "oneYear"
+  | "halfDaySingle"
+  | "belowStatutoryMinimum"
+  | "bandsOverlap"
+  | "statutoryType"
+  | "insufficientBalance"
+  | "overlap"
+  | "attachmentRequired"
+  | "notEligible"
+  | "noWorkingDays"
+  | "askHr"
+  | "inPayroll"
+  | "notOpen"
+  | "outsideEmployment";
 
 export type FieldErrors = Partial<Record<string, ErrorKey>>;
 

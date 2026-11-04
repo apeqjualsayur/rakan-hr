@@ -7,6 +7,8 @@ import {
   stateCode,
   toBranch,
   toJobOpenings,
+  toLeavePolicy,
+  toWorkPattern,
   toJobRoles,
   toRoleRequirements,
   toTenant,
@@ -254,5 +256,69 @@ describe("toJobOpenings", () => {
     expect(() =>
       toJobOpenings({ roles_to_hire: [{ title: "SLT", pay_model: "hybrid" }] }),
     ).toThrow(/hybrid/);
+  });
+});
+
+describe("toWorkPattern", () => {
+  it("5.5 days with Sunday rest: Saturday is a half day", () => {
+    expect(
+      toWorkPattern({
+        work_pattern: { rest_day: "Sunday", work_days_per_week: 5.5 },
+      }),
+    ).toEqual({
+      rest_day: 0,
+      off_days: [],
+      half_days: [6],
+    });
+  });
+  it("5 days: Saturday is an off day", () => {
+    expect(
+      toWorkPattern({
+        work_pattern: { rest_day: "Sunday", work_days_per_week: 5 },
+      }).off_days,
+    ).toEqual([6]);
+  });
+  it("refuses an unknown rest day", () => {
+    expect(() =>
+      toWorkPattern({
+        work_pattern: { rest_day: "TBC", work_days_per_week: 5 },
+      }),
+    ).toThrow();
+  });
+});
+
+describe("toLeavePolicy", () => {
+  it("maps annual and sick leave bands, carry-forward on annual only, and extra types", () => {
+    const { policies, extraTypes } = toLeavePolicy({
+      leave_policy: {
+        annual_leave_days: {
+          under_2_years: 12,
+          two_to_5_years: 14,
+          over_5_years: 18,
+        },
+        sick_leave_days: { under_2_years: 14 },
+        carry_forward_max_days: 5,
+        carry_forward_expiry_months: 3,
+        extra_leave_types: ["compassionate", "exam"],
+      },
+    });
+    expect(policies).toContainEqual({
+      code: "ANNUAL",
+      min_service_months: 24,
+      max_service_months: 60,
+      days_per_year: 14,
+      carry_forward_max: 5,
+      carry_forward_expiry_months: 3,
+    });
+    expect(policies).toContainEqual({
+      code: "SICK",
+      min_service_months: 0,
+      max_service_months: 24,
+      days_per_year: 14,
+      carry_forward_max: 0,
+      carry_forward_expiry_months: null,
+    });
+    expect(policies).toHaveLength(4);
+    expect(extraTypes.map((t) => t.code)).toEqual(["COMPASSIONATE", "EXAM"]);
   });
 });

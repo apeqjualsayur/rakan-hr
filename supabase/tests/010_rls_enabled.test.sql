@@ -28,7 +28,8 @@ select is(
       'signatures',
       'candidates',
       'offers',
-      'probation_reviews'
+      'probation_reviews',
+      'leave_requests'
     ]) as t (name)
     where not exists (
       select 1 from pg_trigger tr

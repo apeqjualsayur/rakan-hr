@@ -29,6 +29,7 @@ const copy = {
       bank_change: "bank change",
       credential: "credential",
       probation_review: "probation review",
+      leave: "leave",
     } as Record<string, string>,
     open: "Open Rakan",
     footer:
@@ -173,6 +174,7 @@ const copy = {
       bank_change: "perubahan bank",
       credential: "kredensial",
       probation_review: "penilaian percubaan",
+      leave: "cuti",
     } as Record<string, string>,
     open: "Buka Rakan",
     footer:

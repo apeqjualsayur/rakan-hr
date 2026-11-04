@@ -3,6 +3,7 @@ import {
   AnnouncementsCard,
   PoliciesBanner,
 } from "@/components/policies/HomeCards";
+import { WhosOutCard } from "@/components/leave/WhosOutCard";
 import { SetupProgressCard } from "@/components/settings/SetupProgressCard";
 import { TestNotificationButton } from "./TestNotificationButton";
 
@@ -27,6 +28,7 @@ export default async function AdminHomePage() {
         </section>
       </div>
       <div className="flex min-w-0 flex-col gap-6">
+        <WhosOutCard calendarHref="/admin/leave/calendar" />
         <SetupProgressCard />
         <AnnouncementsCard area="/admin" />
       </div>

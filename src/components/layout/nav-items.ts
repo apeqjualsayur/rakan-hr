@@ -30,7 +30,7 @@ export const adminNavItems: NavItem<AdminNavKey>[] = [
   { key: "home", href: "/admin" },
   { key: "people", href: "/admin/people" },
   { key: "hiring", href: "/admin/hiring" },
-  { key: "timeOff" },
+  { key: "timeOff", href: "/admin/leave" },
   { key: "payroll" },
   { key: "compliance", href: "/admin/compliance" },
   { key: "reports" },
@@ -45,7 +45,7 @@ export function isNavActive(href: string | undefined, pathname: string) {
 
 export const staffNavItems: (NavItem<StaffNavKey> & { icon: LucideIcon })[] = [
   { key: "home", icon: House, href: "/staff" },
-  { key: "time", icon: Clock },
+  { key: "time", icon: Clock, href: "/staff/leave" },
   { key: "credentials", icon: ShieldCheck, href: "/staff/credentials" },
   { key: "pay", icon: Wallet },
   { key: "me", icon: User, href: "/staff/me" },
