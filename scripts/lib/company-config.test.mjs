@@ -263,9 +263,14 @@ describe("toWorkPattern", () => {
   it("5.5 days with Sunday rest: Saturday is a half day", () => {
     expect(
       toWorkPattern({
-        work_pattern: { rest_day: "Sunday", work_days_per_week: 5.5 },
+        work_pattern: {
+          rest_day: "Sunday",
+          work_days_per_week: 5.5,
+          normal_hours_per_day: 8,
+        },
       }),
     ).toEqual({
+      normal_hours_per_day: 8,
       rest_day: 0,
       off_days: [],
       half_days: [6],
@@ -274,7 +279,11 @@ describe("toWorkPattern", () => {
   it("5 days: Saturday is an off day", () => {
     expect(
       toWorkPattern({
-        work_pattern: { rest_day: "Sunday", work_days_per_week: 5 },
+        work_pattern: {
+          rest_day: "Sunday",
+          work_days_per_week: 5,
+          normal_hours_per_day: 8,
+        },
       }).off_days,
     ).toEqual([6]);
   });

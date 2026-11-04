@@ -192,6 +192,11 @@ try {
       workPattern.half_days,
     ],
   );
+  // Step 10: normal hours a day (only while still the default).
+  await client.query(
+    `update public.tenants set normal_hours_per_day = $2 where id = $1 and normal_hours_per_day = 8`,
+    [TENANT_ID, workPattern.normal_hours_per_day],
+  );
   for (const t of leave.extraTypes) {
     await client.query(
       `insert into public.leave_types (tenant_id, code, name_en, name_ms, sort_order)

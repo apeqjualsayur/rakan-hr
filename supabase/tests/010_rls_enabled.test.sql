@@ -29,7 +29,9 @@ select is(
       'candidates',
       'offers',
       'probation_reviews',
-      'leave_requests'
+      'leave_requests',
+      'attendance_logs',
+      'ot_requests'
     ]) as t (name)
     where not exists (
       select 1 from pg_trigger tr

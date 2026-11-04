@@ -75,7 +75,14 @@ export type ErrorKey =
   | "askHr"
   | "inPayroll"
   | "notOpen"
-  | "outsideEmployment";
+  | "outsideEmployment"
+  // Attendance, roster, OT (Step 10)
+  | "alreadyClockedIn"
+  | "notClockedIn"
+  | "shiftOverlap"
+  | "credentialBlock"
+  | "otExists"
+  | "endBeforeStart";
 
 export type FieldErrors = Partial<Record<string, ErrorKey>>;
 

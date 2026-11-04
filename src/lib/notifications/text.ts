@@ -149,6 +149,36 @@ export function useNotificationText() {
             days: String(d.days ?? 3),
           }),
         };
+      // Step 10 roster and time alerts.
+      case "roster_published":
+        return {
+          title: t("templates.roster_published.title"),
+          body: t("templates.roster_published.body", {
+            date: String(d.week_start ?? ""),
+          }),
+        };
+      case "ot_limit_exceeded":
+        return {
+          title: t("templates.ot_limit_exceeded.title", {
+            name: String(d.employee_name ?? ""),
+          }),
+          body: t("templates.ot_limit_exceeded.body", {
+            hours: String(d.hours ?? ""),
+            month: String(d.month ?? ""),
+            limit: String(d.limit ?? ""),
+          }),
+        };
+      case "weekly_hours_exceeded":
+        return {
+          title: t("templates.weekly_hours_exceeded.title", {
+            name: String(d.employee_name ?? ""),
+            cap: String(d.cap ?? ""),
+          }),
+          body: t("templates.weekly_hours_exceeded.body", {
+            hours: String(d.hours ?? ""),
+            date: String(d.week_start ?? ""),
+          }),
+        };
       case "cpd_decided":
         return {
           title:

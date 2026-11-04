@@ -74,6 +74,7 @@ export const statusTones = {
     pending: "info",
     approved: "primary",
     rejected: "danger",
+    cancelled: "neutral",
   },
   payroll: {
     draft: "neutral",

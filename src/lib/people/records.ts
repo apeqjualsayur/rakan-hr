@@ -33,10 +33,14 @@ export type EmploymentRecord = {
   probation_end: string | null;
   confirmed_on: string | null;
   is_current: boolean;
+  /** Step 10 overtime rule: Employment Act rates up to the wage threshold ('auto'). */
+  ot_rule: (typeof OT_RULES)[number];
 };
 
+export const OT_RULES = ["auto", "ea_rates", "none"] as const;
+
 export const EMPLOYMENT_COLUMNS =
-  "id, employment_type, pay_model, basic_salary, hourly_rate, session_rate, normal_hours_per_day, work_days_per_week, start_date, end_date, probation_end, confirmed_on, is_current";
+  "id, employment_type, pay_model, basic_salary, hourly_rate, session_rate, normal_hours_per_day, work_days_per_week, start_date, end_date, probation_end, confirmed_on, is_current, ot_rule";
 
 /** The pay column each pay model needs. */
 export const RATE_FIELD = {
@@ -104,6 +108,7 @@ export function parseContract(
       end_date,
       probation_end,
       confirmed_on,
+      ot_rule: readChoice(formData, "ot_rule", OT_RULES, errors) ?? "auto",
     },
     errors,
   );

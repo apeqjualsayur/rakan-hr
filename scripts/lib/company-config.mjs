@@ -284,7 +284,13 @@ export function toWorkPattern(config) {
   const days = Number(wp.work_days_per_week);
   if (![5, 5.5, 6].includes(days))
     throw new Error("work_pattern.work_days_per_week must be 5, 5.5 or 6");
+  const hours = Number(wp.normal_hours_per_day);
+  if (!(hours > 0 && hours <= 24))
+    throw new Error(
+      "work_pattern.normal_hours_per_day must be a number of hours",
+    );
   return {
+    normal_hours_per_day: hours,
     rest_day: rest,
     off_days: days === 5 ? [before] : [],
     half_days: days === 5.5 ? [before] : [],

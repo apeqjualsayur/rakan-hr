@@ -28,7 +28,7 @@ export default async function AdminHomePage() {
         </section>
       </div>
       <div className="flex min-w-0 flex-col gap-6">
-        <WhosOutCard calendarHref="/admin/leave/calendar" />
+        <WhosOutCard calendarHref="/admin/time/calendar" />
         <SetupProgressCard />
         <AnnouncementsCard area="/admin" />
       </div>

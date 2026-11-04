@@ -30,6 +30,7 @@ const copy = {
       credential: "credential",
       probation_review: "probation review",
       leave: "leave",
+      overtime: "overtime",
     } as Record<string, string>,
     open: "Open Rakan",
     footer:
@@ -164,6 +165,28 @@ const copy = {
       title: `Approved: end ${name}'s employment after probation`,
       body: "Give notice as the contract sets out.",
     }),
+    rosterPublished: (date: string) => ({
+      title: "Your roster is out",
+      body: `Shifts for the week of ${date} are published. Open Rakan to see them.`,
+    }),
+    otLimitExceeded: (
+      name: string,
+      hours: string,
+      month: string,
+      limit: string,
+    ) => ({
+      title: `${name} is over the monthly OT limit`,
+      body: `${hours} OT hours in ${month} (limit ${limit}).`,
+    }),
+    weeklyHoursExceeded: (
+      name: string,
+      cap: string,
+      hours: string,
+      date: string,
+    ) => ({
+      title: `${name} worked over ${cap} hours`,
+      body: `${hours} hours in the week of ${date}.`,
+    }),
     fallback: { title: "New notification", body: "" },
   },
   ms: {
@@ -175,6 +198,7 @@ const copy = {
       credential: "kredensial",
       probation_review: "penilaian percubaan",
       leave: "cuti",
+      overtime: "lebih masa",
     } as Record<string, string>,
     open: "Buka Rakan",
     footer:
@@ -305,6 +329,28 @@ const copy = {
       title: `Diluluskan: tamatkan pekerjaan ${name} selepas tempoh percubaan`,
       body: "Berikan notis seperti yang ditetapkan dalam kontrak.",
     }),
+    rosterPublished: (date: string) => ({
+      title: "Jadual tugas anda telah keluar",
+      body: `Syif untuk minggu ${date} telah diterbitkan. Buka Rakan untuk melihatnya.`,
+    }),
+    otLimitExceeded: (
+      name: string,
+      hours: string,
+      month: string,
+      limit: string,
+    ) => ({
+      title: `${name} melebihi had lebih masa bulanan`,
+      body: `${hours} jam lebih masa pada ${month} (had ${limit}).`,
+    }),
+    weeklyHoursExceeded: (
+      name: string,
+      cap: string,
+      hours: string,
+      date: string,
+    ) => ({
+      title: `${name} bekerja melebihi ${cap} jam`,
+      body: `${hours} jam pada minggu ${date}.`,
+    }),
     fallback: { title: "Pemberitahuan baharu", body: "" },
   },
 };
@@ -403,6 +449,24 @@ function text(template: string, data: Data, locale: Locale) {
       );
     case "probation_end_approved":
       return c.probationEndApproved(String(data.employee_name ?? ""));
+    case "roster_published":
+      return c.rosterPublished(
+        letterDate(String(data.week_start ?? ""), locale),
+      );
+    case "ot_limit_exceeded":
+      return c.otLimitExceeded(
+        String(data.employee_name ?? ""),
+        String(data.hours ?? ""),
+        String(data.month ?? ""),
+        String(data.limit ?? ""),
+      );
+    case "weekly_hours_exceeded":
+      return c.weeklyHoursExceeded(
+        String(data.employee_name ?? ""),
+        String(data.cap ?? ""),
+        String(data.hours ?? ""),
+        letterDate(String(data.week_start ?? ""), locale),
+      );
     default:
       return c.fallback;
   }

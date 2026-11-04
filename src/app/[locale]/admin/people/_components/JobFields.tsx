@@ -10,6 +10,7 @@ import {
   PAY_MODELS,
   RATE_FIELD,
   type EmploymentRecord,
+  OT_RULES,
 } from "@/lib/people/records";
 
 export type RoleOption = { id: string; name: string; is_clinical: boolean };
@@ -210,6 +211,20 @@ export function ContractFields({
         defaultValue={record?.confirmed_on ?? ""}
         error={error("confirmed_on")}
       />
+      <SelectField
+        className="md:col-span-2"
+        label={t("ot_rule")}
+        name="ot_rule"
+        defaultValue={record?.ot_rule ?? "auto"}
+        hint={t("ot_ruleHint")}
+        error={error("ot_rule")}
+      >
+        {OT_RULES.map((rule) => (
+          <option key={rule} value={rule}>
+            {t(`otRules.${rule}`)}
+          </option>
+        ))}
+      </SelectField>
     </div>
   );
 }

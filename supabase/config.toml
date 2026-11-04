@@ -424,3 +424,6 @@ verify_jwt = false
 
 [functions.hiring]
 verify_jwt = false
+
+[functions.selfie-purge]
+verify_jwt = false

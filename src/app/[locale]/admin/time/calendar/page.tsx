@@ -15,7 +15,7 @@ export async function generateMetadata() {
 // LVE-06 team calendar. Roster clashes join in Step 10 (clinical roster).
 export default async function LeaveCalendarPage({
   searchParams,
-}: PageProps<"/[locale]/admin/leave/calendar">) {
+}: PageProps<"/[locale]/admin/time/calendar">) {
   await requireMember(ADMIN_ROLES);
   const { month } = await searchParams;
   const today = malaysiaToday();
@@ -35,7 +35,7 @@ export default async function LeaveCalendarPage({
       leave={leave}
       holidays={holidays}
       today={today}
-      basePath="/admin/leave/calendar"
+      basePath="/admin/time/calendar"
     />
   );
 }

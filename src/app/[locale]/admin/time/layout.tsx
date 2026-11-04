@@ -7,7 +7,7 @@ import { ADMIN_ROLES } from "@/lib/auth/roles";
 // with holidays and clashes, and everyone's balances.
 export default async function LeaveLayout({
   children,
-}: LayoutProps<"/[locale]/admin/leave">) {
+}: LayoutProps<"/[locale]/admin/time">) {
   await requireMember(ADMIN_ROLES);
   const t = await getTranslations("Leave");
   return (
@@ -21,9 +21,12 @@ export default async function LeaveLayout({
       <SectionTabs
         label={t("nav.label")}
         items={[
-          { href: "/admin/leave", label: t("nav.requests") },
-          { href: "/admin/leave/calendar", label: t("nav.calendar") },
-          { href: "/admin/leave/balances", label: t("nav.balances") },
+          { href: "/admin/time", label: t("nav.requests") },
+          { href: "/admin/time/calendar", label: t("nav.calendar") },
+          { href: "/admin/time/balances", label: t("nav.balances") },
+          { href: "/admin/time/roster", label: t("nav.roster") },
+          { href: "/admin/time/attendance", label: t("nav.attendance") },
+          { href: "/admin/time/overtime", label: t("nav.overtime") },
         ]}
       />
       {children}

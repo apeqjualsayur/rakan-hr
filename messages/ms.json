@@ -132,6 +132,18 @@
       "probation_end_approved": {
         "title": "Diluluskan: tamatkan pekerjaan {name} selepas tempoh percubaan",
         "body": "Berikan notis seperti yang ditetapkan dalam kontrak."
+      },
+      "roster_published": {
+        "title": "Jadual tugas anda telah keluar",
+        "body": "Syif untuk minggu {date} telah diterbitkan."
+      },
+      "ot_limit_exceeded": {
+        "title": "{name} melebihi had lebih masa bulanan",
+        "body": "{hours} jam lebih masa pada {month} (had {limit})."
+      },
+      "weekly_hours_exceeded": {
+        "title": "{name} bekerja melebihi {cap} jam",
+        "body": "{hours} jam pada minggu {date}."
       }
     },
     "entity": {
@@ -141,7 +153,8 @@
       "bank_change": "perubahan bank",
       "credential": "kredensial",
       "probation_review": "penilaian percubaan",
-      "leave": "cuti"
+      "leave": "cuti",
+      "overtime": "kerja lebih masa"
     }
   },
   "AdminNav": {
@@ -220,7 +233,8 @@
     "ot": {
       "pending": "Menunggu",
       "approved": "Diluluskan",
-      "rejected": "Ditolak"
+      "rejected": "Ditolak",
+      "cancelled": "Dibatalkan"
     },
     "payroll": {
       "draft": "Draf",
@@ -565,7 +579,13 @@
       "askHr": "Cuti yang diluluskan hanya boleh dibatalkan oleh HR.",
       "inPayroll": "Cuti ini sudah dalam larian gaji.",
       "notOpen": "Cuti ini sudah ditutup.",
-      "outsideEmployment": "Tarikh ini di luar tempoh pekerjaan anda (sebelum mula atau selepas berhenti)."
+      "outsideEmployment": "Tarikh ini di luar tempoh pekerjaan anda (sebelum mula atau selepas berhenti).",
+      "alreadyClockedIn": "Anda sudah daftar masuk.",
+      "notClockedIn": "Anda belum daftar masuk.",
+      "shiftOverlap": "Syif ini bertindih dengan syif lain bagi orang yang sama.",
+      "credentialBlock": "Disekat: kredensial wajib tidak sah pada tarikh ini (penguatkuasaan ketat).",
+      "otExists": "Sudah ada kerja lebih masa untuk hari ini.",
+      "endBeforeStart": "Masa tamat mesti selepas masa mula."
     },
     "company": {
       "title": "Profil syarikat",
@@ -1015,7 +1035,14 @@
       "ongoing": "kini",
       "rateMonthly": "{amount} sebulan",
       "rateHourly": "{amount} sejam",
-      "rateSession": "{amount} satu sesi"
+      "rateSession": "{amount} satu sesi",
+      "ot_rule": "Bayaran lebih masa",
+      "ot_ruleHint": "Automatik: kadar Akta Kerja sehingga had gaji (RM4,000 sebulan), tiada di atasnya melainkan anda memilih sebaliknya.",
+      "otRules": {
+        "auto": "Automatik (Akta Kerja)",
+        "ea_rates": "Kadar Akta Kerja (diberikan oleh kontrak)",
+        "none": "Tiada bayaran lebih masa"
+      }
     },
     "statutory": {
       "numbers": "Nombor berkanun",
@@ -1934,7 +1961,7 @@
     "certificate": "Sijil",
     "toApprove": "Menunggu keputusan",
     "adminTitle": "Cuti",
-    "adminIntro": "Permohonan cuti, kalendar pasukan dengan cuti umum dan pertembungan, serta baki cuti semua orang.",
+    "adminIntro": "Permohonan cuti, kalendar pasukan dengan cuti umum dan pertembungan, baki cuti, jadual tugas, kehadiran dan lebih masa.",
     "upcoming": "Cuti diluluskan akan datang",
     "noUpcoming": "Tiada cuti diluluskan akan datang.",
     "overridden": "direkod melebihi baki",
@@ -1942,7 +1969,10 @@
       "label": "Bahagian cuti",
       "requests": "Permohonan",
       "calendar": "Kalendar",
-      "balances": "Baki"
+      "balances": "Baki",
+      "roster": "Jadual tugas",
+      "attendance": "Kehadiran",
+      "overtime": "Lebih masa"
     },
     "apply": {
       "employee": "Pekerja",
@@ -2081,6 +2111,177 @@
       "nameMs": "Nama (Bahasa Malaysia)",
       "add": "Tambah cuti",
       "remove": "Buang cuti"
+    },
+    "otToApprove": "Lebih masa menunggu keputusan"
+  },
+  "StaffHome": {
+    "fallbackTitle": "Utama",
+    "tiles": {
+      "leave": "Cuti",
+      "claim": "Tuntutan",
+      "overtime": "Lebih masa",
+      "payslips": "Slip gaji"
+    },
+    "annualLeave": "Cuti tahunan",
+    "ofDays": "daripada {total} hari"
+  },
+  "Time": {
+    "title": "Masa",
+    "leaveLink": "Cuti",
+    "notLinked": "Akaun anda belum dipautkan kepada rekod pekerja. Tanya HR.",
+    "myShifts": "Syif saya",
+    "noShifts": "Tiada syif diterbitkan minggu ini atau minggu depan.",
+    "todayTag": "hari ini",
+    "onCall": "atas panggilan",
+    "myAttendance": "Kehadiran saya",
+    "noAttendance": "Belum ada daftar masuk.",
+    "outside": "Di luar",
+    "manual": "Direkod oleh HR",
+    "atCentre": "Di pusat",
+    "hours": "{hours} j",
+    "nav": {
+      "roster": "Jadual tugas",
+      "attendance": "Kehadiran",
+      "overtime": "Lebih masa"
+    },
+    "today": {
+      "todaysShift": "Syif hari ini",
+      "noShift": "Tiada syif hari ini",
+      "onCall": "Atas panggilan",
+      "locating": "Mencari lokasi anda…",
+      "clockedInAt": "Daftar masuk pada",
+      "outReason": "Kenapa anda daftar keluar di luar pusat?",
+      "clockOut": "Daftar keluar",
+      "selfieAdded": "Swafoto ditambah",
+      "addSelfie": "Tambah swafoto (pilihan)",
+      "noFence": "Tiada semakan lokasi untuk cawangan ini.",
+      "noLocation": "Lokasi tidak tersedia.",
+      "lastOut": "Daftar keluar pada {time}",
+      "saving": "Menyimpan…"
+    },
+    "roster": {
+      "noBranch": "Tambah cawangan dahulu (Tetapan > Cawangan).",
+      "previous": "Minggu sebelumnya",
+      "next": "Minggu berikutnya",
+      "weekOf": "Minggu {date}",
+      "branch": "Cawangan",
+      "unnamedBranch": "Cawangan (nama belum ditetapkan)",
+      "copy": "Salin minggu lepas",
+      "copied": "{count, plural, =0 {Tiada untuk disalin.} other {# syif disalin sebagai draf.}}",
+      "publish": "{count, plural, other {Terbitkan # syif}}",
+      "allPublished": "Semua diterbitkan",
+      "published": "{count, plural, =0 {Tiada yang baharu untuk diterbitkan.} other {Diterbitkan: # orang dimaklumkan.}}",
+      "person": "Orang",
+      "hours": "Jam",
+      "compliance": "Kredensial {pct}%",
+      "onLeave": "Bercuti",
+      "pending": "menunggu",
+      "draft": "draf",
+      "addFor": "Tambah syif untuk {name} pada {date}",
+      "legend": "Garis putus = draf (kakitangan belum nampak). Kuning = amaran (cuti, melebihi 45 j, kredensial, hari rehat atau cuti umum). Merah = disekat oleh penguatkuasaan kredensial ketat.",
+      "newShift": "Syif baharu",
+      "editShift": "Edit syif",
+      "date": "Tarikh",
+      "start": "Mula",
+      "end": "Tamat",
+      "break": "Rehat (minit)",
+      "room": "Bilik atau perkhidmatan",
+      "roomHint": "cth. Bilik 2 · Terapi pertuturan",
+      "notes": "Nota (pilihan)",
+      "onCall": "Atas panggilan",
+      "paidHours": "{hours} jam berbayar",
+      "noIssues": "Tiada pertembungan atau masalah kredensial.",
+      "save": "Simpan syif",
+      "add": "Tambah syif",
+      "delete": "Padam",
+      "cancel": "Batal",
+      "issues": {
+        "LEAVE": "Bercuti pada hari itu: {type} ({status}).",
+        "WEEK_HOURS": "{hours} jam minggu itu: melebihi minggu biasa {cap} jam.",
+        "CREDENTIAL": "{type}: {status} pada tarikh itu.",
+        "CREDENTIAL_BLOCK": "Disekat: {type} {status} pada tarikh itu (penguatkuasaan ketat).",
+        "HOLIDAY": "Cuti umum ({name}): kerja dibayar sebagai lebih masa cuti umum.",
+        "REST_DAY": "Hari rehat: kerja dibayar pada kadar hari rehat."
+      },
+      "credentialStatus": {
+        "expired": "telah luput",
+        "missing": "tiada",
+        "rejected": "ditolak",
+        "pending": "menunggu pengesahan",
+        "upcoming": "belum berkuat kuasa"
+      }
+    },
+    "attendance": {
+      "previous": "Minggu sebelumnya",
+      "next": "Minggu berikutnya",
+      "weekOf": "Minggu {date}",
+      "overCap": "Melebihi {cap} jam minggu ini: {names}",
+      "title": "Daftar masuk",
+      "none": "Tiada daftar masuk minggu ini.",
+      "person": "Orang",
+      "day": "Hari",
+      "inOut": "Masuk – keluar",
+      "hours": "Jam",
+      "where": "Lokasi",
+      "open": "masih masuk",
+      "manual": "Direkod oleh HR: {reason}",
+      "outside": "Di luar: {reason}",
+      "inside": "Di pusat",
+      "noFence": "Tiada pagar ditetapkan",
+      "recordTitle": "Rekod kehadiran",
+      "recordIntro": "Untuk daftar masuk yang terlupa atau orang tanpa telefon. Sebabnya disimpan.",
+      "choose": "Pilih…",
+      "in": "Daftar masuk",
+      "out": "Daftar keluar",
+      "reason": "Sebab",
+      "record": "Rekod",
+      "selfie": "Swafoto"
+    },
+    "ot": {
+      "title": "Lebih masa",
+      "employee": "Pekerja",
+      "choose": "Pilih…",
+      "date": "Tarikh",
+      "hours": "Jam",
+      "hoursHint": "Hari biasa: jam selepas waktu biasa anda. Hari rehat atau cuti umum: semua jam bekerja.",
+      "reason": "Untuk apa?",
+      "dayTypes": {
+        "normal": "Hari biasa",
+        "rest_day": "Hari rehat",
+        "public_holiday": "Cuti umum"
+      },
+      "lines": {
+        "normal_ot": "{hours} j × {multiplier} × {rate}/j (KGS) = {amount}",
+        "rest_day_half": "Hari rehat, sehingga separuh waktu biasa: {multiplier} × {rate} (KGB) = {amount}",
+        "rest_day_full": "Hari rehat, melebihi separuh waktu biasa: {multiplier} × {rate} (KGB) = {amount}",
+        "rest_day_ot": "{hours} j melebihi waktu biasa × {multiplier} × {rate}/j = {amount}",
+        "holiday_normal": "Cuti umum, dalam waktu biasa: {multiplier} × {rate} (KGB) = {amount}",
+        "holiday_ot": "{hours} j melebihi waktu biasa × {multiplier} × {rate}/j = {amount}"
+      },
+      "total": "Bayaran {amount}",
+      "notCovered": {
+        "contract": "Melebihi had gaji Akta Kerja: bayaran lebih masa mengikut kontrak (tiada ditetapkan).",
+        "none": "Kontrak ini tiada bayaran lebih masa.",
+        "manual": "Dibayar mengikut sesi: HR memasukkan jumlah lebih masa dalam gaji."
+      },
+      "overLimit": "{hours} jam lebih masa bulan ini: melebihi had {limit} jam.",
+      "monthHours": "{hours} daripada {limit} jam lebih masa bulan ini",
+      "record": "Rekod lebih masa",
+      "submit": "Hantar untuk kelulusan",
+      "none": "Belum ada permohonan lebih masa.",
+      "hoursCount": "{hours} jam",
+      "cancel": "Batal",
+      "nonePending": "Tiada lebih masa menunggu.",
+      "someone": "Seseorang",
+      "pays": "Bayaran {amount}",
+      "waiting": "Menunggu pengurus mereka",
+      "toApprove": "Lebih masa menunggu keputusan",
+      "thisMonth": "Lebih masa diluluskan, {month}",
+      "personMonth": "{name}: {hours} daripada {limit} j · {amount}",
+      "noneApproved": "Tiada lebih masa diluluskan bulan ini.",
+      "recordTitle": "Rekod lebih masa",
+      "recordIntro": "Untuk lebih masa yang dipersetujui di luar Rakan. Ia terus diluluskan dan dihantar ke gaji.",
+      "basis": "KGB {orp} sehari · KGS {hrp} sejam · {hours} jam biasa"
     }
   }
 }

@@ -132,6 +132,18 @@
       "probation_end_approved": {
         "title": "Approved: end {name}'s employment after probation",
         "body": "Give notice as the contract sets out."
+      },
+      "roster_published": {
+        "title": "Your roster is out",
+        "body": "Shifts for the week of {date} are published."
+      },
+      "ot_limit_exceeded": {
+        "title": "{name} is over the monthly OT limit",
+        "body": "{hours} OT hours in {month} (limit {limit})."
+      },
+      "weekly_hours_exceeded": {
+        "title": "{name} worked over {cap} hours",
+        "body": "{hours} hours in the week of {date}."
       }
     },
     "entity": {
@@ -141,7 +153,8 @@
       "bank_change": "bank change",
       "credential": "credential",
       "probation_review": "probation review",
-      "leave": "leave"
+      "leave": "leave",
+      "overtime": "overtime"
     }
   },
   "AdminNav": {
@@ -220,7 +233,8 @@
     "ot": {
       "pending": "Pending",
       "approved": "Approved",
-      "rejected": "Rejected"
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
     },
     "payroll": {
       "draft": "Draft",
@@ -565,7 +579,13 @@
       "askHr": "Approved leave can only be cancelled by HR.",
       "inPayroll": "This leave is already in a payroll run.",
       "notOpen": "This leave is already closed.",
-      "outsideEmployment": "These dates are outside your employment (before you start or after you leave)."
+      "outsideEmployment": "These dates are outside your employment (before you start or after you leave).",
+      "alreadyClockedIn": "You are already clocked in.",
+      "notClockedIn": "You are not clocked in.",
+      "shiftOverlap": "This overlaps another shift for the same person.",
+      "credentialBlock": "Blocked: a required credential is not valid on this date (hard enforcement).",
+      "otExists": "There is already OT for this day.",
+      "endBeforeStart": "The end must be after the start."
     },
     "company": {
       "title": "Company profile",
@@ -1015,7 +1035,14 @@
       "ongoing": "now",
       "rateMonthly": "{amount} a month",
       "rateHourly": "{amount} an hour",
-      "rateSession": "{amount} a session"
+      "rateSession": "{amount} a session",
+      "ot_rule": "Overtime pay",
+      "ot_ruleHint": "Automatic: Employment Act rates up to the wage threshold (RM4,000 a month), none above it unless you choose otherwise.",
+      "otRules": {
+        "auto": "Automatic (Employment Act)",
+        "ea_rates": "Employment Act rates (contract gives them)",
+        "none": "No overtime pay"
+      }
     },
     "statutory": {
       "numbers": "Statutory numbers",
@@ -1934,7 +1961,7 @@
     "certificate": "Certificate",
     "toApprove": "Waiting for a decision",
     "adminTitle": "Time off",
-    "adminIntro": "Leave requests, the team calendar with public holidays and clashes, and everyone's balances.",
+    "adminIntro": "Leave requests, the team calendar with public holidays and clashes, balances, the roster, attendance and overtime.",
     "upcoming": "Upcoming approved leave",
     "noUpcoming": "No approved leave coming up.",
     "overridden": "recorded beyond the balance",
@@ -1942,7 +1969,10 @@
       "label": "Time off sections",
       "requests": "Requests",
       "calendar": "Calendar",
-      "balances": "Balances"
+      "balances": "Balances",
+      "roster": "Roster",
+      "attendance": "Attendance",
+      "overtime": "Overtime"
     },
     "apply": {
       "employee": "Employee",
@@ -2081,6 +2111,177 @@
       "nameMs": "Name (Bahasa Malaysia)",
       "add": "Add holiday",
       "remove": "Remove holiday"
+    },
+    "otToApprove": "Overtime waiting for a decision"
+  },
+  "StaffHome": {
+    "fallbackTitle": "Home",
+    "tiles": {
+      "leave": "Leave",
+      "claim": "Claim",
+      "overtime": "Overtime",
+      "payslips": "Payslips"
+    },
+    "annualLeave": "Annual leave",
+    "ofDays": "of {total} days"
+  },
+  "Time": {
+    "title": "Time",
+    "leaveLink": "Leave",
+    "notLinked": "Your account isn't linked to an employee record yet. Ask HR.",
+    "myShifts": "My shifts",
+    "noShifts": "No published shifts this week or next.",
+    "todayTag": "today",
+    "onCall": "on call",
+    "myAttendance": "My attendance",
+    "noAttendance": "No clock-ins yet.",
+    "outside": "Outside",
+    "manual": "Recorded by HR",
+    "atCentre": "At the centre",
+    "hours": "{hours} h",
+    "nav": {
+      "roster": "Roster",
+      "attendance": "Attendance",
+      "overtime": "Overtime"
+    },
+    "today": {
+      "todaysShift": "Today's shift",
+      "noShift": "No shift today",
+      "onCall": "On call",
+      "locating": "Finding your location…",
+      "clockedInAt": "Clocked in at",
+      "outReason": "Why are you clocking out outside the centre?",
+      "clockOut": "Clock out",
+      "selfieAdded": "Selfie added",
+      "addSelfie": "Add a selfie (optional)",
+      "noFence": "No location check for this branch.",
+      "noLocation": "Location not available.",
+      "lastOut": "Clocked out at {time}",
+      "saving": "Saving…"
+    },
+    "roster": {
+      "noBranch": "Add a branch first (Settings > Branches).",
+      "previous": "Previous week",
+      "next": "Next week",
+      "weekOf": "Week of {date}",
+      "branch": "Branch",
+      "unnamedBranch": "Branch (name not set)",
+      "copy": "Copy last week",
+      "copied": "{count, plural, =0 {Nothing to copy.} one {# shift copied as a draft.} other {# shifts copied as drafts.}}",
+      "publish": "{count, plural, one {Publish # shift} other {Publish # shifts}}",
+      "allPublished": "All published",
+      "published": "{count, plural, =0 {Nothing new to publish.} one {Published: # person told.} other {Published: # people told.}}",
+      "person": "Person",
+      "hours": "Hours",
+      "compliance": "Credentials {pct}%",
+      "onLeave": "On leave",
+      "pending": "pending",
+      "draft": "draft",
+      "addFor": "Add a shift for {name} on {date}",
+      "legend": "Dashed = draft (staff can't see it yet). Amber = a warning (leave, over 45 h, credential, rest day or holiday). Red = blocked by hard credential enforcement.",
+      "newShift": "New shift",
+      "editShift": "Edit shift",
+      "date": "Date",
+      "start": "Start",
+      "end": "End",
+      "break": "Break (minutes)",
+      "room": "Room or service",
+      "roomHint": "e.g. Room 2 · Speech therapy",
+      "notes": "Notes (optional)",
+      "onCall": "On call",
+      "paidHours": "{hours} paid hours",
+      "noIssues": "No clashes or credential problems.",
+      "save": "Save shift",
+      "add": "Add shift",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "issues": {
+        "LEAVE": "On leave that day: {type} ({status}).",
+        "WEEK_HOURS": "{hours} hours that week: over the {cap}-hour normal week.",
+        "CREDENTIAL": "{type}: {status} on that date.",
+        "CREDENTIAL_BLOCK": "Blocked: {type} is {status} on that date (hard enforcement).",
+        "HOLIDAY": "Public holiday ({name}): work is paid as holiday OT.",
+        "REST_DAY": "Rest day: work is paid at rest-day rates."
+      },
+      "credentialStatus": {
+        "expired": "expired",
+        "missing": "missing",
+        "rejected": "rejected",
+        "pending": "waiting for verification",
+        "upcoming": "not yet in force"
+      }
+    },
+    "attendance": {
+      "previous": "Previous week",
+      "next": "Next week",
+      "weekOf": "Week of {date}",
+      "overCap": "Over {cap} hours this week: {names}",
+      "title": "Clock-ins",
+      "none": "No clock-ins this week.",
+      "person": "Person",
+      "day": "Day",
+      "inOut": "In – out",
+      "hours": "Hours",
+      "where": "Where",
+      "open": "still in",
+      "manual": "Recorded by HR: {reason}",
+      "outside": "Outside: {reason}",
+      "inside": "At the centre",
+      "noFence": "No fence set",
+      "recordTitle": "Record attendance",
+      "recordIntro": "For a forgotten clock-in or someone without a phone. The reason is kept.",
+      "choose": "Choose…",
+      "in": "Clock in",
+      "out": "Clock out",
+      "reason": "Reason",
+      "record": "Record",
+      "selfie": "Selfie"
+    },
+    "ot": {
+      "title": "Overtime",
+      "employee": "Employee",
+      "choose": "Choose…",
+      "date": "Date",
+      "hours": "Hours",
+      "hoursHint": "Normal day: hours after your normal hours. Rest day or public holiday: all hours worked.",
+      "reason": "What was it for?",
+      "dayTypes": {
+        "normal": "Normal day",
+        "rest_day": "Rest day",
+        "public_holiday": "Public holiday"
+      },
+      "lines": {
+        "normal_ot": "{hours} h × {multiplier} × {rate}/h (HRP) = {amount}",
+        "rest_day_half": "Rest day, up to half the normal hours: {multiplier} × {rate} (ORP) = {amount}",
+        "rest_day_full": "Rest day, more than half the normal hours: {multiplier} × {rate} (ORP) = {amount}",
+        "rest_day_ot": "{hours} h beyond the normal hours × {multiplier} × {rate}/h = {amount}",
+        "holiday_normal": "Public holiday, within the normal hours: {multiplier} × {rate} (ORP) = {amount}",
+        "holiday_ot": "{hours} h beyond the normal hours × {multiplier} × {rate}/h = {amount}"
+      },
+      "total": "Pays {amount}",
+      "notCovered": {
+        "contract": "Above the Employment Act wage threshold: overtime pay follows the contract (none set).",
+        "none": "This contract has no overtime pay.",
+        "manual": "Paid per session: HR enters the OT amount in payroll."
+      },
+      "overLimit": "{hours} OT hours this month: over the {limit}-hour limit.",
+      "monthHours": "{hours} of {limit} OT hours this month",
+      "record": "Record OT",
+      "submit": "Send for approval",
+      "none": "No overtime requests yet.",
+      "hoursCount": "{hours, plural, one {# hour} other {# hours}}",
+      "cancel": "Cancel",
+      "nonePending": "No overtime waiting.",
+      "someone": "Someone",
+      "pays": "Pays {amount}",
+      "waiting": "Waiting for their manager",
+      "toApprove": "Overtime waiting for a decision",
+      "thisMonth": "Approved overtime, {month}",
+      "personMonth": "{name}: {hours} of {limit} h · {amount}",
+      "noneApproved": "No approved overtime this month.",
+      "recordTitle": "Record overtime",
+      "recordIntro": "For overtime agreed outside Rakan. It's approved straight away and goes to payroll.",
+      "basis": "ORP {orp} a day · HRP {hrp} an hour · {hours} normal hours"
     }
   }
 }
