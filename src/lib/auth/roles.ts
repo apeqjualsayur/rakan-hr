@@ -98,6 +98,12 @@ const ACCESS = {
   reviewChanges: ["owner", "hr_admin"],
   /** See the change request queue (profile_change_requests_select). */
   viewChanges: ["owner", "hr_admin", "auditor"],
+  /** Hiring pages, letter templates, onboarding (job_openings_select, candidates_select). */
+  viewHiring: ["owner", "hr_admin", "auditor"],
+  /** Openings, candidates, offers, conversion, templates (… _insert / _update). */
+  manageHiring: ["owner", "hr_admin"],
+  /** Approve probation reviews (approval step role "owner"). */
+  approveProbation: ["owner"],
 } as const satisfies Record<string, readonly AppRole[]>;
 
 export type Action = keyof typeof ACCESS;

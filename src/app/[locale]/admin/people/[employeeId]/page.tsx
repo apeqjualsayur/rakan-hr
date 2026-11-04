@@ -40,6 +40,8 @@ import { EmployeeTabs } from "./EmployeeTabs";
 import { AccountCard, EmploymentSection } from "./EmploymentSection";
 import { PersonalForm } from "./PersonalForm";
 import { StatutoryForm } from "./StatutoryForm";
+import { OnboardingTab } from "./OnboardingTab";
+import { ProbationTab } from "./ProbationTab";
 import { EMPLOYEE_TABS, type EmployeeTab } from "./tabs";
 
 export async function generateMetadata({
@@ -65,7 +67,7 @@ export default async function EmployeePage({
 }: PageProps<"/[locale]/admin/people/[employeeId]">) {
   const member = await requireMember(ADMIN_ROLES);
   const { employeeId } = await params;
-  const { tab: tabParam, created } = await searchParams;
+  const { tab: tabParam, created, converted } = await searchParams;
   if (!isUuid(employeeId)) notFound();
 
   const t = await getTranslations("People");
@@ -83,7 +85,10 @@ export default async function EmployeePage({
     (tab) =>
       (sensitive || (tab !== "bank" && tab !== "documents")) &&
       // Credential status: owner, HR admin, auditor (v_credential_status).
-      (tab !== "credentials" || can(member.role, "viewChanges")),
+      (tab !== "credentials" || can(member.role, "viewChanges")) &&
+      // Onboarding and probation (Step 8): owner, HR admin, auditor.
+      ((tab !== "onboarding" && tab !== "probation") ||
+        can(member.role, "viewHiring")),
   );
   const tab: EmployeeTab = tabs.includes(tabParam as EmployeeTab)
     ? (tabParam as EmployeeTab)
@@ -156,6 +161,14 @@ export default async function EmployeePage({
           {t("employee.created")}
         </p>
       ) : null}
+      {converted === "1" ? (
+        <p
+          role="status"
+          className="rounded-tile bg-primary-tint px-4 py-3 text-meta text-primary-strong"
+        >
+          {t("employee.converted")}
+        </p>
+      ) : null}
       {canEdit ? null : (
         <p className="rounded-tile bg-neutral-tint px-4 py-3 text-meta text-neutral">
           {t("employee.readOnly")}
@@ -200,6 +213,15 @@ export default async function EmployeePage({
         ) : null}
         {tab === "dependents" ? (
           <DependentsTab employeeId={employee.id} canEdit={canEdit} />
+        ) : null}
+        {tab === "onboarding" ? (
+          <OnboardingTab
+            employeeId={employee.id}
+            canEdit={can(member.role, "manageHiring")}
+          />
+        ) : null}
+        {tab === "probation" ? (
+          <ProbationTab employee={employee} member={member} />
         ) : null}
         {tab === "documents" ? (
           <DocumentsTab

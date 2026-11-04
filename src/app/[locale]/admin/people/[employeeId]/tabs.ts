@@ -7,5 +7,7 @@ export const EMPLOYEE_TABS = [
   "bank",
   "dependents",
   "documents",
+  "onboarding",
+  "probation",
 ] as const;
 export type EmployeeTab = (typeof EMPLOYEE_TABS)[number];

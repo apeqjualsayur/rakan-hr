@@ -17,6 +17,7 @@ import { parse } from "yaml";
 import {
   ownerEmails,
   toBranch,
+  toJobOpenings,
   toJobRoles,
   toRoleRequirements,
   toTenant,
@@ -46,7 +47,7 @@ if (!dbUrl.includes(linkedRef) || !appUrl.includes(linkedRef)) {
   );
 }
 
-let config, tenant, branch, owners, jobRoles, requirements;
+let config, tenant, branch, owners, jobRoles, requirements, openings;
 try {
   config = parse(readFileSync("_specs/hr-system/company-config.yaml", "utf8"));
   tenant = toTenant(config);
@@ -54,6 +55,7 @@ try {
   owners = ownerEmails(config);
   jobRoles = toJobRoles(config);
   requirements = toRoleRequirements(config);
+  openings = toJobOpenings(config);
 } catch (error) {
   fail(error.message);
 }
@@ -144,6 +146,27 @@ try {
     );
     requirementsAdded += res.rowCount;
   }
+  // Step 8: an open job opening per role, added once (Hiring > Job openings edits them).
+  let openingsAdded = 0;
+  for (const o of openings) {
+    const res = await client.query(
+      `insert into public.job_openings
+         (tenant_id, job_role_id, title, employment_type, pay_model, status, notes)
+       select $1, $2, $3, $4, $5, 'open', $6
+       where not exists (
+         select 1 from public.job_openings where tenant_id = $1 and title = $3
+       )`,
+      [
+        TENANT_ID,
+        roleIds.get(o.role),
+        o.title,
+        o.employment_type,
+        o.pay_model,
+        o.headcount ? `Headcount: ${o.headcount} (company-config.yaml)` : null,
+      ],
+    );
+    openingsAdded += res.rowCount;
+  }
   const seededPeople = await seedTestPeople(client, roleIds, owners[0]);
   const seededCredentials = await seedTestCredentials(client);
   await client.query("commit");
@@ -170,6 +193,9 @@ try {
   );
   console.log(
     `✔ Credential requirements: ${requirementsAdded} added (${requirements.length} in the yaml)`,
+  );
+  console.log(
+    `✔ Job openings: ${openingsAdded} added (${openings.length} roles in the yaml)`,
   );
   console.log(`✔ Test credentials: ${seededCredentials} added`);
   console.log(

@@ -45,3 +45,24 @@ export async function uploadCredentialFile(
   if (status === 401 || status === 403) return "forbidden";
   return "uploadFailed";
 }
+
+/**
+ * Step 8 pre-boarding portal: candidates have no account, so the file goes to the app's
+ * server (/api/preboarding/upload), which adds their pre-boarding session and passes it on
+ * to the same Edge Function.
+ */
+export async function uploadPreboardingFile(
+  id: string,
+  file: File,
+): Promise<UploadProblem | null> {
+  const body = new FormData();
+  body.set("kind", "credential");
+  body.set("id", id);
+  body.set("file", file);
+  const res = await fetch("/api/preboarding/upload", { method: "POST", body });
+  if (res.ok) return null;
+  if (res.status === 415) return "fileType";
+  if (res.status === 413) return "fileTooBig";
+  if (res.status === 401 || res.status === 403) return "forbidden";
+  return "uploadFailed";
+}

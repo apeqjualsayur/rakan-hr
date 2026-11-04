@@ -105,6 +105,33 @@
       "policy_reminder": {
         "title": "Peringatan: tandatangan {title}",
         "body": "Ia telah menunggu selama {days} hari."
+      },
+      "offer_accepted": {
+        "title": "{name} menerima tawaran",
+        "body": "{title}. Mereka kini boleh mengisi butiran pra-penyertaan."
+      },
+      "preboarding_completed": {
+        "title": "{name} telah melengkapkan pra-penyertaan",
+        "body": "Semak butiran dan kredensial mereka, kemudian tukarkan mereka kepada pekerja."
+      },
+      "probation_due": {
+        "title": "Tempoh percubaan {name} tamat dalam {days} hari",
+        "titleToday": "Tempoh percubaan {name} tamat hari ini",
+        "body": "Tempoh percubaan tamat pada {date}. Sila lengkapkan penilaian percubaan."
+      },
+      "probation_decided": {
+        "confirmedTitle": "Jawatan {name} telah disahkan",
+        "confirmedTitleSelf": "Jawatan anda telah disahkan",
+        "confirmedBody": "Disahkan mulai {date}.",
+        "confirmedBodySelf": "Disahkan mulai {date}. Surat pengesahan anda ada dalam dokumen anda.",
+        "extendedTitle": "Tempoh percubaan {name} telah dilanjutkan",
+        "extendedTitleSelf": "Tempoh percubaan anda telah dilanjutkan",
+        "extendedBody": "Ia kini tamat pada {date}.",
+        "extendedBodySelf": "Ia kini tamat pada {date}. Surat anda ada dalam dokumen anda."
+      },
+      "probation_end_approved": {
+        "title": "Diluluskan: tamatkan pekerjaan {name} selepas tempoh percubaan",
+        "body": "Berikan notis seperti yang ditetapkan dalam kontrak."
       }
     },
     "entity": {
@@ -112,7 +139,8 @@
       "fallback": "kelulusan",
       "profile_change": "perubahan profil",
       "bank_change": "perubahan bank",
-      "credential": "kredensial"
+      "credential": "kredensial",
+      "probation_review": "penilaian percubaan"
     }
   },
   "AdminNav": {
@@ -157,7 +185,8 @@
     "claim": "Tuntutan",
     "overtime": "Lebih masa",
     "bank_change": "Tukar bank",
-    "profile_change": "Tukar profil"
+    "profile_change": "Tukar profil",
+    "probation_review": "Percubaan"
   },
   "Status": {
     "credential": {
@@ -247,6 +276,39 @@
       "rejected": "Ditolak",
       "superseded": "Diganti oleh pembaharuan",
       "withdrawn": "Ditarik balik"
+    },
+    "candidate": {
+      "applied": "Memohon",
+      "interview": "Temu duga",
+      "offer": "Tawaran",
+      "hired": "Diambil",
+      "rejected": "Ditolak"
+    },
+    "offer": {
+      "draft": "Draf",
+      "sent": "Dihantar",
+      "expired": "Luput",
+      "accepted": "Diterima",
+      "withdrawn": "Ditarik balik"
+    },
+    "opening": {
+      "open": "Dibuka",
+      "on_hold": "Ditangguhkan",
+      "closed": "Ditutup"
+    },
+    "probation": {
+      "none": "Tiada percubaan",
+      "on_probation": "Dalam percubaan",
+      "due": "Penilaian perlu",
+      "overdue": "Lewat",
+      "review_submitted": "Penilaian dihantar",
+      "confirmed": "Disahkan"
+    },
+    "probationReview": {
+      "submitted": "Menunggu Pemilik",
+      "approved": "Diluluskan",
+      "rejected": "Ditolak",
+      "cancelled": "Dibatalkan"
     }
   },
   "Stepper": {
@@ -427,7 +489,8 @@
       "branches": "Cawangan",
       "users": "Pengguna",
       "checklist": "Senarai semak persediaan",
-      "credentials": "Kredensial"
+      "credentials": "Kredensial",
+      "letters": "Templat surat"
     },
     "errors": {
       "required": "Ruangan ini wajib diisi.",
@@ -472,7 +535,20 @@
       "nameMismatch": "Taip nama penuh anda tepat seperti dalam rekod anda.",
       "alreadySigned": "Anda sudah menandatangani ini.",
       "documentChanged": "Dokumen ini tidak lagi sepadan dengan versi yang diterbitkan. Minta HR menerbitkannya semula.",
-      "notPdf": "Pilih fail PDF."
+      "notPdf": "Pilih fail PDF.",
+      "rangeOrder": "Nilai maksimum mesti sekurang-kurangnya sama dengan minimum.",
+      "unknownMergeField": "Teks menggunakan medan gabung yang tiada untuk surat ini. Semak ejaannya dengan senarai.",
+      "offerNotDraft": "Tawaran ini sudah dihantar. Tarik balik untuk membuat perubahan.",
+      "offerNotOpen": "Tawaran ini tidak lagi terbuka.",
+      "offerAccepted": "Calon ini telah menerima tawaran, jadi kini hanya boleh ditolak.",
+      "offerNotAccepted": "Tawaran belum diterima.",
+      "badStage": "Calon ini tidak boleh diberi tawaran pada peringkat ini.",
+      "useConvert": "Gunakan Tukar kepada pekerja untuk mengambil seseorang.",
+      "alreadyConverted": "Calon ini sudah menjadi pekerja.",
+      "sessionEnded": "Pautan pra-penyertaan ini telah tamat. Minta HR menghantar pautan baharu.",
+      "reviewOpen": "Satu penilaian sedang menunggu kelulusan.",
+      "noProbation": "Orang ini tidak dalam tempoh percubaan.",
+      "letterFailed": "Surat tidak dapat dihasilkan. Cuba lagi."
     },
     "company": {
       "title": "Profil syarikat",
@@ -795,7 +871,9 @@
         "bank": "Bank",
         "dependents": "Tanggungan",
         "documents": "Dokumen",
-        "credentials": "Kredensial"
+        "credentials": "Kredensial",
+        "onboarding": "Orientasi",
+        "probation": "Percubaan"
       },
       "account": {
         "title": "Akaun Rakan",
@@ -804,7 +882,8 @@
         "none": "Belum ada akaun Rakan. Pemilik boleh menjemput {email} di Tetapan > Pengguna; ia dipautkan kepada rekod ini secara automatik.",
         "noEmail": "Tambah e-mel kerja, kemudian pemilik boleh menjemput mereka di Tetapan > Pengguna.",
         "users": "Buka Tetapan > Pengguna"
-      }
+      },
+      "converted": "Telah diambil. Senarai semak orientasi mereka ada di bawah, dan mereka akan menerima e-mel jemputan untuk log masuk ke Rakan."
     },
     "personal": {
       "title": "Butiran peribadi",
@@ -1007,7 +1086,8 @@
         "contract": "Kontrak pekerjaan",
         "offer_letter": "Surat tawaran",
         "certificate": "Sijil",
-        "other": "Lain-lain"
+        "other": "Lain-lain",
+        "probation_letter": "Surat percubaan"
       },
       "titleField": "Tajuk (pilihan)",
       "expiry_date": "Tarikh luput (pilihan)",
@@ -1445,5 +1525,379 @@
       "publishVersion": "Terbitkan versi baharu",
       "cancel": "Batal"
     }
+  },
+  "Hiring": {
+    "title": "Pengambilan",
+    "intro": "Jawatan kosong, calon dan tawaran. Calon yang menerima tawaran mengisi butiran dan memuat naik kredensial sebelum hari pertama; kemudian anda tukarkan mereka kepada pekerja.",
+    "openFailed": "Fail tidak dapat dibuka. Cuba lagi.",
+    "nav": {
+      "label": "Bahagian pengambilan",
+      "pipeline": "Calon",
+      "openings": "Jawatan kosong"
+    },
+    "board": {
+      "filterLabel": "Tapis mengikut jawatan",
+      "allOpenings": "Semua jawatan",
+      "addCandidate": "Tambah calon",
+      "empty": "Belum ada calon. Tambah yang pertama.",
+      "emptyNoOpenings": "Cipta jawatan kosong dahulu, kemudian tambah calon kepadanya.",
+      "createOpening": "Cipta jawatan kosong",
+      "emptyColumn": "Tiada",
+      "since": "Sejak {date}",
+      "accepted": "Tawaran diterima",
+      "preboardingDone": "Pra-penyertaan selesai"
+    },
+    "openings": {
+      "new": "Jawatan baharu",
+      "newTitle": "Jawatan kosong baharu",
+      "edit": "Jawatan kosong",
+      "back": "Jawatan kosong",
+      "empty": "Belum ada jawatan kosong.",
+      "noSalary": "Gaji belum ditetapkan",
+      "candidates": "{count, plural, =0 {Tiada calon aktif} other {# calon aktif}}"
+    },
+    "openingFields": {
+      "title": "Jawatan",
+      "job_role_id": "Peranan",
+      "job_role_hint": "Peranan menentukan kredensial yang perlu dimuat naik oleh pekerja baharu.",
+      "noRole": "Tiada peranan",
+      "branch_id": "Cawangan",
+      "anyBranch": "Mana-mana cawangan",
+      "unnamedBranch": "Cawangan (nama belum ditetapkan)",
+      "employment_type": "Jenis pekerjaan",
+      "pay_model": "Model gaji",
+      "salary_min": "Gaji dari (RM)",
+      "salary_max": "Gaji hingga (RM)",
+      "status": "Status",
+      "notes": "Nota (pilihan)",
+      "save": "Simpan jawatan",
+      "create": "Cipta jawatan"
+    },
+    "candidate": {
+      "back": "Calon",
+      "newTitle": "Tambah calon",
+      "details": "Butiran dan CV",
+      "full_name": "Nama penuh",
+      "full_nameHint": "Seperti dalam MyKad atau pasport: mereka menaipnya untuk menerima tawaran.",
+      "email": "E-mel",
+      "emailHint": "Tawaran dan pautan pra-penyertaan dihantar ke sini.",
+      "phone": "Telefon (pilihan)",
+      "job_opening_id": "Jawatan kosong",
+      "choose": "Pilih…",
+      "notes": "Nota (pilihan)",
+      "cv": "CV",
+      "cvHint": "PDF atau Word, sehingga 10 MB.",
+      "chooseCv": "Pilih CV",
+      "replaceCv": "Tukar CV",
+      "openCv": "Buka CV",
+      "noCv": "Belum ada CV.",
+      "problems": {
+        "cvType": "Pilih fail PDF atau Word.",
+        "cvTooBig": "Fail itu melebihi 10 MB.",
+        "uploadFailed": "CV tidak dapat dimuat naik. Cuba lagi."
+      },
+      "save": "Simpan butiran",
+      "create": "Tambah calon",
+      "moveTo": "Pindah ke {stage}",
+      "reject": "Tolak",
+      "rejectReason": "Sebab (pilihan, untuk rekod anda)",
+      "rejectAcceptedWarning": "Mereka telah menerima tawaran. Menolak akan menutup pautan dan rekod pra-penyertaan mereka.",
+      "confirmReject": "Tolak calon",
+      "cancel": "Batal",
+      "rejectedBecause": "Ditolak: {reason}",
+      "rejectedNoReason": "Ditolak."
+    },
+    "offer": {
+      "title": "Tawaran",
+      "none": "Belum ada tawaran.",
+      "draftHint": "Isi syarat-syarat, pratonton surat, kemudian hantar. Calon menerima e-mel dengan pautan yang berfungsi sekali dan menerima tawaran dengan menaip nama mereka.",
+      "letter_locale": "Bahasa surat",
+      "locales": {
+        "en": "English",
+        "ms": "Bahasa Malaysia"
+      },
+      "job_title": "Jawatan",
+      "job_role_id": "Peranan",
+      "job_roleHint": "Menentukan kredensial yang diminta untuk dimuat naik.",
+      "noRole": "Tiada peranan",
+      "branch_id": "Cawangan",
+      "anyBranch": "Mana-mana cawangan",
+      "unnamedBranch": "Cawangan (nama belum ditetapkan)",
+      "manager_id": "Melapor kepada",
+      "noManager": "Belum ditetapkan",
+      "employment_type": "Jenis pekerjaan",
+      "pay_model": "Model gaji",
+      "pay": "Gaji",
+      "start_date": "Tarikh mula",
+      "probation": "Tempoh percubaan",
+      "probation_months": "Tempoh percubaan (bulan)",
+      "probation_monthsHint": "0 jika tiada.",
+      "probationValue": "{months} bulan, tamat {date}",
+      "noProbation": "Tiada",
+      "contract_end_date": "Tarikh tamat kontrak",
+      "extra_terms": "Syarat tambahan (pilihan)",
+      "extra_termsHint": "Elaun, faedah atau apa-apa lagi untuk ditambah pada surat tawaran.",
+      "createDraft": "Mulakan tawaran",
+      "saveDraft": "Simpan draf",
+      "preview": "Pratonton PDF",
+      "send": "Hantar tawaran",
+      "sendNow": "Hantar sekarang",
+      "confirmSend": "Hantar tawaran kepada {email}? Mereka akan menerima e-mel dengan pautan yang berfungsi sekali dan luput dalam 14 hari.",
+      "cancel": "Batal",
+      "saveFirst": "Simpan tawaran dahulu, kemudian pratonton.",
+      "previewFailed": "Pratonton tidak dapat dihasilkan. Cuba lagi.",
+      "sentNoEmail": "Tawaran telah dihantar, tetapi e-mel tidak dapat dihantar. Gunakan Hantar semula pautan setelah e-mel disediakan.",
+      "sentOn": "Dihantar {date} kepada {email}. Pautan luput {expires}.",
+      "expiredOn": "Luput {date}. Hantar semula pautan untuk memberi mereka 14 hari lagi.",
+      "acceptedOn": "Diterima {date} melalui klik-untuk-tandatangan.",
+      "openLetter": "Buka surat",
+      "signedCopy": "Salinan bertandatangan",
+      "resend": "Hantar semula pautan",
+      "linkSent": "Pautan baharu telah dihantar melalui e-mel. Pautan lama tidak lagi berfungsi.",
+      "linkMadeNoEmail": "Pautan baharu telah dibuat, tetapi e-mel tidak dapat dihantar.",
+      "withdraw": "Tarik balik tawaran",
+      "confirmWithdraw": "Tarik balik"
+    },
+    "preboarding": {
+      "title": "Pra-penyertaan",
+      "submitted": "Dihantar kepada HR {date}",
+      "steps": {
+        "offer": "Tawaran diterima",
+        "personal": "Butiran peribadi",
+        "statutory": "Berkanun dan cukai",
+        "bank": "Akaun bank gaji",
+        "emergency": "Hubungan kecemasan",
+        "dependents": "Tanggungan (pilihan)",
+        "credentials": "Kredensial wajib"
+      },
+      "done": "selesai",
+      "notYet": "belum",
+      "credentials": "Kredensial",
+      "optional": "pilihan",
+      "linkUsed": "Mereka membuka pautan pada {date}.",
+      "linkUnused": "Pautan mereka belum dibuka; ia luput {date}."
+    },
+    "convert": {
+      "title": "Tukar kepada pekerja",
+      "body": "Mengaktifkan rekod pekerja dan kontrak mereka, menghantar kredensial yang dimuat naik untuk pengesahan, mencipta senarai semak orientasi dan menjemput mereka ke Rakan sebagai kakitangan. Baki cuti bermula dengan modul cuti.",
+      "incomplete": "Beberapa butiran pra-penyertaan masih belum diisi. Anda boleh menukar sekarang dan melengkapkannya dalam Kakitangan.",
+      "button": "Tukar kepada pekerja",
+      "doneTitle": "Telah diambil",
+      "doneBody": "Ditukar kepada pekerja pada {date}.",
+      "openRecord": "Buka rekod pekerja"
+    }
+  },
+  "Letters": {
+    "intro": "Teks surat tawaran, kontrak dan surat percubaan, dalam bahasa Inggeris dan Bahasa Malaysia. Tampal teks yang telah disemak oleh peguam anda di sini.",
+    "draftWarning": "{count} templat masih menggunakan teks sementara. Surat yang dihasilkan daripadanya dicap DRAF: jangan hantar untuk pengambilan sebenar.",
+    "kinds": {
+      "offer": "Surat tawaran",
+      "contract": "Kontrak pekerjaan",
+      "confirmation": "Surat pengesahan",
+      "extension": "Surat lanjutan percubaan"
+    },
+    "locales": {
+      "en": "English",
+      "ms": "Bahasa Malaysia"
+    },
+    "updated": "dikemas kini {date}",
+    "draft": "Draf",
+    "final": "Muktamad",
+    "back": "Templat surat",
+    "titleField": "Tajuk",
+    "titleHint": "Digunakan sebagai tajuk PDF.",
+    "body": "Teks",
+    "bodyHint": "Mulakan baris dengan # untuk tajuk, ## untuk subtajuk dan - untuk senarai. Tinggalkan baris kosong antara perenggan. Medan gabung (di sebelah kanan) diisi untuk setiap surat.",
+    "unknown": "Medan gabung tidak dikenali: {fields}",
+    "isDraft": "Teks sementara (cap surat sebagai DRAF)",
+    "isDraftHint": "Nyahtanda setelah peguam menyemak teks ini.",
+    "save": "Simpan templat",
+    "preview": "Pratonton PDF",
+    "previewFailed": "Pratonton tidak dapat dihasilkan. Cuba lagi.",
+    "fieldsTitle": "Medan gabung",
+    "fieldsIntro": "Salin satu ke dalam teks, termasuk tanda kurungnya.",
+    "fields": {
+      "today": "Tarikh surat",
+      "name": "Nama calon atau pekerja",
+      "job_title": "Jawatan",
+      "company_name": "Nama sah syarikat",
+      "company_reg_no": "Nombor pendaftaran SSM",
+      "company_address": "Alamat syarikat",
+      "branch_name": "Cawangan",
+      "manager_name": "Melapor kepada",
+      "employment_type": "Sepenuh masa, separuh masa, kontrak atau lokum",
+      "start_date": "Tarikh mula",
+      "contract_end": "Ayat dengan tarikh tamat kontrak (kontrak sahaja)",
+      "probation_months": "Tempoh percubaan dalam bulan",
+      "probation_end": "Hari terakhir tempoh percubaan",
+      "pay": "Gaji, cth. RM 4,500.00 sebulan",
+      "normal_hours_per_day": "Waktu bekerja biasa sehari",
+      "work_days_per_week": "Hari bekerja seminggu",
+      "offer_expiry_date": "Tarikh akhir untuk menerima tawaran",
+      "extra_terms": "Syarat tambahan yang ditaip pada tawaran",
+      "confirmation_date": "Tarikh jawatan disahkan",
+      "extension_months": "Bilangan bulan tempoh percubaan dilanjutkan",
+      "new_probation_end": "Hari terakhir tempoh percubaan yang baharu"
+    },
+    "formatHelp": "Baris yang hanya mengandungi medan gabung kosong akan ditinggalkan."
+  },
+  "Onboarding": {
+    "title": "Senarai semak orientasi",
+    "none": "Tiada tugasan orientasi. Ia dicipta apabila calon ditukar kepada pekerja.",
+    "progress": "{done} daripada {total} selesai",
+    "tasks": {
+      "SYSTEM_ACCOUNTS": "Sediakan akaun sistem (Rakan, e-mel)",
+      "ORIENTATION": "Orientasi dan lawatan pusat",
+      "UNIFORM": "Beri pakaian seragam dan tanda nama",
+      "CREDENTIALS_VERIFIED": "Pengesahan kredensial selesai",
+      "POLICIES_SIGNED": "Notis privasi dan buku panduan ditandatangani dalam Rakan",
+      "PAYROLL_DETAILS": "Semak butiran bank dan berkanun untuk gaji",
+      "EPF_REGISTRATION": "Daftar dengan KWSP",
+      "SOCSO_REGISTRATION": "Daftar dengan PERKESO (PERKESO dan SIP)"
+    },
+    "due": "tarikh akhir {date}",
+    "overdue": "lewat sejak {date}",
+    "doneOn": "selesai {date}",
+    "remove": "Buang {task}",
+    "addTitle": "Tambah tugasan",
+    "taskTitle": "Tugasan",
+    "taskDue": "Tarikh akhir (pilihan)",
+    "add": "Tambah tugasan"
+  },
+  "Probation": {
+    "title": "Tempoh percubaan",
+    "none": "Tiada tempoh percubaan pada kontrak semasa.",
+    "endsOn": "Tamat {date} ({days, plural, =0 {hari ini} other {dalam # hari}}).",
+    "endedOn": "Tamat {date}: penilaian sudah lewat.",
+    "confirmedOn": "Disahkan pada {date}.",
+    "goesToOwner": "Penilaian anda akan dihantar kepada Pemilik untuk kelulusan.",
+    "ownerFinal": "Sebagai Pemilik, penilaian anda ialah keputusan muktamad.",
+    "history": "Penilaian",
+    "waitingForOwner": "Menunggu kelulusan Pemilik.",
+    "someone": "penilai",
+    "reviewMeta": "{date} · oleh {name} · purata {average} / 5",
+    "months": "{count} bulan",
+    "outcomeConfirmed": "Disahkan mulai {date}.",
+    "outcomeExtended": "Tempoh percubaan kini tamat {date}.",
+    "outcomeEnd": "Diluluskan: tamatkan pekerjaan. Berikan notis seperti yang ditetapkan dalam kontrak.",
+    "confirmationLetter": "Surat pengesahan",
+    "extensionLetter": "Surat lanjutan",
+    "letterComing": "Surat sedang disediakan. Muat semula sebentar lagi.",
+    "letterFailed": "Surat tidak dapat disediakan.",
+    "retryLetter": "Cuba lagi",
+    "backHome": "Utama",
+    "form": {
+      "title": "Penilaian percubaan: {name}",
+      "intro": "Nilai setiap bidang dari 1 (jauh di bawah keperluan jawatan) hingga 5 (jauh melebihi), tambah ulasan anda, dan cadangkan langkah seterusnya.",
+      "scale": "1 = jauh di bawah · 3 = memenuhi · 5 = jauh melebihi",
+      "criteria": {
+        "quality": {
+          "label": "Kualiti kerja",
+          "hint": "Tepat, teliti, amalan selamat dan catatan yang baik."
+        },
+        "skills": {
+          "label": "Kemahiran klinikal atau teknikal",
+          "hint": "Pengetahuan dan kemahiran yang diperlukan jawatan, dan mempelajari yang baharu."
+        },
+        "reliability": {
+          "label": "Kebolehpercayaan dan kehadiran",
+          "hint": "Tepat masa, mengikut jadual tugas, menyelesaikan tugasan."
+        },
+        "teamwork": {
+          "label": "Kerja berpasukan dan komunikasi",
+          "hint": "Bekerjasama dengan rakan sekerja, pelanggan dan keluarga."
+        },
+        "conduct": {
+          "label": "Tatakelakuan profesional",
+          "hint": "Mematuhi polisi, kerahsiaan dan tatakelakuan."
+        }
+      },
+      "comments": "Ulasan",
+      "commentsHint": "Kekuatan, perkara yang perlu diperbaiki, dan sebab cadangan anda.",
+      "recommendation": "Cadangan",
+      "recommendations": {
+        "confirm": "Sahkan jawatan",
+        "extend": "Lanjutkan tempoh percubaan",
+        "end": "Tamatkan pekerjaan"
+      },
+      "recommendationHints": {
+        "confirm": "Surat pengesahan dihasilkan setelah diluluskan.",
+        "extend": "Surat lanjutan dengan tarikh tamat baharu dihasilkan setelah diluluskan.",
+        "end": "HR memberikan notis seperti yang ditetapkan dalam kontrak."
+      },
+      "extend_months": "Lanjutkan selama (bulan)",
+      "extend_monthsHint": "1 hingga 6 bulan.",
+      "submit": "Hantar penilaian",
+      "submitted": "Penilaian telah dihantar."
+    },
+    "decide": {
+      "comment": "Ulasan",
+      "commentHint": "Diperlukan untuk menolak.",
+      "approve": "Luluskan penilaian",
+      "reject": "Tolak"
+    }
+  },
+  "Preboarding": {
+    "title": "Pra-penyertaan",
+    "startTitle": "Tawaran kerja anda",
+    "startIntro": "Baca surat tawaran dan kontrak anda, terimanya, kemudian berikan butiran yang diperlukan oleh majikan baharu anda sebelum hari pertama.",
+    "noToken": "Halaman ini memerlukan pautan daripada e-mel tawaran anda. Buka e-mel itu dan tekan butang sekali lagi.",
+    "oneDevice": "Pautan ini berfungsi sekali sahaja. Bukanya pada telefon atau komputer yang akan anda gunakan; anda boleh kembali pada peranti itu sehingga tarikh mula.",
+    "open": "Buka tawaran saya",
+    "linkErrors": {
+      "link_invalid": "Pautan ini tidak sah. Gunakan e-mel terkini daripada majikan baharu anda, atau minta mereka menghantarnya semula.",
+      "link_used": "Pautan ini telah dibuka pada peranti lain. Kembali ke peranti itu, atau minta HR menghantar pautan baharu.",
+      "link_expired": "Pautan ini telah luput. Minta HR menghantar pautan baharu.",
+      "failed": "Ada masalah. Sila cuba lagi."
+    },
+    "noSessionTitle": "Buka pautan daripada e-mel anda",
+    "noSessionBody": "Untuk melihat tawaran anda, buka pautan dalam e-mel daripada majikan baharu anda pada peranti ini.",
+    "endedTitle": "Sesi pra-penyertaan ini telah tamat",
+    "endedBody": "Jika anda sudah mula bekerja, log masuk ke Rakan menggunakan e-mel jemputan. Jika tidak, minta HR menghantar pautan baharu.",
+    "welcome": "Selamat datang, {name}",
+    "summary": "{title} di {company}, mula {date}.",
+    "progressLabel": "Kemajuan anda",
+    "progress": "{done} daripada {total}",
+    "noOffer": "Tiada tawaran terbuka untuk anda sekarang. Tanya HR jika anda rasa ini salah.",
+    "steps": {
+      "offer": "1. Tawaran dan kontrak anda",
+      "personal": "2. Butiran peribadi dan hubungan kecemasan",
+      "statutory": "3. Nombor berkanun dan cukai",
+      "bank": "4. Akaun bank gaji",
+      "dependents": "5. Tanggungan",
+      "credentials": "6. Kredensial profesional"
+    },
+    "offerIntro": "Baca surat tawaran dan kontrak yang menyusulinya, kemudian terima dengan menaip nama penuh anda. Sila terima sebelum {date}.",
+    "accepted": "Anda telah menerima pada {date}. Terima kasih!",
+    "signedCopy": "Salinan bertandatangan anda",
+    "openFailed": "Fail tidak dapat dibuka. Cuba lagi.",
+    "stepDone": "Selesai",
+    "stepTodo": "Belum",
+    "personalIntro": "Seperti dalam MyKad atau pasport anda. Nombor IC anda disimpan secara tersulit.",
+    "statutoryIntro": "Biarkan kosong jika anda belum mempunyai nombor itu. Kategori PCB menentukan potongan cukai bulanan anda.",
+    "choose": "Pilih…",
+    "save": "Simpan",
+    "bankIntro": "Gaji anda dibayar ke akaun ini. Nombornya disimpan secara tersulit.",
+    "bankSaved": "{bank} ••••{last4}, {holder}",
+    "replaceBank": "Tukar akaun",
+    "optional": "Pilihan",
+    "required": "Wajib untuk jawatan anda",
+    "extra": "Tambahan",
+    "notSent": "belum dihantar",
+    "upload": "Muat naik",
+    "uploadOther": "Muat naik sijil lain",
+    "uploadTitle": "Muat naik sijil",
+    "removeUpload": "Buang",
+    "credentialsIntro": "Muat naik gambar yang jelas atau PDF bagi setiap sijil. HR menyemaknya sebelum anda mula bekerja.",
+    "credentialsNone": "Jawatan anda tiada kredensial wajib. Anda masih boleh memuat naik sijil yang anda miliki.",
+    "finishTitle": "Hantar kepada HR",
+    "finishReady": "Semua yang wajib telah diisi. Maklumkan HR bahawa anda sudah selesai; anda masih boleh membuat perubahan sehingga tarikh mula.",
+    "finishNotReady": "Lengkapkan langkah di atas dahulu. Tanggungan adalah pilihan.",
+    "finishDone": "Dihantar kepada HR pada {date}. Anda masih boleh membuat perubahan sehingga tarikh mula.",
+    "finish": "Hantar kepada HR",
+    "finishAgain": "Maklumkan HR sekali lagi",
+    "back": "Kembali ke pra-penyertaan",
+    "privacy": "{company} menggunakan butiran anda untuk mengambil anda bekerja dan membayar gaji anda, seperti yang dinyatakan dalam notis privasinya.",
+    "summaryNoCompany": "{title}, mula {date}."
   }
 }

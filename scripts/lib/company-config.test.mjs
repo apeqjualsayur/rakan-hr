@@ -6,6 +6,7 @@ import {
   parseOperatingHours,
   stateCode,
   toBranch,
+  toJobOpenings,
   toJobRoles,
   toRoleRequirements,
   toTenant,
@@ -209,5 +210,49 @@ describe("toRoleRequirements", () => {
       parse(readFileSync("_specs/hr-system/company-config.yaml", "utf8")),
     );
     expect(rows.length).toBeGreaterThan(0);
+  });
+});
+
+describe("toJobOpenings", () => {
+  it("opens one opening per role with its employment type and pay model", () => {
+    expect(
+      toJobOpenings({
+        roles_to_hire: [
+          {
+            title: "Occupational Therapist",
+            employment_type: "full_time",
+            pay_model: "monthly",
+            headcount: 2,
+          },
+          {
+            title: "Locum SLT",
+            employment_type: "locum_contractor",
+            pay_model: "per_session",
+          },
+          { title: "TBC" },
+        ],
+      }),
+    ).toEqual([
+      {
+        role: "Occupational Therapist",
+        title: "Occupational Therapist",
+        employment_type: "full_time",
+        pay_model: "monthly",
+        headcount: 2,
+      },
+      {
+        role: "Locum SLT",
+        title: "Locum SLT",
+        employment_type: "locum_contractor",
+        pay_model: "per_session",
+        headcount: null,
+      },
+    ]);
+  });
+
+  it("refuses a pay model the system does not have instead of guessing", () => {
+    expect(() =>
+      toJobOpenings({ roles_to_hire: [{ title: "SLT", pay_model: "hybrid" }] }),
+    ).toThrow(/hybrid/);
   });
 });

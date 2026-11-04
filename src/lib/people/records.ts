@@ -216,6 +216,7 @@ export const DOC_TYPES = [
   "work_permit",
   "contract",
   "offer_letter",
+  "probation_letter",
   "certificate",
   "other",
 ] as const;

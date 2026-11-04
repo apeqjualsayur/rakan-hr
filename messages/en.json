@@ -105,6 +105,33 @@
       "policy_reminder": {
         "title": "Reminder: sign {title}",
         "body": "It has been waiting for {days} days."
+      },
+      "offer_accepted": {
+        "title": "{name} accepted the offer",
+        "body": "{title}. They can now fill in their pre-boarding details."
+      },
+      "preboarding_completed": {
+        "title": "{name} finished pre-boarding",
+        "body": "Check their details and credentials, then convert them to an employee."
+      },
+      "probation_due": {
+        "title": "{name}'s probation ends in {days, plural, one {# day} other {# days}}",
+        "titleToday": "{name}'s probation ends today",
+        "body": "Probation ends on {date}. Please complete the probation review."
+      },
+      "probation_decided": {
+        "confirmedTitle": "{name}'s appointment is confirmed",
+        "confirmedTitleSelf": "Your appointment is confirmed",
+        "confirmedBody": "Confirmed from {date}.",
+        "confirmedBodySelf": "Confirmed from {date}. Your confirmation letter is in your documents.",
+        "extendedTitle": "{name}'s probation was extended",
+        "extendedTitleSelf": "Your probation has been extended",
+        "extendedBody": "It now ends on {date}.",
+        "extendedBodySelf": "It now ends on {date}. Your letter is in your documents."
+      },
+      "probation_end_approved": {
+        "title": "Approved: end {name}'s employment after probation",
+        "body": "Give notice as the contract sets out."
       }
     },
     "entity": {
@@ -112,7 +139,8 @@
       "fallback": "approval",
       "profile_change": "profile change",
       "bank_change": "bank change",
-      "credential": "credential"
+      "credential": "credential",
+      "probation_review": "probation review"
     }
   },
   "AdminNav": {
@@ -157,7 +185,8 @@
     "claim": "Claim",
     "overtime": "Overtime",
     "bank_change": "Bank change",
-    "profile_change": "Profile change"
+    "profile_change": "Profile change",
+    "probation_review": "Probation"
   },
   "Status": {
     "credential": {
@@ -247,6 +276,39 @@
       "rejected": "Rejected",
       "superseded": "Replaced by renewal",
       "withdrawn": "Withdrawn"
+    },
+    "candidate": {
+      "applied": "Applied",
+      "interview": "Interview",
+      "offer": "Offer",
+      "hired": "Hired",
+      "rejected": "Rejected"
+    },
+    "offer": {
+      "draft": "Draft",
+      "sent": "Sent",
+      "expired": "Expired",
+      "accepted": "Accepted",
+      "withdrawn": "Withdrawn"
+    },
+    "opening": {
+      "open": "Open",
+      "on_hold": "On hold",
+      "closed": "Closed"
+    },
+    "probation": {
+      "none": "No probation",
+      "on_probation": "On probation",
+      "due": "Review due",
+      "overdue": "Overdue",
+      "review_submitted": "Review submitted",
+      "confirmed": "Confirmed"
+    },
+    "probationReview": {
+      "submitted": "Waiting for Owner",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
     }
   },
   "Stepper": {
@@ -427,7 +489,8 @@
       "branches": "Branches",
       "users": "Users",
       "checklist": "Setup checklist",
-      "credentials": "Credentials"
+      "credentials": "Credentials",
+      "letters": "Letter templates"
     },
     "errors": {
       "required": "This is required.",
@@ -472,7 +535,20 @@
       "nameMismatch": "Type your full name exactly as it is on your record.",
       "alreadySigned": "You have already signed this.",
       "documentChanged": "This document no longer matches its published version. Ask HR to publish it again.",
-      "notPdf": "Choose a PDF file."
+      "notPdf": "Choose a PDF file.",
+      "rangeOrder": "The maximum must be at least the minimum.",
+      "unknownMergeField": "The text uses a merge field this letter doesn't have. Check the spelling against the list.",
+      "offerNotDraft": "This offer was already sent. Withdraw it to make changes.",
+      "offerNotOpen": "This offer is no longer open.",
+      "offerAccepted": "This candidate has accepted an offer, so they can only be rejected now.",
+      "offerNotAccepted": "The offer hasn't been accepted yet.",
+      "badStage": "This candidate can't get an offer at this stage.",
+      "useConvert": "Use Convert to employee to hire someone.",
+      "alreadyConverted": "This candidate is already an employee.",
+      "sessionEnded": "This pre-boarding link has ended. Ask HR to send you a new one.",
+      "reviewOpen": "A review is already waiting for approval.",
+      "noProbation": "This person isn't on probation.",
+      "letterFailed": "The letter couldn't be created. Try again."
     },
     "company": {
       "title": "Company profile",
@@ -795,7 +871,9 @@
         "bank": "Bank",
         "dependents": "Dependents",
         "documents": "Documents",
-        "credentials": "Credentials"
+        "credentials": "Credentials",
+        "onboarding": "Onboarding",
+        "probation": "Probation"
       },
       "account": {
         "title": "Rakan account",
@@ -804,7 +882,8 @@
         "none": "No Rakan account yet. The owner can invite {email} in Settings > Users; it links to this record automatically.",
         "noEmail": "Add a work email, then the owner can invite them in Settings > Users.",
         "users": "Open Settings > Users"
-      }
+      },
+      "converted": "Hired. Their onboarding checklist is below, and they will get an email inviting them to sign in to Rakan."
     },
     "personal": {
       "title": "Personal details",
@@ -1007,7 +1086,8 @@
         "contract": "Employment contract",
         "offer_letter": "Offer letter",
         "certificate": "Certificate",
-        "other": "Other"
+        "other": "Other",
+        "probation_letter": "Probation letter"
       },
       "titleField": "Title (optional)",
       "expiry_date": "Expiry date (optional)",
@@ -1445,5 +1525,379 @@
       "publishVersion": "Publish new version",
       "cancel": "Cancel"
     }
+  },
+  "Hiring": {
+    "title": "Hiring",
+    "intro": "Job openings, candidates and offers. Candidates who accept fill in their details and upload credentials before day one; then you convert them to employees.",
+    "openFailed": "Couldn't open the file. Try again.",
+    "nav": {
+      "label": "Hiring sections",
+      "pipeline": "Candidates",
+      "openings": "Job openings"
+    },
+    "board": {
+      "filterLabel": "Filter by opening",
+      "allOpenings": "All openings",
+      "addCandidate": "Add candidate",
+      "empty": "No candidates yet. Add the first one.",
+      "emptyNoOpenings": "Create a job opening first, then add candidates to it.",
+      "createOpening": "Create a job opening",
+      "emptyColumn": "None",
+      "since": "Since {date}",
+      "accepted": "Offer accepted",
+      "preboardingDone": "Pre-boarding done"
+    },
+    "openings": {
+      "new": "New opening",
+      "newTitle": "New job opening",
+      "edit": "Job opening",
+      "back": "Job openings",
+      "empty": "No job openings yet.",
+      "noSalary": "Salary not set",
+      "candidates": "{count, plural, =0 {No active candidates} one {# active candidate} other {# active candidates}}"
+    },
+    "openingFields": {
+      "title": "Job title",
+      "job_role_id": "Role",
+      "job_role_hint": "The role decides which credentials a hire must upload.",
+      "noRole": "No role",
+      "branch_id": "Branch",
+      "anyBranch": "Any branch",
+      "unnamedBranch": "Branch (name not set)",
+      "employment_type": "Employment type",
+      "pay_model": "Pay model",
+      "salary_min": "Salary from (RM)",
+      "salary_max": "Salary to (RM)",
+      "status": "Status",
+      "notes": "Notes (optional)",
+      "save": "Save opening",
+      "create": "Create opening"
+    },
+    "candidate": {
+      "back": "Candidates",
+      "newTitle": "Add candidate",
+      "details": "Details and CV",
+      "full_name": "Full name",
+      "full_nameHint": "As on their MyKad or passport: they type it to accept the offer.",
+      "email": "Email",
+      "emailHint": "The offer and pre-boarding link go here.",
+      "phone": "Phone (optional)",
+      "job_opening_id": "Job opening",
+      "choose": "Choose…",
+      "notes": "Notes (optional)",
+      "cv": "CV",
+      "cvHint": "PDF or Word, up to 10 MB.",
+      "chooseCv": "Choose CV",
+      "replaceCv": "Replace CV",
+      "openCv": "Open CV",
+      "noCv": "No CV yet.",
+      "problems": {
+        "cvType": "Choose a PDF or Word file.",
+        "cvTooBig": "That file is over 10 MB.",
+        "uploadFailed": "The CV didn't upload. Try again."
+      },
+      "save": "Save details",
+      "create": "Add candidate",
+      "moveTo": "Move to {stage}",
+      "reject": "Reject",
+      "rejectReason": "Reason (optional, for your records)",
+      "rejectAcceptedWarning": "They have accepted the offer. Rejecting closes their pre-boarding link and record.",
+      "confirmReject": "Reject candidate",
+      "cancel": "Cancel",
+      "rejectedBecause": "Rejected: {reason}",
+      "rejectedNoReason": "Rejected."
+    },
+    "offer": {
+      "title": "Offer",
+      "none": "No offer yet.",
+      "draftHint": "Fill in the terms, preview the letter, then send it. The candidate gets an email with a link that works once and accepts by typing their name.",
+      "letter_locale": "Letter language",
+      "locales": {
+        "en": "English",
+        "ms": "Bahasa Malaysia"
+      },
+      "job_title": "Job title",
+      "job_role_id": "Role",
+      "job_roleHint": "Sets the credentials they're asked to upload.",
+      "noRole": "No role",
+      "branch_id": "Branch",
+      "anyBranch": "Any branch",
+      "unnamedBranch": "Branch (name not set)",
+      "manager_id": "Reports to",
+      "noManager": "Not set",
+      "employment_type": "Employment type",
+      "pay_model": "Pay model",
+      "pay": "Pay",
+      "start_date": "Start date",
+      "probation": "Probation",
+      "probation_months": "Probation (months)",
+      "probation_monthsHint": "0 for none.",
+      "probationValue": "{months, plural, one {# month} other {# months}}, ends {date}",
+      "noProbation": "None",
+      "contract_end_date": "Contract end date",
+      "extra_terms": "Extra terms (optional)",
+      "extra_termsHint": "Allowances, benefits or anything else to add to the offer letter.",
+      "createDraft": "Start offer",
+      "saveDraft": "Save draft",
+      "preview": "Preview PDF",
+      "send": "Send offer",
+      "sendNow": "Send now",
+      "confirmSend": "Send the offer to {email}? They get an email with a link that works once and expires in 14 days.",
+      "cancel": "Cancel",
+      "saveFirst": "Save the offer first, then preview it.",
+      "previewFailed": "The preview couldn't be made. Try again.",
+      "sentNoEmail": "The offer was sent, but the email didn't go out. Use Resend link once email is set up.",
+      "sentOn": "Sent {date} to {email}. The link expires {expires}.",
+      "expiredOn": "Expired {date}. Resend the link to give them another 14 days.",
+      "acceptedOn": "Accepted {date} by click-to-sign.",
+      "openLetter": "Open letter",
+      "signedCopy": "Signed copy",
+      "resend": "Resend link",
+      "linkSent": "A new link was emailed. The old one no longer works.",
+      "linkMadeNoEmail": "A new link was made, but the email didn't go out.",
+      "withdraw": "Withdraw offer",
+      "confirmWithdraw": "Withdraw it"
+    },
+    "preboarding": {
+      "title": "Pre-boarding",
+      "submitted": "Sent to HR {date}",
+      "steps": {
+        "offer": "Offer accepted",
+        "personal": "Personal details",
+        "statutory": "Statutory and tax",
+        "bank": "Salary bank account",
+        "emergency": "Emergency contact",
+        "dependents": "Dependents (optional)",
+        "credentials": "Required credentials"
+      },
+      "done": "done",
+      "notYet": "not yet",
+      "credentials": "Credentials",
+      "optional": "optional",
+      "linkUsed": "They opened their link on {date}.",
+      "linkUnused": "Their link hasn't been opened yet; it expires {date}."
+    },
+    "convert": {
+      "title": "Convert to employee",
+      "body": "Activates their employee record and contract, sends their uploaded credentials to verification, creates their onboarding checklist and invites them to Rakan as staff. Leave balances start with the leave module.",
+      "incomplete": "Some pre-boarding details are still missing. You can convert now and complete them in People.",
+      "button": "Convert to employee",
+      "doneTitle": "Hired",
+      "doneBody": "Converted to an employee on {date}.",
+      "openRecord": "Open employee record"
+    }
+  },
+  "Letters": {
+    "intro": "The wording of offer letters, contracts and probation letters, in English and Bahasa Malaysia. Paste your lawyer-reviewed text here.",
+    "draftWarning": "{count, plural, one {# template still has} other {# templates still have}} placeholder wording. Letters made from them are stamped DRAFT: don't send them for a real hire.",
+    "kinds": {
+      "offer": "Offer letter",
+      "contract": "Employment contract",
+      "confirmation": "Confirmation letter",
+      "extension": "Probation extension letter"
+    },
+    "locales": {
+      "en": "English",
+      "ms": "Bahasa Malaysia"
+    },
+    "updated": "updated {date}",
+    "draft": "Draft",
+    "final": "Final",
+    "back": "Letter templates",
+    "titleField": "Title",
+    "titleHint": "Used as the PDF title.",
+    "body": "Text",
+    "bodyHint": "Start a line with # for the title, ## for a heading and - for a bullet. Leave a blank line between paragraphs. Merge fields (on the right) are filled in for each letter.",
+    "unknown": "Unknown merge fields: {fields}",
+    "isDraft": "Placeholder wording (stamp letters DRAFT)",
+    "isDraftHint": "Untick once a lawyer has reviewed this text.",
+    "save": "Save template",
+    "preview": "Preview PDF",
+    "previewFailed": "The preview couldn't be made. Try again.",
+    "fieldsTitle": "Merge fields",
+    "fieldsIntro": "Copy one into the text, braces included.",
+    "fields": {
+      "today": "Date of the letter",
+      "name": "Candidate or employee name",
+      "job_title": "Job title",
+      "company_name": "Company legal name",
+      "company_reg_no": "SSM registration number",
+      "company_address": "Company address",
+      "branch_name": "Branch",
+      "manager_name": "Reports to",
+      "employment_type": "Full-time, part-time, contract or locum",
+      "start_date": "Start date",
+      "contract_end": "Sentence with the contract end date (contracts only)",
+      "probation_months": "Probation length in months",
+      "probation_end": "Last day of probation",
+      "pay": "Pay, e.g. RM 4,500.00 a month",
+      "normal_hours_per_day": "Normal hours a day",
+      "work_days_per_week": "Work days a week",
+      "offer_expiry_date": "Date the offer must be accepted by",
+      "extra_terms": "Extra terms typed on the offer",
+      "confirmation_date": "Date the appointment is confirmed",
+      "extension_months": "Months probation is extended by",
+      "new_probation_end": "New last day of probation"
+    },
+    "formatHelp": "A line that only holds an empty merge field is left out."
+  },
+  "Onboarding": {
+    "title": "Onboarding checklist",
+    "none": "No onboarding tasks. They are created when a candidate is converted to an employee.",
+    "progress": "{done} of {total} done",
+    "tasks": {
+      "SYSTEM_ACCOUNTS": "Set up system accounts (Rakan, email)",
+      "ORIENTATION": "Orientation and centre walk-through",
+      "UNIFORM": "Issue uniform and name tag",
+      "CREDENTIALS_VERIFIED": "Credential verification complete",
+      "POLICIES_SIGNED": "Privacy notice and handbook signed in Rakan",
+      "PAYROLL_DETAILS": "Check bank and statutory details for payroll",
+      "EPF_REGISTRATION": "Register with KWSP (EPF)",
+      "SOCSO_REGISTRATION": "Register with PERKESO (SOCSO and EIS)"
+    },
+    "due": "due {date}",
+    "overdue": "overdue since {date}",
+    "doneOn": "done {date}",
+    "remove": "Remove {task}",
+    "addTitle": "Add a task",
+    "taskTitle": "Task",
+    "taskDue": "Due date (optional)",
+    "add": "Add task"
+  },
+  "Probation": {
+    "title": "Probation",
+    "none": "No probation on the current contract.",
+    "endsOn": "Ends {date} ({days, plural, =0 {today} one {in # day} other {in # days}}).",
+    "endedOn": "Ended {date}: the review is overdue.",
+    "confirmedOn": "Confirmed on {date}.",
+    "goesToOwner": "Your review goes to the Owner for approval.",
+    "ownerFinal": "As the Owner, your review is the final decision.",
+    "history": "Reviews",
+    "waitingForOwner": "Waiting for the Owner to approve.",
+    "someone": "a reviewer",
+    "reviewMeta": "{date} · by {name} · average {average} / 5",
+    "months": "{count, plural, one {# month} other {# months}}",
+    "outcomeConfirmed": "Confirmed from {date}.",
+    "outcomeExtended": "Probation now ends {date}.",
+    "outcomeEnd": "Approved: end the employment. Give notice as the contract sets out.",
+    "confirmationLetter": "Confirmation letter",
+    "extensionLetter": "Extension letter",
+    "letterComing": "The letter is being written. Refresh in a moment.",
+    "letterFailed": "The letter couldn't be written.",
+    "retryLetter": "Try again",
+    "backHome": "Home",
+    "form": {
+      "title": "Probation review: {name}",
+      "intro": "Rate each area from 1 (well below what the role needs) to 5 (well above), add your comments, and recommend what happens next.",
+      "scale": "1 = well below · 3 = meets · 5 = well above",
+      "criteria": {
+        "quality": {
+          "label": "Quality of work",
+          "hint": "Accurate, thorough, safe practice and good notes."
+        },
+        "skills": {
+          "label": "Clinical or technical skills",
+          "hint": "Knowledge and skills the role needs, and learning new ones."
+        },
+        "reliability": {
+          "label": "Reliability and attendance",
+          "hint": "On time, keeps to the roster, follows through."
+        },
+        "teamwork": {
+          "label": "Teamwork and communication",
+          "hint": "Works well with colleagues, clients and families."
+        },
+        "conduct": {
+          "label": "Professional conduct",
+          "hint": "Follows policies, confidentiality and the code of conduct."
+        }
+      },
+      "comments": "Comments",
+      "commentsHint": "Strengths, areas to work on, and the reasons for your recommendation.",
+      "recommendation": "Recommendation",
+      "recommendations": {
+        "confirm": "Confirm the appointment",
+        "extend": "Extend probation",
+        "end": "End the employment"
+      },
+      "recommendationHints": {
+        "confirm": "A confirmation letter is created once approved.",
+        "extend": "An extension letter with the new end date is created once approved.",
+        "end": "HR gives notice as the contract sets out."
+      },
+      "extend_months": "Extend by (months)",
+      "extend_monthsHint": "1 to 6 months.",
+      "submit": "Submit review",
+      "submitted": "Review submitted."
+    },
+    "decide": {
+      "comment": "Comment",
+      "commentHint": "Needed to reject.",
+      "approve": "Approve review",
+      "reject": "Reject"
+    }
+  },
+  "Preboarding": {
+    "title": "Pre-boarding",
+    "startTitle": "Your job offer",
+    "startIntro": "Read your offer letter and contract, accept them, then give the details your new employer needs before your first day.",
+    "noToken": "This page needs the link from your offer email. Open the email and tap the button again.",
+    "oneDevice": "The link works once. Open it on the phone or computer you will keep using; you can come back on that device until your start date.",
+    "open": "Open my offer",
+    "linkErrors": {
+      "link_invalid": "This link isn't valid. Use the latest email from your new employer, or ask them to resend it.",
+      "link_used": "This link was already opened on another device. Go back to that device, or ask HR to send you a new link.",
+      "link_expired": "This link has expired. Ask HR to send you a new one.",
+      "failed": "Something went wrong. Please try again."
+    },
+    "noSessionTitle": "Open the link from your email",
+    "noSessionBody": "To see your offer, open the link in the email from your new employer on this device.",
+    "endedTitle": "This pre-boarding session has ended",
+    "endedBody": "If you have started work, sign in to Rakan with the invitation email. Otherwise ask HR to send you a new link.",
+    "welcome": "Welcome, {name}",
+    "summary": "{title} at {company}, starting {date}.",
+    "progressLabel": "Your progress",
+    "progress": "{done} of {total}",
+    "noOffer": "There is no open offer for you right now. Ask HR if you think this is wrong.",
+    "steps": {
+      "offer": "1. Your offer and contract",
+      "personal": "2. Personal details and emergency contact",
+      "statutory": "3. Statutory numbers and tax",
+      "bank": "4. Salary bank account",
+      "dependents": "5. Dependents",
+      "credentials": "6. Professional credentials"
+    },
+    "offerIntro": "Read the offer letter and the contract that follows it, then accept by typing your full name. Please accept by {date}.",
+    "accepted": "You accepted on {date}. Thank you!",
+    "signedCopy": "Your signed copy",
+    "openFailed": "Couldn't open the file. Try again.",
+    "stepDone": "Done",
+    "stepTodo": "To do",
+    "personalIntro": "As on your MyKad or passport. Your IC number is stored encrypted.",
+    "statutoryIntro": "Leave a number blank if you don't have it yet. Your PCB category sets your monthly tax deduction.",
+    "choose": "Choose…",
+    "save": "Save",
+    "bankIntro": "Your salary is paid into this account. The number is stored encrypted.",
+    "bankSaved": "{bank} ••••{last4}, {holder}",
+    "replaceBank": "Change account",
+    "optional": "Optional",
+    "required": "Required for your role",
+    "extra": "Extra",
+    "notSent": "not sent yet",
+    "upload": "Upload",
+    "uploadOther": "Upload another certificate",
+    "uploadTitle": "Upload a certificate",
+    "removeUpload": "Remove",
+    "credentialsIntro": "Upload a clear photo or PDF of each certificate. HR checks them before you start.",
+    "credentialsNone": "Your role has no required credentials. You can still upload certificates you hold.",
+    "finishTitle": "Send to HR",
+    "finishReady": "Everything required is in. Let HR know you're done; you can still make changes until your start date.",
+    "finishNotReady": "Complete the steps above first. Dependents are optional.",
+    "finishDone": "Sent to HR on {date}. You can still make changes until your start date.",
+    "finish": "Send to HR",
+    "finishAgain": "Tell HR again",
+    "back": "Back to pre-boarding",
+    "privacy": "{company} uses your details to employ and pay you, as set out in its privacy notice.",
+    "summaryNoCompany": "{title}, starting {date}."
   }
 }

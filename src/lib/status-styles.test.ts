@@ -28,6 +28,12 @@ describe("status-styles", () => {
         "ot",
         "payroll",
         "policy",
+        // Step 8 hiring
+        "candidate",
+        "offer",
+        "opening",
+        "probation",
+        "probationReview",
       ].sort(),
     );
   });
@@ -63,6 +69,7 @@ describe("status-styles", () => {
       overtime: "warning",
       bank_change: "danger",
       profile_change: "info",
+      probation_review: "warning",
     });
   });
 

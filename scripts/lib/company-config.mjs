@@ -219,3 +219,39 @@ export function toRoleRequirements(config) {
   }
   return rows;
 }
+
+const EMPLOYMENT_TYPES = [
+  "full_time",
+  "part_time",
+  "contract",
+  "locum_contractor",
+];
+const PAY_MODELS = ["monthly", "hourly", "per_session"];
+
+/**
+ * roles_to_hire → job_openings rows (Step 8, HIR-01): one open opening per role, with the
+ * role's employment type and pay model. Salary ranges are not in the yaml; HR adds them.
+ * "hybrid" pay is not a pay model yet, so it is an error rather than a guess.
+ */
+export function toJobOpenings(config) {
+  const list = Array.isArray(config.roles_to_hire) ? config.roles_to_hire : [];
+  return list
+    .filter((role) => known(role?.title))
+    .map((role) => {
+      const title = known(role.title);
+      const employment_type = role.employment_type ?? "full_time";
+      const pay_model = role.pay_model ?? "monthly";
+      if (!EMPLOYMENT_TYPES.includes(employment_type))
+        throw new Error(
+          `${title}: employment_type must be one of ${EMPLOYMENT_TYPES.join(", ")}`,
+        );
+      if (!PAY_MODELS.includes(pay_model))
+        throw new Error(
+          `${title}: pay_model "${pay_model}" is not supported for job openings; use ${PAY_MODELS.join(", ")}`,
+        );
+      const headcount = Number.isInteger(role.headcount)
+        ? role.headcount
+        : null;
+      return { role: title, title, employment_type, pay_model, headcount };
+    });
+}

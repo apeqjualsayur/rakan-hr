@@ -46,7 +46,21 @@ export type ErrorKey =
   | "nameMismatch"
   | "alreadySigned"
   | "documentChanged"
-  | "notPdf";
+  | "notPdf"
+  // Hiring (Step 8)
+  | "rangeOrder"
+  | "unknownMergeField"
+  | "offerNotDraft"
+  | "offerNotOpen"
+  | "offerAccepted"
+  | "offerNotAccepted"
+  | "badStage"
+  | "useConvert"
+  | "alreadyConverted"
+  | "sessionEnded"
+  | "reviewOpen"
+  | "noProbation"
+  | "letterFailed";
 
 export type FieldErrors = Partial<Record<string, ErrorKey>>;
 

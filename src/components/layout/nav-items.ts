@@ -29,7 +29,7 @@ export type StaffNavKey = "home" | "time" | "credentials" | "pay" | "me";
 export const adminNavItems: NavItem<AdminNavKey>[] = [
   { key: "home", href: "/admin" },
   { key: "people", href: "/admin/people" },
-  { key: "hiring" },
+  { key: "hiring", href: "/admin/hiring" },
   { key: "timeOff" },
   { key: "payroll" },
   { key: "compliance", href: "/admin/compliance" },

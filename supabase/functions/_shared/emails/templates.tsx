@@ -15,6 +15,7 @@ import {
   Text,
 } from "npm:@react-email/components@1.0.12";
 import type { ReactElement } from "npm:react@19.3.0";
+import { letterDate } from "../letters/merge.ts";
 
 export type Locale = "en" | "ms";
 type Data = Record<string, unknown>;
@@ -27,6 +28,7 @@ const copy = {
       profile_change: "profile change",
       bank_change: "bank change",
       credential: "credential",
+      probation_review: "probation review",
     } as Record<string, string>,
     open: "Open Rakan",
     footer:
@@ -111,6 +113,56 @@ const copy = {
       title: `Reminder: sign ${title}`,
       body: `It has been waiting for ${days} days.`,
     }),
+    // Step 8 hiring and probation. The offer goes to a candidate, who has no account.
+    offer: (company: string, title: string, date: string) => ({
+      title: `Your job offer from ${company}`,
+      body: `${company} is offering you the position of ${title}. Read the offer letter and contract, then accept by ${date}. This link works once: open it on the phone or computer you will keep using.`,
+    }),
+    offerButton: "Open my offer",
+    offerFooter:
+      "You get this email because a company that uses Rakan made you a job offer. If you were not expecting it, you can ignore it.",
+    offerAccepted: (name: string, title: string) => ({
+      title: `${name} accepted the offer`,
+      body: `${title}. They can now fill in their pre-boarding details.`,
+    }),
+    preboardingCompleted: (name: string) => ({
+      title: `${name} finished pre-boarding`,
+      body: "Check their details and credentials, then convert them to an employee.",
+    }),
+    probationDue: (name: string, days: number, date: string) => ({
+      title:
+        days === 0
+          ? `${name}'s probation ends today`
+          : `${name}'s probation ends in ${days} day${days === 1 ? "" : "s"}`,
+      body: `Probation ends on ${date}. Please complete the probation review in Rakan.`,
+    }),
+    probationDecided: (
+      name: string,
+      confirmed: boolean,
+      date: string,
+      self: boolean,
+    ) =>
+      confirmed
+        ? {
+            title: self
+              ? "Your appointment is confirmed"
+              : `${name}'s appointment is confirmed`,
+            body: self
+              ? `Confirmed from ${date}. Your confirmation letter is in Rakan.`
+              : `Confirmed from ${date}.`,
+          }
+        : {
+            title: self
+              ? "Your probation has been extended"
+              : `${name}'s probation was extended`,
+            body: self
+              ? `It now ends on ${date}. Your letter is in Rakan.`
+              : `It now ends on ${date}.`,
+          },
+    probationEndApproved: (name: string) => ({
+      title: `Approved: end ${name}'s employment after probation`,
+      body: "Give notice as the contract sets out.",
+    }),
     fallback: { title: "New notification", body: "" },
   },
   ms: {
@@ -120,6 +172,7 @@ const copy = {
       profile_change: "perubahan profil",
       bank_change: "perubahan bank",
       credential: "kredensial",
+      probation_review: "penilaian percubaan",
     } as Record<string, string>,
     open: "Buka Rakan",
     footer:
@@ -201,6 +254,55 @@ const copy = {
       title: `Peringatan: tandatangan ${title}`,
       body: `Ia telah menunggu selama ${days} hari.`,
     }),
+    offer: (company: string, title: string, date: string) => ({
+      title: `Tawaran kerja anda daripada ${company}`,
+      body: `${company} menawarkan jawatan ${title} kepada anda. Baca surat tawaran dan kontrak, kemudian terima sebelum ${date}. Pautan ini hanya berfungsi sekali: bukanya pada telefon atau komputer yang akan anda gunakan.`,
+    }),
+    offerButton: "Buka tawaran saya",
+    offerFooter:
+      "Anda menerima e-mel ini kerana syarikat yang menggunakan Rakan membuat tawaran kerja kepada anda. Jika anda tidak menjangkakannya, abaikan e-mel ini.",
+    offerAccepted: (name: string, title: string) => ({
+      title: `${name} menerima tawaran`,
+      body: `${title}. Mereka kini boleh mengisi butiran pra-penyertaan.`,
+    }),
+    preboardingCompleted: (name: string) => ({
+      title: `${name} telah melengkapkan pra-penyertaan`,
+      body: "Semak butiran dan kredensial mereka, kemudian tukarkan mereka kepada pekerja.",
+    }),
+    probationDue: (name: string, days: number, date: string) => ({
+      title:
+        days === 0
+          ? `Tempoh percubaan ${name} tamat hari ini`
+          : `Tempoh percubaan ${name} tamat dalam ${days} hari`,
+      body: `Tempoh percubaan tamat pada ${date}. Sila lengkapkan penilaian percubaan dalam Rakan.`,
+    }),
+    probationDecided: (
+      name: string,
+      confirmed: boolean,
+      date: string,
+      self: boolean,
+    ) =>
+      confirmed
+        ? {
+            title: self
+              ? "Jawatan anda telah disahkan"
+              : `Jawatan ${name} telah disahkan`,
+            body: self
+              ? `Disahkan mulai ${date}. Surat pengesahan anda ada dalam Rakan.`
+              : `Disahkan mulai ${date}.`,
+          }
+        : {
+            title: self
+              ? "Tempoh percubaan anda telah dilanjutkan"
+              : `Tempoh percubaan ${name} telah dilanjutkan`,
+            body: self
+              ? `Ia kini tamat pada ${date}. Surat anda ada dalam Rakan.`
+              : `Ia kini tamat pada ${date}.`,
+          },
+    probationEndApproved: (name: string) => ({
+      title: `Diluluskan: tamatkan pekerjaan ${name} selepas tempoh percubaan`,
+      body: "Berikan notis seperti yang ditetapkan dalam kontrak.",
+    }),
     fallback: { title: "Pemberitahuan baharu", body: "" },
   },
 };
@@ -271,6 +373,34 @@ function text(template: string, data: Data, locale: Locale) {
         data.decision === "verified",
         data.reason ? String(data.reason) : undefined,
       );
+    case "offer":
+      return c.offer(
+        String(data.company ?? c.yourCompany),
+        String(data.job_title ?? ""),
+        letterDate(String(data.expires_on ?? ""), locale),
+      );
+    case "offer_accepted":
+      return c.offerAccepted(
+        String(data.candidate_name ?? ""),
+        String(data.job_title ?? ""),
+      );
+    case "preboarding_completed":
+      return c.preboardingCompleted(String(data.candidate_name ?? ""));
+    case "probation_due":
+      return c.probationDue(
+        String(data.employee_name ?? ""),
+        Number(data.days_left ?? 0),
+        letterDate(String(data.end_date ?? ""), locale),
+      );
+    case "probation_decided":
+      return c.probationDecided(
+        String(data.employee_name ?? ""),
+        data.outcome === "confirm",
+        letterDate(String(data.date ?? ""), locale),
+        data.for_employee === true,
+      );
+    case "probation_end_approved":
+      return c.probationEndApproved(String(data.employee_name ?? ""));
     default:
       return c.fallback;
   }
@@ -364,7 +494,7 @@ export function buildEmail(
                   padding: "12px 20px",
                 }}
               >
-                {c.open}
+                {template === "offer" ? c.offerButton : c.open}
               </Button>
             </Section>
             <Text
@@ -375,7 +505,7 @@ export function buildEmail(
                 marginTop: 16,
               }}
             >
-              {c.footer}
+              {template === "offer" ? c.offerFooter : c.footer}
             </Text>
           </Container>
         </Body>

@@ -25,7 +25,10 @@ select is(
       'staff_credentials',
       'credential_verifications',
       'cpd_activities',
-      'signatures'
+      'signatures',
+      'candidates',
+      'offers',
+      'probation_reviews'
     ]) as t (name)
     where not exists (
       select 1 from pg_trigger tr

@@ -121,6 +121,40 @@ export const statusTones = {
     retired: "neutral",
     rejected: "danger",
   },
+  // Hiring (Step 8): candidate stage, offer, job opening, probation.
+  candidate: {
+    applied: "neutral",
+    interview: "info",
+    offer: "warning",
+    hired: "primary",
+    rejected: "danger",
+  },
+  offer: {
+    draft: "neutral",
+    sent: "info",
+    expired: "danger",
+    accepted: "primary",
+    withdrawn: "neutral",
+  },
+  opening: {
+    open: "primary",
+    on_hold: "warning",
+    closed: "neutral",
+  },
+  probation: {
+    none: "neutral",
+    on_probation: "info",
+    due: "warning",
+    overdue: "danger",
+    review_submitted: "info",
+    confirmed: "primary",
+  },
+  probationReview: {
+    submitted: "info",
+    approved: "primary",
+    rejected: "danger",
+    cancelled: "neutral",
+  },
 } as const satisfies Record<string, Record<string, Tone>>;
 
 export type StatusDomain = keyof typeof statusTones;
@@ -145,6 +179,7 @@ export const categoryTones = {
   overtime: "warning",
   bank_change: "danger",
   profile_change: "info",
+  probation_review: "warning",
 } as const satisfies Record<string, Tone>;
 
 export type Category = keyof typeof categoryTones;

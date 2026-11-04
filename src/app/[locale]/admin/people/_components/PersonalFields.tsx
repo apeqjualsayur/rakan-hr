@@ -44,10 +44,13 @@ export function PersonalFields({
   employee,
   error,
   canReveal = false,
+  hideWork = false,
 }: {
   employee?: Fields | null;
   error: (name: string) => string | undefined;
   canReveal?: boolean;
+  /** Pre-boarding portal (Step 8): work email and phone are set by HR later. */
+  hideWork?: boolean;
 }) {
   const t = useTranslations("People.personal");
   const locale = useLocale();
@@ -234,23 +237,27 @@ export function PersonalFields({
       <Card className="flex flex-col gap-5">
         <CardHeader title={t("contacts")} />
         <div className="grid gap-5 md:grid-cols-2">
-          <TextField
-            type="email"
-            label={t("work_email")}
-            name="work_email"
-            defaultValue={employee?.work_email ?? ""}
-            hint={t("work_emailHint")}
-            error={error("work_email")}
-            autoComplete="off"
-          />
-          <TextField
-            type="tel"
-            label={t("work_phone")}
-            name="work_phone"
-            defaultValue={employee?.work_phone ?? ""}
-            hint={t("work_phoneHint")}
-            error={error("work_phone")}
-          />
+          {hideWork ? null : (
+            <>
+              <TextField
+                type="email"
+                label={t("work_email")}
+                name="work_email"
+                defaultValue={employee?.work_email ?? ""}
+                hint={t("work_emailHint")}
+                error={error("work_email")}
+                autoComplete="off"
+              />
+              <TextField
+                type="tel"
+                label={t("work_phone")}
+                name="work_phone"
+                defaultValue={employee?.work_phone ?? ""}
+                hint={t("work_phoneHint")}
+                error={error("work_phone")}
+              />
+            </>
+          )}
           <TextField
             type="email"
             label={t("email")}

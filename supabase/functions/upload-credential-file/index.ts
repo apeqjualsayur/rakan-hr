@@ -10,6 +10,10 @@
 // 3. It is written with the service role, and recorded (credential_files, or the CPD
 //    activity's file_path). A failed record removes the file again.
 //
+// Step 8: candidates in the pre-boarding portal have no account. The app's server calls this
+// with their pre-boarding session (x-preboarding-session) instead of a token, and the
+// database checks it (preboarding_credential_upload_target).
+//
 // Deployed with --no-verify-jwt because the token is checked here (auth.getUser), which also
 // works with Supabase's newer signing keys. SUPABASE_URL, SUPABASE_ANON_KEY and
 // SUPABASE_SERVICE_ROLE_KEY are provided by Supabase.
@@ -25,7 +29,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const cors = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+    "authorization, x-client-info, apikey, content-type, x-preboarding-session",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
@@ -67,19 +71,28 @@ Deno.serve(async (req) => {
     return new Response(null, { status: 204, headers: cors });
   if (req.method !== "POST") return json(405, { error: "method_not_allowed" });
 
-  const authorization = req.headers.get("Authorization") ?? "";
-  if (!authorization.startsWith("Bearer "))
-    return json(401, { error: "unauthorised" });
-
   const url = Deno.env.get("SUPABASE_URL")!;
-  const asUser = createClient(url, Deno.env.get("SUPABASE_ANON_KEY")!, {
-    global: { headers: { Authorization: authorization } },
-    auth: { persistSession: false },
-  });
-  const { data: who, error: whoError } = await asUser.auth.getUser(
-    authorization.slice("Bearer ".length),
-  );
-  if (whoError || !who.user) return json(401, { error: "unauthorised" });
+  const session = req.headers.get("x-preboarding-session");
+  const authorization = req.headers.get("Authorization") ?? "";
+  let uploaderId: string | null = null;
+  let asUser;
+  if (session !== null) {
+    asUser = createClient(url, Deno.env.get("SUPABASE_ANON_KEY")!, {
+      auth: { persistSession: false },
+    });
+  } else {
+    if (!authorization.startsWith("Bearer "))
+      return json(401, { error: "unauthorised" });
+    asUser = createClient(url, Deno.env.get("SUPABASE_ANON_KEY")!, {
+      global: { headers: { Authorization: authorization } },
+      auth: { persistSession: false },
+    });
+    const { data: who, error: whoError } = await asUser.auth.getUser(
+      authorization.slice("Bearer ".length),
+    );
+    if (whoError || !who.user) return json(401, { error: "unauthorised" });
+    uploaderId = who.user.id;
+  }
 
   const form = await req.formData().catch(() => null);
   const kind = form?.get("kind");
@@ -87,6 +100,7 @@ Deno.serve(async (req) => {
   const file = form?.get("file");
   if (
     (kind !== "credential" && kind !== "cpd") ||
+    (session !== null && kind !== "credential") ||
     typeof id !== "string" ||
     !UUID.test(id)
   )
@@ -101,11 +115,18 @@ Deno.serve(async (req) => {
 
   // Where it may go, decided by the database as this user.
   const target =
-    kind === "credential"
+    session !== null
       ? await asUser
-          .rpc("credential_upload_target", { p_credential_id: id })
+          .rpc("preboarding_credential_upload_target", {
+            p_session: session,
+            p_credential_id: id,
+          })
           .single()
-      : await asUser.rpc("cpd_upload_target", { p_activity_id: id }).single();
+      : kind === "credential"
+        ? await asUser
+            .rpc("credential_upload_target", { p_credential_id: id })
+            .single()
+        : await asUser.rpc("cpd_upload_target", { p_activity_id: id }).single();
   if (target.error || !target.data) return json(403, { error: "forbidden" });
   const t = target.data as {
     tenant_id: string;
@@ -135,7 +156,7 @@ Deno.serve(async (req) => {
           mime,
           size_bytes: file.size,
           page_no: t.next_page ?? 1,
-          uploaded_by: who.user.id,
+          uploaded_by: uploaderId,
         })
       : await admin
           .from("cpd_activities")

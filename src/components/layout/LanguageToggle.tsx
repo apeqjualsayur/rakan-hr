@@ -28,7 +28,12 @@ export function LanguageToggle() {
             aria-pressed={selected}
             disabled={isPending}
             onClick={() =>
-              startTransition(() => router.replace(pathname, { locale }))
+              // Keeps the query (e.g. the pre-boarding link token) when switching.
+              startTransition(() =>
+                router.replace(`${pathname}${window.location.search}`, {
+                  locale,
+                }),
+              )
             }
             className={`min-h-10 min-w-11 rounded-full px-3 text-sm font-semibold transition-colors disabled:opacity-40 ${
               selected

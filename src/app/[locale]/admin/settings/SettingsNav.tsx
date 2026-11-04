@@ -5,7 +5,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
 export type SettingsSection =
-  "company" | "branches" | "users" | "checklist" | "credentials";
+  "company" | "branches" | "users" | "checklist" | "credentials" | "letters";
 
 export const settingsHref: Record<SettingsSection, string> = {
   company: "/admin/settings/company",
@@ -13,6 +13,7 @@ export const settingsHref: Record<SettingsSection, string> = {
   users: "/admin/settings/users",
   checklist: "/admin/settings/setup-checklist",
   credentials: "/admin/settings/credentials",
+  letters: "/admin/settings/letters",
 };
 
 // Section pills, styled like the top nav (active = primary-tint pill). Scrolls sideways
