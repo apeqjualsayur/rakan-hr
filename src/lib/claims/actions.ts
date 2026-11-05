@@ -130,13 +130,11 @@ export async function saveClaimType(
   const id = formData.get("claim_type_id");
   const { error } = isUuid(id)
     ? await ctx.supabase.from("claim_types").update(parsed.values).eq("id", id)
-    : await ctx.supabase
-        .from("claim_types")
-        .insert({
-          ...parsed.values,
-          tenant_id: ctx.member.tenantId,
-          sort_order: 100,
-        });
+    : await ctx.supabase.from("claim_types").insert({
+        ...parsed.values,
+        tenant_id: ctx.member.tenantId,
+        sort_order: 100,
+      });
   if (error) {
     if (error.code === "23505")
       return { status: "error", errors: { name_en: "duplicateName" } };
