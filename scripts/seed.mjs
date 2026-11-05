@@ -17,6 +17,7 @@ import { parse } from "yaml";
 import {
   ownerEmails,
   toBranch,
+  toClaimTypes,
   toJobOpenings,
   toLeavePolicy,
   toWorkPattern,
@@ -57,7 +58,8 @@ let config,
   requirements,
   openings,
   workPattern,
-  leave;
+  leave,
+  claimTypes;
 try {
   config = parse(readFileSync("_specs/hr-system/company-config.yaml", "utf8"));
   tenant = toTenant(config);
@@ -68,6 +70,7 @@ try {
   openings = toJobOpenings(config);
   workPattern = toWorkPattern(config);
   leave = toLeavePolicy(config);
+  claimTypes = toClaimTypes(config);
 } catch (error) {
   fail(error.message);
 }
@@ -227,6 +230,24 @@ try {
     );
     policiesRaised += res.rowCount;
   }
+  // Step 11: claim types, added once (Settings > Claims edits them).
+  let claimTypesAdded = 0;
+  for (const c of claimTypes) {
+    const res = await client.query(
+      `insert into public.claim_types (tenant_id, name_en, name_ms, monthly_limit, is_taxable, is_mileage, sort_order)
+       values ($1, $2, $3, $4, $5, $6, $7) on conflict (tenant_id, name_en) do nothing`,
+      [
+        TENANT_ID,
+        c.name_en,
+        c.name_ms,
+        c.monthly_limit,
+        c.is_taxable,
+        c.is_mileage,
+        c.sort_order,
+      ],
+    );
+    claimTypesAdded += res.rowCount;
+  }
   const seededPeople = await seedTestPeople(client, roleIds, owners[0]);
   const seededCredentials = await seedTestCredentials(client);
   await client.query("commit");
@@ -259,6 +280,9 @@ try {
   );
   console.log(
     `✔ Leave: ${policiesRaised} policy bands set from the yaml; extra types: ${leave.extraTypes.map((t) => t.code).join(", ") || "none"}`,
+  );
+  console.log(
+    `✔ Claim types: ${claimTypesAdded} added (${claimTypes.length} in the yaml)`,
   );
   console.log(`✔ Test credentials: ${seededCredentials} added`);
   console.log(

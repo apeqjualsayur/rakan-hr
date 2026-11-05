@@ -72,7 +72,11 @@ export default async function StaffHomePage() {
           label={t("tiles.leave")}
           href="/staff/leave/apply"
         />
-        <QuickActionTile icon={Receipt} label={t("tiles.claim")} disabled />
+        <QuickActionTile
+          icon={Receipt}
+          label={t("tiles.claim")}
+          href="/staff/claims/new"
+        />
         <QuickActionTile
           icon={Clock}
           label={t("tiles.overtime")}

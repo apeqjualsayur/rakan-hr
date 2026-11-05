@@ -69,6 +69,7 @@ export const statusTones = {
     approved: "primary",
     rejected: "danger",
     paid: "primary",
+    cancelled: "neutral",
   },
   ot: {
     pending: "info",

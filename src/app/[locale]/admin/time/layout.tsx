@@ -27,6 +27,7 @@ export default async function LeaveLayout({
           { href: "/admin/time/roster", label: t("nav.roster") },
           { href: "/admin/time/attendance", label: t("nav.attendance") },
           { href: "/admin/time/overtime", label: t("nav.overtime") },
+          { href: "/admin/time/claims", label: t("nav.claims") },
         ]}
       />
       {children}

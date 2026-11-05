@@ -12,7 +12,8 @@ export type SettingsSection =
   | "credentials"
   | "letters"
   | "leave"
-  | "holidays";
+  | "holidays"
+  | "claims";
 
 export const settingsHref: Record<SettingsSection, string> = {
   company: "/admin/settings/company",
@@ -23,6 +24,7 @@ export const settingsHref: Record<SettingsSection, string> = {
   letters: "/admin/settings/letters",
   leave: "/admin/settings/leave",
   holidays: "/admin/settings/holidays",
+  claims: "/admin/settings/claims",
 };
 
 // Section pills, styled like the top nav (active = primary-tint pill). Scrolls sideways

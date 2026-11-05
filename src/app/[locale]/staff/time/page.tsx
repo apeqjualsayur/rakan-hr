@@ -1,4 +1,4 @@
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, Receipt } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { OtForm, MyOt } from "@/components/time/OtBits";
 import { TodayCard } from "@/components/time/TodayCard";
@@ -71,13 +71,22 @@ export default async function StaffTimePage() {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3">
         <h1 className="text-display-sm text-ink">{t("title")}</h1>
-        <Link
-          href="/staff/leave"
-          className="inline-flex min-h-11 items-center gap-1 text-label text-primary underline-offset-4 hover:underline"
-        >
-          <CalendarDays aria-hidden size={18} strokeWidth={1.75} />
-          {t("leaveLink")}
-        </Link>
+        <div className="flex flex-wrap gap-x-4">
+          <Link
+            href="/staff/leave"
+            className="inline-flex min-h-11 items-center gap-1 text-label text-primary underline-offset-4 hover:underline"
+          >
+            <CalendarDays aria-hidden size={18} strokeWidth={1.75} />
+            {t("leaveLink")}
+          </Link>
+          <Link
+            href="/staff/claims"
+            className="inline-flex min-h-11 items-center gap-1 text-label text-primary underline-offset-4 hover:underline"
+          >
+            <Receipt aria-hidden size={18} strokeWidth={1.75} />
+            {t("claimsLink")}
+          </Link>
+        </div>
       </div>
       {member.employeeId && day ? (
         <TodayCard

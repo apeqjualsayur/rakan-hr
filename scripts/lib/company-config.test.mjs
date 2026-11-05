@@ -6,6 +6,7 @@ import {
   parseOperatingHours,
   stateCode,
   toBranch,
+  toClaimTypes,
   toJobOpenings,
   toLeavePolicy,
   toWorkPattern,
@@ -329,5 +330,44 @@ describe("toLeavePolicy", () => {
     });
     expect(policies).toHaveLength(4);
     expect(extraTypes.map((t) => t.code)).toEqual(["COMPASSIONATE", "EXAM"]);
+  });
+});
+
+describe("toClaimTypes", () => {
+  it("maps name, monthly limit and taxable; mileage by name; Malay names where known", () => {
+    expect(
+      toClaimTypes({
+        claim_types: [
+          { name: "Travel / mileage", monthly_limit: 300, taxable: false },
+          { name: "Phone bill", monthly_limit: 50, taxable: true },
+          { name: "Uniform", monthly_limit: "TBC" },
+        ],
+      }),
+    ).toEqual([
+      {
+        name_en: "Travel / mileage",
+        name_ms: "Perjalanan / perbatuan",
+        monthly_limit: 300,
+        is_taxable: false,
+        is_mileage: true,
+        sort_order: 10,
+      },
+      {
+        name_en: "Phone bill",
+        name_ms: "Bil telefon",
+        monthly_limit: 50,
+        is_taxable: true,
+        is_mileage: false,
+        sort_order: 20,
+      },
+      {
+        name_en: "Uniform",
+        name_ms: "Uniform",
+        monthly_limit: null,
+        is_taxable: false,
+        is_mileage: false,
+        sort_order: 30,
+      },
+    ]);
   });
 });

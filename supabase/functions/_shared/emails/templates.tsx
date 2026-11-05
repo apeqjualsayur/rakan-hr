@@ -23,6 +23,7 @@ type Data = Record<string, unknown>;
 const copy = {
   en: {
     entity: {
+      claim: "claim",
       test: "test",
       fallback: "approval",
       profile_change: "profile change",
@@ -191,6 +192,7 @@ const copy = {
   },
   ms: {
     entity: {
+      claim: "tuntutan",
       test: "ujian",
       fallback: "kelulusan",
       profile_change: "perubahan profil",

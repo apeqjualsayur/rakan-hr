@@ -1,5 +1,6 @@
 import { ChevronLeft } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { PendingClaims } from "@/components/claims/PendingClaims";
 import { LeaveCalendar } from "@/components/leave/LeaveCalendar";
 import { PendingLeave } from "@/components/leave/PendingLeave";
 import { PendingOt } from "@/components/time/PendingOt";
@@ -51,6 +52,10 @@ export default async function TeamLeavePage({
       <Card className="flex flex-col gap-2">
         <CardHeader title={t("otToApprove")} />
         <PendingOt member={member} />
+      </Card>
+      <Card className="flex flex-col gap-2">
+        <CardHeader title={t("claimsToApprove")} />
+        <PendingClaims member={member} />
       </Card>
       <LeaveCalendar
         monthKey={m.key}

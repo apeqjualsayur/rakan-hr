@@ -154,7 +154,8 @@
       "credential": "kredensial",
       "probation_review": "penilaian percubaan",
       "leave": "cuti",
-      "overtime": "kerja lebih masa"
+      "overtime": "kerja lebih masa",
+      "claim": "tuntutan"
     }
   },
   "AdminNav": {
@@ -228,7 +229,8 @@
       "pending": "Menunggu",
       "approved": "Diluluskan",
       "rejected": "Ditolak",
-      "paid": "Dibayar"
+      "paid": "Dibayar",
+      "cancelled": "Dibatalkan"
     },
     "ot": {
       "pending": "Menunggu",
@@ -507,7 +509,8 @@
       "credentials": "Kredensial",
       "letters": "Templat surat",
       "leave": "Cuti",
-      "holidays": "Cuti umum"
+      "holidays": "Cuti umum",
+      "claims": "Tuntutan"
     },
     "errors": {
       "required": "Ruangan ini wajib diisi.",
@@ -585,7 +588,15 @@
       "shiftOverlap": "Syif ini bertindih dengan syif lain bagi orang yang sama.",
       "credentialBlock": "Disekat: kredensial wajib tidak sah pada tarikh ini (penguatkuasaan ketat).",
       "otExists": "Sudah ada kerja lebih masa untuk hari ini.",
-      "endBeforeStart": "Masa tamat mesti selepas masa mula."
+      "endBeforeStart": "Masa tamat mesti selepas masa mula.",
+      "perClaimLimit": "Ini melebihi had setiap tuntutan.",
+      "monthlyLimit": "Ini melebihi had bulanan untuk jenis tuntutan ini.",
+      "receiptRequired": "Tambah gambar resit.",
+      "noMileageRate": "Syarikat belum menetapkan kadar perbatuan. Tanya HR.",
+      "futureDate": "Tarikh tidak boleh pada masa hadapan.",
+      "alreadySent": "Tuntutan ini sudah dihantar.",
+      "duplicateName": "Jenis dengan nama ini sudah wujud.",
+      "perClaimOverMonthly": "Had setiap tuntutan tidak boleh melebihi had bulanan."
     },
     "company": {
       "title": "Profil syarikat",
@@ -1972,7 +1983,8 @@
       "balances": "Baki",
       "roster": "Jadual tugas",
       "attendance": "Kehadiran",
-      "overtime": "Lebih masa"
+      "overtime": "Lebih masa",
+      "claims": "Tuntutan"
     },
     "apply": {
       "employee": "Pekerja",
@@ -2112,7 +2124,8 @@
       "add": "Tambah cuti",
       "remove": "Buang cuti"
     },
-    "otToApprove": "Lebih masa menunggu keputusan"
+    "otToApprove": "Lebih masa menunggu keputusan",
+    "claimsToApprove": "Tuntutan untuk diluluskan"
   },
   "StaffHome": {
     "fallbackTitle": "Utama",
@@ -2282,6 +2295,103 @@
       "recordTitle": "Rekod lebih masa",
       "recordIntro": "Untuk lebih masa yang dipersetujui di luar Rakan. Ia terus diluluskan dan dihantar ke gaji.",
       "basis": "KGB {orp} sehari · KGS {hrp} sejam · {hours} jam biasa"
+    },
+    "claimsLink": "Tuntutan"
+  },
+  "Claims": {
+    "title": "Tuntutan",
+    "new": "Tuntutan baharu",
+    "sent": "Tuntutan dihantar. Pengurus anda akan melihatnya sekarang.",
+    "notLinked": "Akaun anda belum dipautkan kepada rekod pekerja. Minta HR memautkannya.",
+    "thisMonth": "Bulan ini",
+    "usedOf": "{used} daripada {limit}",
+    "mine": "Tuntutan saya",
+    "none": "Tiada tuntutan lagi.",
+    "receipts": "Resit",
+    "km": "{km} km",
+    "cancel": "Batal",
+    "toApprove": "Tuntutan untuk diluluskan",
+    "forPayroll": "Diluluskan, menunggu gaji",
+    "noneForPayroll": "Tiada tuntutan diluluskan yang menunggu gaji.",
+    "totals": "Tidak bercukai {nonTaxable} · Bercukai {taxable}",
+    "pending": {
+      "none": "Tiada tuntutan menunggu.",
+      "someone": "Seseorang",
+      "mileage": "{km} km pada {rate}/km",
+      "receiptAttached": "{count} resit",
+      "noReceipt": "Tiada resit",
+      "leftAfter": "Baki {amount} bulan ini selepas ini",
+      "withinLimit": "Tiada had bulanan",
+      "taxable": "Bercukai",
+      "waiting": "Menunggu pelulus"
+    },
+    "form": {
+      "noTypes": "Tiada jenis tuntutan dibuka untuk anda. Tanya HR.",
+      "type": "Jenis tuntutan",
+      "left": "Baki {amount} daripada {limit} bulan ini",
+      "noMonthlyLimit": "Tiada had bulanan",
+      "perClaim": "Sehingga {amount} setiap tuntutan",
+      "taxable": "Bercukai (ditambah kepada gaji bercukai anda)",
+      "date": "Tarikh perbelanjaan",
+      "from": "Dari",
+      "to": "Ke",
+      "distance": "Jarak (km)",
+      "rate": "Dibayar {rate} sekilometer",
+      "mileageAmount": "{km} km × {rate} = {amount}",
+      "noRate": "Syarikat belum menetapkan kadar perbatuan, jadi perbatuan tidak boleh dituntut. Tanya HR.",
+      "amount": "Amaun (RM)",
+      "overPerClaim": "Ini melebihi {amount} yang dibenarkan setiap tuntutan.",
+      "overMonthly": "Ini melebihi had bulanan anda. Baki anda {amount} bulan ini.",
+      "description": "Untuk apa?",
+      "descriptionHint": "Contohnya: Letak kereta di Hospital Selayang untuk lawatan rumah.",
+      "receipts": "Resit",
+      "receiptsOptional": "Resit (pilihan)",
+      "receiptsHint": "Gambar yang jelas atau PDF, sehingga 10 MB setiap satu.",
+      "takePhoto": "Ambil gambar",
+      "chooseFiles": "Pilih fail",
+      "remove": "Buang {name}",
+      "submit": "Hantar tuntutan",
+      "problems": {
+        "fileType": "Hanya gambar (JPG, PNG, HEIC) atau fail PDF.",
+        "fileTooBig": "Setiap fail mesti 10 MB atau kurang.",
+        "uploadFailed": "Resit tidak dapat dimuat naik. Semak sambungan anda dan cuba lagi."
+      }
+    },
+    "settings": {
+      "intro": "Jenis tuntutan yang boleh dipilih oleh kakitangan, berserta hadnya. Tuntutan yang diluluskan masuk ke gaji seterusnya, bercukai atau tidak mengikut jenis. Tanya akauntan anda jenis mana yang bercukai.",
+      "mileageTitle": "Kadar perbatuan",
+      "mileageNow": "Perbatuan dibayar {rate} sekilometer.",
+      "mileageUnset": "Belum ada kadar perbatuan. Kakitangan tidak boleh menuntut perbatuan sehingga ia ditetapkan.",
+      "mileageRate": "Kadar sekilometer (RM)",
+      "mileageHint": "Contohnya 0.60",
+      "saveRate": "Simpan kadar",
+      "mileageOwner": "Hanya Pemilik boleh menukar kadar perbatuan.",
+      "everyone": "Semua orang",
+      "tags": {
+        "monthly": "{amount} sebulan",
+        "noMonthly": "Tiada had bulanan",
+        "perClaim": "{amount} setiap tuntutan",
+        "taxable": "Bercukai",
+        "nonTaxable": "Tidak bercukai",
+        "receipt": "Perlu resit",
+        "mileage": "Perbatuan"
+      },
+      "switchOff": "Matikan",
+      "switchOn": "Hidupkan",
+      "off": "Dimatikan",
+      "edit": "Sunting",
+      "newType": "Tambah jenis tuntutan",
+      "nameEn": "Nama (Bahasa Inggeris)",
+      "nameMs": "Nama (Bahasa Malaysia)",
+      "monthlyLimit": "Had bulanan (RM)",
+      "perClaimLimit": "Had setiap tuntutan (RM)",
+      "blankNoLimit": "Biarkan kosong jika tiada had",
+      "taxable": "Bercukai (dibayar sebagai sebahagian gaji bercukai)",
+      "requiresReceipt": "Perlu resit",
+      "whoCanClaim": "Siapa boleh menuntut",
+      "whoHint": "Jangan tanda apa-apa untuk membenarkan semua orang.",
+      "save": "Simpan",
+      "add": "Tambah jenis"
     }
   }
 }

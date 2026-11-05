@@ -2,6 +2,7 @@
 // error values are message keys under Settings.errors in messages/*.json.
 
 export type ErrorKey =
+  | "perClaimOverMonthly"
   | "required"
   | "tooLong"
   | "invalidDate"
@@ -82,7 +83,15 @@ export type ErrorKey =
   | "shiftOverlap"
   | "credentialBlock"
   | "otExists"
-  | "endBeforeStart";
+  | "endBeforeStart"
+  // Claims (Step 11)
+  | "perClaimLimit"
+  | "monthlyLimit"
+  | "receiptRequired"
+  | "noMileageRate"
+  | "futureDate"
+  | "alreadySent"
+  | "duplicateName";
 
 export type FieldErrors = Partial<Record<string, ErrorKey>>;
 

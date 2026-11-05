@@ -154,7 +154,8 @@
       "credential": "credential",
       "probation_review": "probation review",
       "leave": "leave",
-      "overtime": "overtime"
+      "overtime": "overtime",
+      "claim": "claim"
     }
   },
   "AdminNav": {
@@ -228,7 +229,8 @@
       "pending": "Pending",
       "approved": "Approved",
       "rejected": "Rejected",
-      "paid": "Paid"
+      "paid": "Paid",
+      "cancelled": "Cancelled"
     },
     "ot": {
       "pending": "Pending",
@@ -507,7 +509,8 @@
       "credentials": "Credentials",
       "letters": "Letter templates",
       "leave": "Leave",
-      "holidays": "Public holidays"
+      "holidays": "Public holidays",
+      "claims": "Claims"
     },
     "errors": {
       "required": "This is required.",
@@ -585,7 +588,15 @@
       "shiftOverlap": "This overlaps another shift for the same person.",
       "credentialBlock": "Blocked: a required credential is not valid on this date (hard enforcement).",
       "otExists": "There is already OT for this day.",
-      "endBeforeStart": "The end must be after the start."
+      "endBeforeStart": "The end must be after the start.",
+      "perClaimLimit": "This is more than the limit per claim.",
+      "monthlyLimit": "This is more than the monthly limit for this claim type.",
+      "receiptRequired": "Add a photo of the receipt.",
+      "noMileageRate": "The company has not set a mileage rate yet. Ask HR.",
+      "futureDate": "The date cannot be in the future.",
+      "alreadySent": "This claim was already sent.",
+      "duplicateName": "A type with this name already exists.",
+      "perClaimOverMonthly": "The limit per claim cannot be more than the monthly limit."
     },
     "company": {
       "title": "Company profile",
@@ -1972,7 +1983,8 @@
       "balances": "Balances",
       "roster": "Roster",
       "attendance": "Attendance",
-      "overtime": "Overtime"
+      "overtime": "Overtime",
+      "claims": "Claims"
     },
     "apply": {
       "employee": "Employee",
@@ -2112,7 +2124,8 @@
       "add": "Add holiday",
       "remove": "Remove holiday"
     },
-    "otToApprove": "Overtime waiting for a decision"
+    "otToApprove": "Overtime waiting for a decision",
+    "claimsToApprove": "Claims to approve"
   },
   "StaffHome": {
     "fallbackTitle": "Home",
@@ -2282,6 +2295,103 @@
       "recordTitle": "Record overtime",
       "recordIntro": "For overtime agreed outside Rakan. It's approved straight away and goes to payroll.",
       "basis": "ORP {orp} a day · HRP {hrp} an hour · {hours} normal hours"
+    },
+    "claimsLink": "Claims"
+  },
+  "Claims": {
+    "title": "Claims",
+    "new": "New claim",
+    "sent": "Claim sent. Your manager will see it now.",
+    "notLinked": "Your account is not linked to an employee record yet. Ask HR to link it.",
+    "thisMonth": "This month",
+    "usedOf": "{used} of {limit}",
+    "mine": "My claims",
+    "none": "No claims yet.",
+    "receipts": "Receipts",
+    "km": "{km} km",
+    "cancel": "Cancel",
+    "toApprove": "Claims to approve",
+    "forPayroll": "Approved, waiting for payroll",
+    "noneForPayroll": "No approved claims waiting for payroll.",
+    "totals": "Non-taxable {nonTaxable} · Taxable {taxable}",
+    "pending": {
+      "none": "No claims waiting.",
+      "someone": "Someone",
+      "mileage": "{km} km at {rate}/km",
+      "receiptAttached": "{count, plural, one {# receipt} other {# receipts}}",
+      "noReceipt": "No receipt",
+      "leftAfter": "{amount} left this month after this",
+      "withinLimit": "No monthly limit",
+      "taxable": "Taxable",
+      "waiting": "Waiting for the approver"
+    },
+    "form": {
+      "noTypes": "No claim types are open to you. Ask HR.",
+      "type": "Claim type",
+      "left": "{amount} left of {limit} this month",
+      "noMonthlyLimit": "No monthly limit",
+      "perClaim": "Up to {amount} per claim",
+      "taxable": "Taxable (added to your taxable pay)",
+      "date": "Date of expense",
+      "from": "From",
+      "to": "To",
+      "distance": "Distance (km)",
+      "rate": "Paid at {rate} per km",
+      "mileageAmount": "{km} km × {rate} = {amount}",
+      "noRate": "The company has not set a mileage rate yet, so mileage cannot be claimed. Ask HR.",
+      "amount": "Amount (RM)",
+      "overPerClaim": "This is more than the {amount} allowed per claim.",
+      "overMonthly": "This is more than your monthly limit. You have {amount} left this month.",
+      "description": "What was it for?",
+      "descriptionHint": "For example: Parking at Hospital Selayang for a home visit.",
+      "receipts": "Receipt",
+      "receiptsOptional": "Receipt (optional)",
+      "receiptsHint": "A clear photo or PDF, up to 10 MB each.",
+      "takePhoto": "Take a photo",
+      "chooseFiles": "Choose files",
+      "remove": "Remove {name}",
+      "submit": "Send claim",
+      "problems": {
+        "fileType": "Only photos (JPG, PNG, HEIC) or PDF files.",
+        "fileTooBig": "Each file must be 10 MB or less.",
+        "uploadFailed": "The receipt did not upload. Check your connection and try again."
+      }
+    },
+    "settings": {
+      "intro": "Claim types staff can choose, with their limits. Approved claims go to the next payroll, taxable or non-taxable by type. Ask your accountant which types are taxable.",
+      "mileageTitle": "Mileage rate",
+      "mileageNow": "Mileage is paid at {rate} per km.",
+      "mileageUnset": "No mileage rate yet. Staff cannot claim mileage until it is set.",
+      "mileageRate": "Rate per km (RM)",
+      "mileageHint": "For example 0.60",
+      "saveRate": "Save rate",
+      "mileageOwner": "Only the Owner can change the mileage rate.",
+      "everyone": "Everyone",
+      "tags": {
+        "monthly": "{amount} a month",
+        "noMonthly": "No monthly limit",
+        "perClaim": "{amount} per claim",
+        "taxable": "Taxable",
+        "nonTaxable": "Non-taxable",
+        "receipt": "Receipt needed",
+        "mileage": "Mileage"
+      },
+      "switchOff": "Switch off",
+      "switchOn": "Switch on",
+      "off": "Off",
+      "edit": "Edit",
+      "newType": "Add a claim type",
+      "nameEn": "Name (English)",
+      "nameMs": "Name (Bahasa Malaysia)",
+      "monthlyLimit": "Monthly limit (RM)",
+      "perClaimLimit": "Limit per claim (RM)",
+      "blankNoLimit": "Leave blank for no limit",
+      "taxable": "Taxable (paid as part of taxable pay)",
+      "requiresReceipt": "Receipt needed",
+      "whoCanClaim": "Who can claim",
+      "whoHint": "Tick none to let everyone claim.",
+      "save": "Save",
+      "add": "Add type"
     }
   }
 }

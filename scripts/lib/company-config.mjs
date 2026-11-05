@@ -349,3 +349,42 @@ export function toLeavePolicy(config) {
   });
   return { policies: rows, extraTypes: extra };
 }
+
+const CLAIM_NAMES_MS = {
+  "travel / mileage": "Perjalanan / perbatuan",
+  "parking & toll": "Letak kereta & tol",
+  "medical (outpatient)": "Perubatan (pesakit luar)",
+  "cpd / course fees": "CPD / yuran kursus",
+  "phone bill": "Bil telefon",
+};
+
+/**
+ * claim_types → claim types (Step 11, CLM-01): name, monthly limit, taxable. A type whose
+ * name mentions mileage is paid by distance at the company rate (set in Settings). Names
+ * without a known Malay translation keep the English name until edited in Settings.
+ */
+export function toClaimTypes(config) {
+  const list = Array.isArray(config.claim_types) ? config.claim_types : [];
+  return list
+    .filter((c) => known(c?.name))
+    .map((c, index) => {
+      const name = known(c.name);
+      const limit = c.monthly_limit;
+      if (
+        limit !== undefined &&
+        known(String(limit)) !== null &&
+        !(typeof limit === "number" && limit > 0)
+      )
+        throw new Error(
+          `claim_types "${name}": monthly_limit must be a positive number`,
+        );
+      return {
+        name_en: name,
+        name_ms: CLAIM_NAMES_MS[name.toLowerCase()] ?? name,
+        monthly_limit: typeof limit === "number" ? limit : null,
+        is_taxable: c.taxable === true,
+        is_mileage: /mileage/i.test(name),
+        sort_order: (index + 1) * 10,
+      };
+    });
+}
