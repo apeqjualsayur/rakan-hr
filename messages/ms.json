@@ -510,7 +510,8 @@
       "letters": "Templat surat",
       "leave": "Cuti",
       "holidays": "Cuti umum",
-      "claims": "Tuntutan"
+      "claims": "Tuntutan",
+      "bankAccounts": "Akaun bank"
     },
     "errors": {
       "required": "Ruangan ini wajib diisi.",
@@ -596,7 +597,12 @@
       "futureDate": "Tarikh tidak boleh pada masa hadapan.",
       "alreadySent": "Tuntutan ini sudah dihantar.",
       "duplicateName": "Jenis dengan nama ini sudah wujud.",
-      "perClaimOverMonthly": "Had setiap tuntutan tidak boleh melebihi had bulanan."
+      "perClaimOverMonthly": "Had setiap tuntutan tidak boleh melebihi had bulanan.",
+      "accountNoMismatch": "Kedua-dua nombor akaun tidak sepadan.",
+      "accountNoFixed": "Bank dan nombor akaun tidak boleh ditukar. Tambah akaun baharu dan bersarakan yang ini.",
+      "accountRetired": "Akaun ini telah dibersarakan dan tidak boleh ditukar.",
+      "formatMismatch": "Pilih format fail yang sesuai dengan bank ini.",
+      "invalidMapping": "Lajur ini tidak boleh menghasilkan fail. Semak nama dan kedudukan."
     },
     "company": {
       "title": "Profil syarikat",
@@ -2392,6 +2398,78 @@
       "whoHint": "Jangan tanda apa-apa untuk membenarkan semua orang.",
       "save": "Simpan",
       "add": "Tambah jenis"
+    }
+  },
+  "BankAccounts": {
+    "intro": "Akaun syarikat yang membayar gaji. Tambah mana-mana bank, pilih akaun lalai untuk gaji, dan bersarakan akaun lama. Akaun yang dibersarakan disimpan untuk sejarah dan tidak pernah dipadam. Nombor akaun sentiasa disembunyikan.",
+    "none": "Belum ada akaun bank syarikat. Gaji memerlukannya sebelum hari gaji pertama.",
+    "noDefault": "Tiada akaun lalai. Pilih satu supaya gaji tahu akaun mana yang membayar.",
+    "default": "Lalai",
+    "fileFormat": "Fail: {name}",
+    "corporateIdIs": "ID korporat {id}",
+    "orgCodeIs": "Kod organisasi {code}",
+    "since": "Sejak {date}",
+    "setDefault": "Jadikan lalai",
+    "retire": "Bersarakan",
+    "retireConfirm": "Bersarakan akaun ini? Ia kekal dalam sejarah tetapi tidak boleh digunakan untuk gaji lagi.",
+    "retireDefaultConfirm": "Ini akaun lalai. Bersarakan? Gaji tidak akan ada akaun lalai sehingga anda memilih yang lain.",
+    "editDetails": "Sunting butiran",
+    "saveDetails": "Simpan butiran",
+    "format": "Format fail bayaran",
+    "formatHint": "CSV Generik berfungsi dengan skrin muat naik mana-mana bank. Format khusus bank akan muncul di sini apabila ditambah.",
+    "accountName": "Nama akaun",
+    "accountNameHint": "Seperti yang ditunjukkan oleh bank, biasanya nama berdaftar syarikat.",
+    "corporateId": "ID korporat (pilihan)",
+    "orgCode": "Kod organisasi (pilihan)",
+    "bankIdHint": "Hanya jika bank anda memberikannya untuk bayaran pukal.",
+    "numberFixed": "Bank dan nombor akaun tidak boleh ditukar kemudian. Untuk nombor baharu, tambah akaun baharu dan bersarakan yang ini.",
+    "add": "Tambah akaun bank syarikat",
+    "bank": "Bank",
+    "chooseBank": "Pilih bank",
+    "accountNo": "Nombor akaun",
+    "accountNoConfirm": "Nombor akaun sekali lagi",
+    "makeDefault": "Gunakan akaun ini untuk gaji (jadikan lalai)",
+    "addButton": "Tambah akaun",
+    "retired": "Akaun yang dibersarakan",
+    "retiredIntro": "Disimpan supaya larian gaji lepas masih menunjukkan akaun mana yang membayarnya.",
+    "retiredOn": "Dibersarakan {date}",
+    "columns": {
+      "title": "Lajur fail",
+      "defaultIntro": "Akaun ini menggunakan lajur CSV Generik standard. Tukar supaya sepadan dengan skrin muat naik bank anda.",
+      "ownIntro": "Akaun ini mempunyai lajurnya sendiri.",
+      "delimiter": "Pemisah",
+      "delimiters": {
+        "comma": "Koma (,)",
+        "semicolon": "Koma bertitik (;)",
+        "pipe": "Paip (|)",
+        "tab": "Tab"
+      },
+      "dateFormat": "Format tarikh",
+      "headerRow": "Baris pertama mengandungi nama lajur",
+      "fields": "Lajur (tandakan yang hendak dimasukkan)",
+      "include": "Masukkan {field}",
+      "header": "Nama lajur",
+      "order": "Kedudukan",
+      "sameBank": "Jenis pindahan: bank sama",
+      "interbank": "Jenis pindahan: bank lain",
+      "transferHint": "Biarkan kedua-duanya kosong untuk SAME_BANK dan INTERBANK.",
+      "save": "Simpan lajur",
+      "reset": "Guna lajur standard semula",
+      "field": {
+        "beneficiary_name": "Nama",
+        "id_no": "No. KP / pasport",
+        "employee_no": "No. pekerja",
+        "bank_bic": "Kod bank (BIC)",
+        "bank_code": "Bank (kod ringkas)",
+        "bank_name": "Nama bank",
+        "account_no": "No. akaun",
+        "amount": "Amaun",
+        "transfer_type": "Jenis pindahan",
+        "reference": "Rujukan bayaran",
+        "description": "Keterangan bayaran",
+        "email": "E-mel",
+        "payment_date": "Tarikh bayaran"
+      }
     }
   }
 }

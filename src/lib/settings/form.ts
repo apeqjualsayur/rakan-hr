@@ -91,7 +91,13 @@ export type ErrorKey =
   | "noMileageRate"
   | "futureDate"
   | "alreadySent"
-  | "duplicateName";
+  | "duplicateName"
+  // Company bank accounts (Step 12)
+  | "accountNoMismatch"
+  | "accountNoFixed"
+  | "accountRetired"
+  | "formatMismatch"
+  | "invalidMapping";
 
 export type FieldErrors = Partial<Record<string, ErrorKey>>;
 

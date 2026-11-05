@@ -32,7 +32,8 @@ select is(
       'leave_requests',
       'attendance_logs',
       'ot_requests',
-      'claims'
+      'claims',
+      'company_bank_accounts'
     ]) as t (name)
     where not exists (
       select 1 from pg_trigger tr

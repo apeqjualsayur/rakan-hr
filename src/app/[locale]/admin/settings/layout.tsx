@@ -21,6 +21,9 @@ export default async function SettingsLayout({
       <SettingsNav
         sections={[
           "company",
+          ...(can(member.role, "viewCompanyBank")
+            ? (["bankAccounts"] as const)
+            : []),
           "branches",
           ...(can(member.role, "viewUsers") ? (["users"] as const) : []),
           ...(can(member.role, "viewChecklist")

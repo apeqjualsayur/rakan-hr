@@ -102,6 +102,10 @@ const ACCESS = {
   viewHiring: ["owner", "hr_admin", "auditor"],
   /** Openings, candidates, offers, conversion, templates (… _insert / _update). */
   manageHiring: ["owner", "hr_admin"],
+  /** See company payroll bank accounts, masked (company_bank_accounts_select). */
+  viewCompanyBank: ["owner", "hr_admin", "payroll_approver", "auditor"],
+  /** Add, edit, set default and retire them (company_bank_accounts_insert / _update). */
+  manageCompanyBank: ["owner"],
   /** Approve probation reviews (approval step role "owner"). */
   approveProbation: ["owner"],
 } as const satisfies Record<string, readonly AppRole[]>;

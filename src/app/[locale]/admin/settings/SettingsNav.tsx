@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 
 export type SettingsSection =
   | "company"
+  | "bankAccounts"
   | "branches"
   | "users"
   | "checklist"
@@ -17,6 +18,7 @@ export type SettingsSection =
 
 export const settingsHref: Record<SettingsSection, string> = {
   company: "/admin/settings/company",
+  bankAccounts: "/admin/settings/bank-accounts",
   branches: "/admin/settings/branches",
   users: "/admin/settings/users",
   checklist: "/admin/settings/setup-checklist",

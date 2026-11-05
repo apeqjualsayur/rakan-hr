@@ -510,7 +510,8 @@
       "letters": "Letter templates",
       "leave": "Leave",
       "holidays": "Public holidays",
-      "claims": "Claims"
+      "claims": "Claims",
+      "bankAccounts": "Bank accounts"
     },
     "errors": {
       "required": "This is required.",
@@ -596,7 +597,12 @@
       "futureDate": "The date cannot be in the future.",
       "alreadySent": "This claim was already sent.",
       "duplicateName": "A type with this name already exists.",
-      "perClaimOverMonthly": "The limit per claim cannot be more than the monthly limit."
+      "perClaimOverMonthly": "The limit per claim cannot be more than the monthly limit.",
+      "accountNoMismatch": "The two account numbers do not match.",
+      "accountNoFixed": "The bank and account number cannot change. Add a new account and retire this one.",
+      "accountRetired": "This account is retired and cannot be changed.",
+      "formatMismatch": "Choose a file format that fits this bank.",
+      "invalidMapping": "These columns cannot make a file. Check the names and positions."
     },
     "company": {
       "title": "Company profile",
@@ -2392,6 +2398,78 @@
       "whoHint": "Tick none to let everyone claim.",
       "save": "Save",
       "add": "Add type"
+    }
+  },
+  "BankAccounts": {
+    "intro": "The company accounts that pay salaries. Add any bank, choose the default for payroll, and retire old accounts. Retired accounts are kept for history and never deleted. Account numbers are always masked.",
+    "none": "No company bank account yet. Payroll needs one before the first payday.",
+    "noDefault": "No account is the default. Choose one so payroll knows which account pays.",
+    "default": "Default",
+    "fileFormat": "File: {name}",
+    "corporateIdIs": "Corporate ID {id}",
+    "orgCodeIs": "Org code {code}",
+    "since": "Since {date}",
+    "setDefault": "Make default",
+    "retire": "Retire",
+    "retireConfirm": "Retire this account? It stays in the history but cannot be used for payroll again.",
+    "retireDefaultConfirm": "This is the default account. Retire it? Payroll will have no default until you choose another.",
+    "editDetails": "Edit details",
+    "saveDetails": "Save details",
+    "format": "Payment file format",
+    "formatHint": "Generic CSV works with any bank's upload screen. Bank-specific formats appear here when they are added.",
+    "accountName": "Account name",
+    "accountNameHint": "As the bank shows it, usually the company's registered name.",
+    "corporateId": "Corporate ID (optional)",
+    "orgCode": "Organisation code (optional)",
+    "bankIdHint": "Only if your bank gave you one for bulk payments.",
+    "numberFixed": "The bank and account number cannot be changed later. For a new number, add a new account and retire this one.",
+    "add": "Add a company bank account",
+    "bank": "Bank",
+    "chooseBank": "Choose a bank",
+    "accountNo": "Account number",
+    "accountNoConfirm": "Account number again",
+    "makeDefault": "Use this account for payroll (make it the default)",
+    "addButton": "Add account",
+    "retired": "Retired accounts",
+    "retiredIntro": "Kept so past payroll runs still show which account paid them.",
+    "retiredOn": "Retired {date}",
+    "columns": {
+      "title": "File columns",
+      "defaultIntro": "This account uses the standard Generic CSV columns. Change them to match what your bank's upload screen asks for.",
+      "ownIntro": "This account has its own columns.",
+      "delimiter": "Separator",
+      "delimiters": {
+        "comma": "Comma (,)",
+        "semicolon": "Semicolon (;)",
+        "pipe": "Pipe (|)",
+        "tab": "Tab"
+      },
+      "dateFormat": "Date format",
+      "headerRow": "First row has column names",
+      "fields": "Columns (tick the ones to include)",
+      "include": "Include {field}",
+      "header": "Column name",
+      "order": "Position",
+      "sameBank": "Transfer type: same bank",
+      "interbank": "Transfer type: other banks",
+      "transferHint": "Leave both blank for SAME_BANK and INTERBANK.",
+      "save": "Save columns",
+      "reset": "Use the standard columns again",
+      "field": {
+        "beneficiary_name": "Name",
+        "id_no": "IC / passport number",
+        "employee_no": "Employee number",
+        "bank_bic": "Bank code (BIC)",
+        "bank_code": "Bank (short code)",
+        "bank_name": "Bank name",
+        "account_no": "Account number",
+        "amount": "Amount",
+        "transfer_type": "Transfer type",
+        "reference": "Payment reference",
+        "description": "Payment description",
+        "email": "Email",
+        "payment_date": "Payment date"
+      }
     }
   }
 }
